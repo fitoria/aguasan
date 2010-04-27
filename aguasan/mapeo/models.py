@@ -17,18 +17,41 @@ class TipoDonante(models.Model):
     def __unicode__(self):
         return self.tipo
 
+class TipoContraparte(models.Model):
+    tipo = models.CharField(max_length=20, unique=True)
+    slug = models.SlugField(max_length=30, unique=True)
+
+    def __unicode__(self):
+        return self.tipo
+
+class Avance(models.Model):
+    avance = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return self.avance
+
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField(_('Descripción de medidas'))
-    avance = models.CharField(_('Grado de avance'), max_length=100)
+    avance = models.ForeignKey(Avance)
+    fecha_inicial = models.DateField() 
+    fecha_final = models.DateField() 
 
     def __unicode__(self):
         return self.nombre
 
-class Donante (models.Model):
+class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoDonante)
+
+    def __unicode__(self):
+        return self.nombre
+
+class Contraparte(models.Model):
+    nombre = models.CharField(max_length=150, unique = True)
+    pais = models.ForeignKey(Pais)
+    tipo = models.ForeignKey(TipoContraparte)
 
     def __unicode__(self):
         return self.nombre
@@ -52,3 +75,11 @@ class ProyectoDonante(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.donante.nombre, self.proyecto.nombre)
+
+class ProyectoContraparte(models.Model):
+    contraparte = models.ForeignKey(Contraparte)
+    proyecto = models.ForeignKey(Proyecto)
+    monto = models.FloatField(min_value=0, blank=True)
+
+    def __unicode__(self):
+        return "%s - %s" % (self.contraparte.nombre, self.proyecto.nombre)
