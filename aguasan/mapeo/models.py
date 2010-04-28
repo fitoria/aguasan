@@ -43,7 +43,7 @@ class Proyecto(models.Model):
 
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
-    descripcion = models.TextField(_('Descripción de medidas'))
+    descripcion = models.TextField(_('Descripcion de medidas'))
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoDonante)
 
