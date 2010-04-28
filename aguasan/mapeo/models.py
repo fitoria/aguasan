@@ -1,10 +1,11 @@
+# -*- coding: UTF-8 -*-
 from django.db import models
 from lugar.models import Municipio
 from django.utils.translation import ugettext as _
 
 class Pais(models.Model):
-    codigo = models.CharField(_("Código"), max_length=2, unique = True, 
-                              help_text=_("Código país mas info en: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"))
+    codigo = models.CharField(_("Codigo"), max_length=2, unique = True, 
+                              help_text=_("Codigo pais mas info en: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"))
     nombre = models.CharField(max_length=100, unique = True)
 
     def __unicode__(self):
@@ -32,7 +33,7 @@ class Avance(models.Model):
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=250)
-    descripcion = models.TextField(_('Descripción de medidas'))
+    descripcion = models.TextField(_('Descripcion de medidas'))
     avance = models.ForeignKey(Avance)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
@@ -59,11 +60,11 @@ class Contraparte(models.Model):
 
 class ProyectoMunicipio(models.Model):
     municipio = models.ForeignKey(Municipio)
-    monto = models.FloatField(min_value = 0)
+    monto = models.FloatField()
     #se agregó donante por que puede ser que un municipio 
     #tenga un donante especifico
     donante = models.ForeignKey(Donante, blank=True, 
-                                help_text=_("Puede dejar este campo en blanco si no se tiene información."))
+                                help_text=_("Puede dejar este campo en blanco si no se tiene informacion."))
     proyecto = models.ForeignKey(Proyecto)
 
     def __unicode__(self):
@@ -72,7 +73,7 @@ class ProyectoMunicipio(models.Model):
 class ProyectoDonante(models.Model):
     donante = models.ForeignKey(Donante)
     proyecto = models.ForeignKey(Proyecto)
-    monto = models.FloatField(min_value=0, blank=True)
+    monto = models.FloatField(blank=True)
 
     def __unicode__(self):
         return "%s - %s" % (self.donante.nombre, self.proyecto.nombre)
@@ -80,7 +81,7 @@ class ProyectoDonante(models.Model):
 class ProyectoContraparte(models.Model):
     contraparte = models.ForeignKey(Contraparte)
     proyecto = models.ForeignKey(Proyecto)
-    monto = models.FloatField(min_value=0, blank=True)
+    monto = models.FloatField(blank=True)
 
     def __unicode__(self):
         return "%s - %s" % (self.contraparte.nombre, self.proyecto.nombre)
