@@ -1,9 +1,69 @@
  {%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+            function agregar(formulario)
+            {
+                var tabla = document.getElementById("id_tabla_donante");
+                var ultimaFila = tabla.rows.length;
+                var iteraccion = ultimaFila+1;
+                var fila = tabla.insertRow(ultimaFila);
+
+                //celda izquierda - Nombre de donante
+                var celdaIzquierda = fila.insertCell(0);
+                var inputDonante = document.createElement('input');
+                inputDonante.type = 'text';
+                inputDonante.name = 'donante_' + iteraccion;
+                inputDonante.id = 'id_donante_' + iteraccion;
+                inputDonante.value = 'testDonante';
+                inputDonante.readonly = 'readonly';
+                celdaIzquierda.appendChild(inputDonante);
+
+                //celda centro - Monto 
+                var celdaCentro= fila.insertCell(1);
+                var inputMonto= document.createElement('input');
+                inputMonto.type = 'text';
+                inputMonto.name = 'monto_' + iteraccion;
+                inputMonto.id = 'id_monto_' + iteraccion;
+                inputMonto.value = 'test';
+                inputMonto.readonly = 'readonly';
+                celdaCentro.appendChild(inputMonto);
+
+                //celda derecha - Eliminar 
+                var celdaDerecha = fila.insertCell(2);
+                var enlaceBorrar = document.createTextNode('<a href="#" onClick="eliminarFila(' +
+                    iteraccion + ')">Eliminar</a>');
+                celdaDerecha.appendChild(enlaceBorrar);
+            }
+
+            function eliminarFila(fila)
+            {
+              var tabla = document.getElementById('id_tabla_donante');
+              tabla.deleteRow(fila);
+            }
+        </script>
+{%endblock%}  
  {%block contenido%}
  <div id="titulo">
                    Formulario de entrada de datos
  </div>
                    <div id="contenido_interno">
-formulario
+							<form action="." method="POST">
+								<p><label>Donante:</label>
+								<select id="id_donante" name="donante">
+									<option value="1">Donante</option>  
+									<option value="2">Donante dos</option>  
+									<option value="3">Donante tres</option>  
+									<option value="4">Donante cuatro</option>  
+								</select></p>
+								<p><label>Monto: </label><input type="text" name="monto" id="id_monto"/>
+								<input type="button" onClick="agregar(this)" value="agregar" /></p>
+								<table name="tabla_donante" id="id_tabla_donante" border="1">
+									<tr>
+										<td>Donante</td>
+										<td>Monto</td>
+										<td>acción</td>
+									</tr>
+								</table>
+							</form>
                    </div>
  {% endblock %}
