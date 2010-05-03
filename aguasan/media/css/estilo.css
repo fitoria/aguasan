@@ -1,0 +1,297 @@
+/* --------------Comienza Generales-------------- */
+
+body {
+  background:#eeeae3;
+  background-image: url(../imagen/fondo.png);
+  background-repeat: repeat-x;
+  font-family: 'Trebuchet MS', Helvetica, sans-serif;
+  font-size:14px;
+  padding:0;
+  margin:0;
+}
+
+p {
+  text-align:justify;
+}
+
+a img{
+  border-style:none;
+}
+
+
+
+h2{
+  font-size:18px;
+  color:#4d4d4d;
+  font-weight:bold;
+}
+
+.izq{
+  float:left;
+}
+
+.der{
+  float:right;
+}
+
+.centro{
+  margin: 0pt auto;
+  padding:0pt;
+ 
+}
+.separador{
+  clear:both;
+}
+
+
+/* --------------Termina Generales-------------- */
+
+/* --------------Contenedor que centra todo el sitio-------------- */
+
+/* --------------Comienza Header-------------- */
+
+#header{
+  width:100%;
+  height:109px;
+  background-image: url(../imagen/header.jpg);
+  background-repeat: repeat-x;
+
+}
+
+#header_contenedor{
+  width:960px;
+  height:109px;
+  margin:0pt auto;
+  padding:0pt;
+}
+
+#logo{
+  width:750px;
+  font-size:22px;
+  font-weight:bold;
+  color:#004967;
+  text-shadow: 0 0 1px #4e4e4e;
+  padding-top:20px;
+  height:55px;
+}
+
+#imagen_header{
+  width:128px;
+  height:75px;
+  background-image: url(../imagen/gota.jpg);
+  background-repeat: no-repeat;
+}
+#contenedor{
+  width:960px;
+  margin-top:15px;
+}
+
+#login{
+  margin-top:5px;
+}
+#menu{
+
+  margin-left:10px;
+  color:#fff;
+  width:300px;
+  text-align:left;
+}
+
+#menu ul {  
+	list-style:none;
+	margin:0;
+	padding:0;
+	float:right;
+	}
+
+#menu li {
+	margin-left:4px;
+	padding-left:4px;
+	padding-top:2px;
+	height:15px;
+	float:left;
+	text-align:center;
+	width:70px;
+	background-image:url(../imagen/separador.png);
+	background-repeat: no-repeat;
+	background-position:left;
+	}
+
+
+
+
+/* --------------Termina Header-------------- */
+
+
+
+
+
+/* --------------Comienza contenido--------------- */
+#contenido{
+  width:960px;
+  !width:960px;
+  /*min-height:900px;*/
+  
+  color:#5d5d5d;
+ }
+
+#colum_izq{
+  width:140px;
+  margin-rigth:10px;
+  background:#d9cfbf;
+  border-radius:6px;
+  -moz-border-radius:6px; /* Firefox */
+  -webkit-border-radius:6px; /* Safari y Chrome */ 
+  padding:5px;
+}
+.enlace_sidebar{
+  color:#000;
+  font-weight:bold;
+  font-size:14px;
+  height:23px;
+  padding-top:7px;
+  padding-left:30px;
+}
+
+.icono_ayuda{
+  background-image:url(../imagen/ayuda.png);
+  background-repeat: no-repeat;
+  background-position:left;
+}
+
+.icono_filtro{
+  background-image:url(../imagen/filtroconsulta.png);
+  background-repeat: no-repeat;
+  background-position:left;
+}
+
+#colum_der{
+  width:780px;
+  background:#fff;
+  border-color:#88969a;
+  border-width:1px;
+  border-style:solid;
+  border-radius:6px;
+  padding:10px;
+  -moz-border-radius:6px; /* Firefox */
+  -webkit-border-radius:6px; /* Safari y Chrome */ 
+ /* padding-left:10px;*/
+   /*background:#ccc;*/
+}
+
+#colum_der img{
+  margin-bottom:3px;
+}
+#titulo{
+   background:#deeef4;
+   border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  color:#003951;
+  font-size:18px;
+  font-weight:bold;
+  padding:7px;
+}
+
+#contenido_interno{
+  margin-top:5px;
+  background:#fbfbfb;
+  border-color:#eeeae3;
+  border-width:1px;
+  border-style:solid;
+  border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  padding:7px;
+  font-size:12px;
+}
+
+#filtros_principales{
+  width:425px;
+  height:240px;
+}
+
+.boton_filtro{
+  width:320px;
+  height:70px;
+  color:#000;
+  font-size:14px;
+  padding:5px;
+  border-color:#99bbdf;
+  border-width:1px;
+  border-style:solid;
+  border-radius:6px;
+  -moz-border-radius:6px; /* Firefox */
+  -webkit-border-radius:6px; /* Safari y Chrome */ 
+  margin-bottom:10px;
+}
+
+.boton_filtro img{
+  float:left;
+  margin:5px;
+  margin-right:20px;
+}
+
+.fondo_boton{
+  background-image:url(../imagen/fondoboton.png);
+  background-repeat: repeat-x;
+}
+
+#filtros_principales a, a:visited{
+  text-decoration:none;
+  color:#000;
+}
+
+#filtros_principales a:hover .fondo_boton{
+  background-image:url(../imagen/fondoboton2.png);
+  background-repeat: repeat-x;
+}
+
+#foto_menu{
+  margin-right:10px;
+}
+
+/* --------------Termina contenido-------------- */
+
+/* --------------Comienza footer-------------- */
+
+#footer{
+  margin-top:15px;
+  width:100%;
+  height:80px;
+  background-image: url(../imagen/footer.png);
+  background-repeat: repeat-x;
+  
+}
+
+#footer_contenedor{
+  height:60px;
+  width:960px;
+  padding-top:10px;
+}
+#logo_footer{
+  width:60px;
+  height:60px;
+  float:left;
+  background-image: url(../imagen/logofooter.jpg);
+  background-repeat: no-repeat;
+}
+#creditos{
+color:#aaccee;
+font-size:14px;
+width:160px;
+height:60px;
+padding-top:10px;
+margin-left:10px;  float:left;
+}
+
+#simas a{
+  color:#3d3d3d;
+  text-decoration:underline;
+  font-weight:bold;
+}
+
+/* Termina footer */
+
+
+

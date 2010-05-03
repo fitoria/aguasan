@@ -1,0 +1,27 @@
+ {%extends "base.html"%}
+ {%block contenido%}
+ <div id="titulo">
+                   Filtros Iniciales
+ </div>
+                   <div id="contenido_interno">
+
+                        <div id="filtros_principales" class="izq">
+                            <a href="#"><div class="boton_filtro fondo_boton">
+                            <img src="{{MEDIA_URL}}imagen/iconomapa.png">
+                            <b>Busqueda por municipio</b><br>
+                            Encuentra los proyectos de agua que se estan ejecutando en un municipio especifico
+                             </div>
+                             </a>
+                            <a href="#"><div class="boton_filtro fondo_boton">
+                            <img src="{{MEDIA_URL}}imagen/cooperante.png">
+                            <b>Busqueda por cooperante</b><br>
+                            Encuentra los proyectos de agua que se estan ejecutando por cada donante
+                             </div>
+                             </a>
+                        </div>
+                        <div id="foto_menu" class="der">
+                             <img src="{{MEDIA_URL}}imagen/foto_menu.jpg">
+                        </div>
+                        <div class="separador" ></div>
+                   </div>
+ {% endblock %}

@@ -1,4 +1,6 @@
 from django.conf.urls.defaults import *
+import settings
+from os import path as os_path
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -14,4 +16,12 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     # (r'^admin/', include(admin.site.urls)),
+    (r'^', include('mapeo.urls')),
+    (r'^$', 'mapeo.views.index'),
 )
+
+if settings.DEBUG:
+    urlpatterns += patterns('',
+                            (r'^archivos/(.*)$', 'django.views.static.serve',
+                             {'document_root': os_path.join(settings.MEDIA_ROOT)}),
+                           )
