@@ -1,6 +1,13 @@
  {%extends "base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
+	$(function() {
+		$("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+		$("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+	});
+	</script>
+
+<script type="text/javascript">
             function agregar(formulario)
             {
                 var tabla = document.getElementById("id_tabla_donante");
@@ -53,22 +60,55 @@
  </div>
                    <div id="contenido_interno">
 							<form action="." method="POST">
-								<p><label>Donante:</label>
-								<select id="id_donante" name="donante">
-									<option value="1">Donante</option>  
-									<option value="2">Donante dos</option>  
-									<option value="3">Donante tres</option>  
-									<option value="4">Donante cuatro</option>  
-								</select></p>
-								<p><label>Monto: </label><input type="text" name="monto" id="id_monto"/>
-								<input type="button" onClick="agregar(this)" value="agregar" /></p>
-								<table name="tabla_donante" id="id_tabla_donante" border="1">
-									<tr>
-										<td>Donante</td>
-										<td>Monto</td>
-										<td>acción</td>
-									</tr>
-								</table>
+								<div class="titulo_form"> Datos Generales</div>
+									<div class="campo_ancho">
+									   <div class="label izq">Nombre</div><input type="text" name="nombre" id="id_nombre" class="textbox_nombre"/>
+									</div>
+									<div class="campo_ancho">
+										<div class="label izq">Descripción</div><textarea id="id_descripcion" class="textarea"></textarea>
+									</div>
+									<div class="campo der">
+									   <div class="label izq">Avance</div>
+									   	<select id="id_donante" name="donante" class="combobox">
+											<option value="1">Detenido</option>  
+											<option value="2">En proceso</option>  
+											<option value="3">Terminado</option>  
+										</select>
+									</div>
+									<div class="campo">
+									   <div class="label izq">Tipo</div>
+									   	<select id="id_tipo" name="tipo" class="combobox">
+											<option value="1">Fortalecimiento Local</option>  
+											<option value="2">Infraestructura APS</option>  
+											<option value="3">GIRH No-APS</option>  
+										</select>
+									</div>
+									<div class="campo izq">
+									   <div class="label izq">Fecha inicio</div><input type="text" name="fecha_inicio" id="id_fecha_final" class="textbox"/>
+									</div>
+									<div class="campo der">
+									   <div class="label izq">Fecha final</div><input type="text" name="fecha_final" id="id_fecha_inicio" class="textbox"/>
+									</div>
+									<br style="clear:both">
+									<br>
+								<div class="titulo_form"> Inversión Internacional</div>
+									<p><label>Donante:</label>
+									<select id="id_donante" name="donante">
+										<option value="1">Donante</option>  
+										<option value="2">Donante dos</option>  
+										<option value="3">Donante tres</option>  
+										<option value="4">Donante cuatro</option>  
+									</select></p>
+									<p><label>Monto: </label><input type="text" name="monto" id="id_monto"/>
+									<input type="button" onClick="agregar(this)" value="agregar" /></p>
+									<table name="tabla_donante" id="id_tabla_donante" border="1">
+										<tr>
+											<td>Donante</td>
+											<td>Monto</td>
+											<td>acción</td>
+										</tr>
+									</table>
+								
 							</form>
                    </div>
  {% endblock %}

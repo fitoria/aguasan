@@ -6,10 +6,10 @@
     <style type="text/css">
         @import url({{MEDIA_URL}}css/estilo.css);
     </style>
-<!--
-    <link type="text/css" href="css/jquery-ui-1.7.2.custom.css" rel="stylesheet" />	
-    <link type="text/css" href="css/verticaltabs.css" rel="stylesheet" />	
-	<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+
+    <link type="text/css" href="{{MEDIA_URL}}css/jquery-ui-1.8.1.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-ui-1.8.1.custom.min.js"></script>
 -->
 
     {%block extra_js%}{%endblock%}
@@ -35,9 +35,9 @@
 			       <form>
 			        
 			            <input id="user" type="text" value="usuario" onfocus="if(this.value==this.defaultValue)this.value='';">
-			            <input id="password" type="text" value="contraseña" onfocus="if(this.value==this.defaultValue)this.value='';">
-			            <input type="submit" value="entrar">
-			        
+			            <input id="password" type="password" value="" onfocus="if(this.value==this.defaultValue)this.value='';">
+			            <input id="button" type="submit" value="entrar">
+			             
 			       </form>
 			   </div>
            </div>

@@ -89,8 +89,40 @@ h2{
 #login{
   margin-top:5px;
 }
-#menu{
 
+#user{
+  border-width:0px;
+    border-radius:4px;
+  -moz-border-radius:4px; /* Firefox */
+  -webkit-border-radius:4px; /* Safari y Chrome */ 
+  height:17px;
+  background:#fff;
+}
+
+#password{
+  border-width:0px;
+    border-radius:4px;
+  -moz-border-radius:4px; /* Firefox */
+  -webkit-border-radius:4px; /* Safari y Chrome */ 
+   height:17px;
+   background:#fff;
+}
+
+#button{
+  background:#35332d;
+  border-color:#daba71;
+  border-width:1px;
+  border-style:solid;
+  height:22px;
+  color:#fff;
+  border-radius:4px;
+  -moz-border-radius:4px; /* Firefox */
+  -webkit-border-radius:4px; /* Safari y Chrome */ 
+  margin-left:7px;
+
+
+}
+#menu{
   margin-left:10px;
   color:#fff;
   width:300px;
@@ -250,6 +282,75 @@ h2{
 #foto_menu{
   margin-right:10px;
 }
+/* CSS para el formulario de entrada */
+
+.titulo_form{
+  width:100%;
+  border-bottom-style:solid;
+  border-bottom-width:1px;
+  border-bottom-color:#cccccf;
+  color:#1d1d1d;
+  font-weight:bold;
+  height:20px;
+  margin-bottom:8px;
+}
+
+.campo{
+  margin-top:5px;
+  background:#eeeeee;
+  width:365px;
+  padding-left:10px;
+  padding-top:7px;
+  padding-bottom:7px;
+  border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+}
+
+.campo_ancho{
+  margin-top:5px;
+  background:#eeeeee;
+  width:755px;
+  padding-left:10px;
+  padding-top:7px;
+  padding-bottom:7px;
+  border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+}
+.label{
+  width:70px;
+}
+
+.textbox_nombre{
+  width:670px;
+  border-width:0px;
+  background:#fff;
+  height:15px;
+}
+
+.textbox{
+  width:285px;
+  border-width:0px;
+  background:#fff;
+  height:15px;
+}
+
+.combobox{
+  width:285px;
+  border-width:0px;
+  background:#fff;
+  height:15px;
+  font-size:11px;
+}
+
+.textarea{
+  width:670px;
+  border-width:0px;
+  background:#fff;
+  height:120px;
+}
+
 
 /* --------------Termina contenido-------------- */
 
