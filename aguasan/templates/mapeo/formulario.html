@@ -7,6 +7,7 @@
                 var ultimaFila = tabla.rows.length;
                 var iteraccion = ultimaFila+1;
                 var fila = tabla.insertRow(ultimaFila);
+                fila.id = 'fila-' + (iteraccion - 1);
 
                 //celda izquierda - Nombre de donante
                 var celdaIzquierda = fila.insertCell(0);
@@ -30,16 +31,20 @@
 
                 //celda derecha - Eliminar 
                 var celdaDerecha = fila.insertCell(2);
-                var enlaceBorrar = document.createTextNode('<a href="#" onClick="eliminarFila(' +
-                    iteraccion + ')">Eliminar</a>');
-                celdaDerecha.appendChild(enlaceBorrar);
+                var linkBorrar = document.createElement('a');
+                linkBorrar.href = '#';
+                linkBorrar.onclick = function() {eliminarFila(linkBorrar);};
+                linkBorrar.appendChild(document.createTextNode('Eliminar')); 
+                celdaDerecha.appendChild(linkBorrar);
             }
 
-            function eliminarFila(fila)
+            function eliminarFila(elem)
             {
               var tabla = document.getElementById('id_tabla_donante');
+              var fila = elem.parentNode.parentNode.rowIndex;
               tabla.deleteRow(fila);
             }
+            
         </script>
 {%endblock%}  
  {%block contenido%}
