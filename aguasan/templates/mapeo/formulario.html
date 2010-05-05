@@ -5,53 +5,63 @@
 		$("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
 		$("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
 	});
-	</script>
+</script>
 
 <script type="text/javascript">
-            function agregar(formulario)
-            {
-                var tabla = document.getElementById("id_tabla_donante");
-                var ultimaFila = tabla.rows.length;
-                var iteraccion = ultimaFila+1;
-                var fila = tabla.insertRow(ultimaFila);
-                fila.id = 'fila-' + (iteraccion - 1);
+    function agregar(formulario, tipo)
+    {
+        var tabla = document.getElementById("id_tabla_" + tipo);
+        var ultimaFila = tabla.rows.length;
+        var iteraccion = ultimaFila+1;
+        var fila = tabla.insertRow(ultimaFila);
+        fila.id = 'fila-' + (iteraccion - 1);
 
-                //celda izquierda - Nombre de donante
-                var celdaIzquierda = fila.insertCell(0);
-                var inputDonante = document.createElement('input');
-                inputDonante.type = 'text';
-                inputDonante.name = 'donante_' + iteraccion;
-                inputDonante.id = 'id_donante_' + iteraccion;
-                inputDonante.value = 'testDonante';
-                inputDonante.readonly = 'readonly';
-                celdaIzquierda.appendChild(inputDonante);
+        //seleccionamos los controles de los formularios
+        var controlSelect = document.getElementById("id_" + tipo);
+        var montoInput  = document.getElementById("id_monto_" + tipo);
 
-                //celda centro - Monto 
-                var celdaCentro= fila.insertCell(1);
-                var inputMonto= document.createElement('input');
-                inputMonto.type = 'text';
-                inputMonto.name = 'monto_' + iteraccion;
-                inputMonto.id = 'id_monto_' + iteraccion;
-                inputMonto.value = 'test';
-                inputMonto.readonly = 'readonly';
-                celdaCentro.appendChild(inputMonto);
+        //celda izquierda - Nombre de donante
+        var celdaIzquierda = fila.insertCell(0);
+        var input= document.createElement('select');
+        input.name = tipo + '_' + iteraccion;
+        input.id = 'id_' + tipo + '_' + iteraccion;
+        var valorSeleccionado = controlSelect.options[controlSelect.selectedIndex].value;
+        var textoSeleccionado = controlSelect.options[controlSelect.selectedIndex].text;
+        var opcion = new Option(textoSeleccionado, valorSeleccionado);
+        input.options.add(opcion);
+        celdaIzquierda.appendChild(input);
 
-                //celda derecha - Eliminar 
-                var celdaDerecha = fila.insertCell(2);
-                var linkBorrar = document.createElement('a');
-                linkBorrar.href = '#';
-                linkBorrar.onclick = function() {eliminarFila(linkBorrar);};
-                linkBorrar.appendChild(document.createTextNode('Eliminar')); 
-                celdaDerecha.appendChild(linkBorrar);
-            }
+        //celda centro - Monto 
+        var celdaCentro= fila.insertCell(1);
+        var inputMonto= document.createElement('input');
+        inputMonto.type = 'text';
+        inputMonto.name = 'monto_' + tipo + '_' + iteraccion;
+        inputMonto.id = 'id_monto_' + tipo + '_' + iteraccion;
+        if (montoInput.value){
+            inputMonto.value = montoInput.value;
+        }else{
+            //TODO: levantar error.
+            alert('error, campo vacío');
+        }
+        inputMonto.readonly = 'readonly';
+        celdaCentro.appendChild(inputMonto);
 
-            function eliminarFila(elem)
-            {
-              var tabla = document.getElementById('id_tabla_donante');
-              var fila = elem.parentNode.parentNode.rowIndex;
-              tabla.deleteRow(fila);
-            }
-            
+        //celda derecha - Eliminar 
+        var celdaDerecha = fila.insertCell(2);
+        var linkBorrar = document.createElement('a');
+        linkBorrar.href = '#';
+        linkBorrar.onclick = function() {eliminarFila(linkBorrar);};
+        linkBorrar.appendChild(document.createTextNode('Eliminar')); 
+        celdaDerecha.appendChild(linkBorrar);
+    }
+
+    function eliminarFila(elem)
+    {
+      var tabla = document.getElementById('id_tabla_' + tipo);
+      var fila = elem.parentNode.parentNode.rowIndex;
+      tabla.deleteRow(fila);
+    }
+        
         </script>
 {%endblock%}  
  {%block contenido%}
@@ -69,7 +79,7 @@
 									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
-									   	<select id="id_donante" name="donante" class="combobox">
+									   	<select id="id_estado" name="estado" class="combobox">
 											<option value="1">Detenido</option>  
 											<option value="2">En proceso</option>  
 											<option value="3">Terminado</option>  
@@ -99,8 +109,8 @@
 										<option value="3">Donante tres</option>  
 										<option value="4">Donante cuatro</option>  
 									</select></p>
-									<p><label>Monto: </label><input type="text" name="monto" id="id_monto"/>
-									<input type="button" onClick="agregar(this)" value="agregar" /></p>
+									<p><label>Monto: </label><input type="text" name="monto_donante" id="id_monto_donante"/>
+									<input type="button" onClick="agregar(this.form, 'donante')" value="agregar" /></p>
 									<table name="tabla_donante" id="id_tabla_donante" border="1">
 										<tr>
 											<td>Donante</td>
@@ -108,7 +118,23 @@
 											<td>acción</td>
 										</tr>
 									</table>
-								
+								<div class="titulo_form"> Inversión Interna</div>
+									<p><label>Contraparte:</label>
+									<select id="id_contraparte" name="contraparte">
+										<option value="1">contraparte</option>  
+										<option value="2">contraparte dos</option>  
+										<option value="3">contraparte tres</option>  
+										<option value="4">contraparte cuatro</option>  
+									</select></p>
+									<p><label>Monto: </label><input type="text" name="monto" id="id_monto_contraparte"/>
+									<input type="button" onClick="agregar(this.form, 'contraparte')" value="agregar" /></p>
+									<table name="tabla_contraparte" id="id_tabla_contraparte" border="1">
+										<tr>
+											<td>contraparte</td>
+											<td>Monto</td>
+											<td>acción</td>
+										</tr>
+									</table>
 							</form>
                    </div>
  {% endblock %}
