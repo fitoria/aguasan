@@ -10,3 +10,5 @@ def index(request):
 def formulario(request):
 	return render_to_response('mapeo/formulario.html',context_instance=RequestContext(request))
 
+def mapa(request):
+	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))

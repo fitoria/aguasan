@@ -1,0 +1,20 @@
+ {%extends "base.html"%}
+{%block extra_js%}
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.maphilight.min.js"></script>
+		<script>$(function() {
+		$('.mapa').maphilight({fade: true, stroke: true, strokeColor: '336699',fillColor: 'd0ddff', fillOpacity: 0.5});
+	});</script> 
+{%endblock%}  
+ {%block contenido%}
+ <div id="titulo">
+                   Selección por Departamento
+ </div>
+                   <div id="contenido_interno">
+                            <img src="{{MEDIA_URL}}imagen/mapa.png" class="mapa" usemap="#nic" width="534" height="516">
+                            <map name="nic">
+							<area href="#" title="Carazo" shape="poly" coords="150,392.5, 151,394.2, 167.2,406.56, 182, 417.6 , 184.41,408.98, 189.67,395.58, 191.53, 393.54, 190.54,391.02, 190.73,383.76, 191.92,381.96, 187.20,378.96, 173.98,372.96, 164.02,379.57, 153.40,389.35 "></area> 
+							<area href="#" title="Rivas" shape="poly" coords="185, 419.34, 187.54,421.83, 191.74,425.05, 201.27, 434.67, 213.44, 445.57, 222.91, 457.85, 231.26, 466.51, 236.39, 468.55, 240.90,460.89, 246.41,452.605, 242.01, 448.140, 233.61, 444.82, 231.11,444.82, 231.6,440.93, 232.08, 437.03, 229.73, 436.42, 226.78,432.82, 224.80,429.090, 223.42,424.57, 220.20,414.50, 216.99,406.67, 213.85, 401.12, 211.73, 401.39, 205.26,402.99, 199.13,405.94, 194.13,409.11, 189.99,409.57"></area> 
+
+                            </map>
+                   </div>
+ {% endblock %}
