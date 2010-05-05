@@ -25,7 +25,7 @@ class MunicipioAdmin(admin.ModelAdmin):
 admin.site.register(Departamento,DepartamentoAdmin)
 #admin.site.register(Municipio, MunicipioAdmin)
 #admin.site.register(Comunidad, ComunidadAdmin)
-admin.site.register(Microcuenca, MicrocuencaAdmin)
+#admin.site.register(Microcuenca, MicrocuencaAdmin)
 
 
 
