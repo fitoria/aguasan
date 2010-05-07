@@ -1,0 +1,5 @@
+<select id = "id_departamento_{{id}}" name="departamento">
+    {%for municipio in municipios%}
+    <option value={{municipio.id}}>{{municipio.nombre}}</option>
+    {%endfor%}
+</select>

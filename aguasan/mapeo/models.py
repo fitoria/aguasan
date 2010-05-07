@@ -31,10 +31,17 @@ class Avance(models.Model):
     def __unicode__(self):
         return self.avance
 
+class TipoProyecto(models.Model):
+    tipo = models.CharField(max_length=100)
+    
+    def __unicode__(self):
+        return self.avance
+
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=250)
     descripcion = models.TextField(_('Descripcion de medidas'))
     avance = models.ForeignKey(Avance)
+    tipo = models.ForeignKey(TipoProyecto)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
 

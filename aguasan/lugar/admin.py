@@ -23,7 +23,7 @@ class MunicipioAdmin(admin.ModelAdmin):
 #    search_fields = ['nombre']
 
 admin.site.register(Departamento,DepartamentoAdmin)
-#admin.site.register(Municipio, MunicipioAdmin)
+admin.site.register(Municipio, MunicipioAdmin)
 #admin.site.register(Comunidad, ComunidadAdmin)
 #admin.site.register(Microcuenca, MicrocuencaAdmin)
 

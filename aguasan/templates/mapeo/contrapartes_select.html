@@ -1,0 +1,5 @@
+<select id = "id_contrapartes" name="contrapartes">
+    {%for contraparte in contrapartes%}
+    <option value={{contraparte.id}}>{{contraparte.nombre}}</option>
+    {%endfor%}
+</select>
