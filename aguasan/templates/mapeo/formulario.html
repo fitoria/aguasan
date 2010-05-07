@@ -8,9 +8,13 @@
 </script>
 
 <script type="text/javascript">
-    function agregar(tipo)
+    function agregar(tipo, id)
     {
-        var tabla = document.getElementById("id_tabla_" + tipo);
+        if (id){
+            var tabla = document.getElementById("id_tabla_" + tipo + "_" + id);
+        }else{
+            var tabla = document.getElementById("id_tabla_" + tipo);
+        }
         var ultimaFila = tabla.rows.length;
         var iteraccion = ultimaFila+1;
         var fila = tabla.insertRow(ultimaFila);
@@ -64,28 +68,11 @@
     
     function agregarTablaMunicipio(control)
     {
-	   /*var html_tabla = '<p><label>Donante:</label>' +
-			'<select id="id_donante" name="donante">'+
-			'<option value="1">Donante</option>'+
-			'<option value="2">Donante dos</option>' +
-			'<option value="3">Donante tres</option>' +
-			'<option value="4">Donante cuatro</option>' +
-			'</select></p>' +
-			'<p><label>Monto: </label><input type="text" name="monto_donante" id="id_monto_donante"/>' +
-			'<input type="button" onClick="agregar(this.form, "donante")" value="agregar" /></p> ' +
-			'<table name="tabla_donante" id="id_tabla_donante" border="1">' +
-			'<tr>' +
-			'<td>Donante</td>' +
-			'<td>Monto</td> ' +
-			'<td>acción</td>' +
-			'</tr>' +
-			'</table>';*/
         //validamos si la tabla existe para elminarla.
         var id_departamento = control.value;
         if (!control.checked)
         {        //Se elimina la tabla
-            var tabla = document.getElementById('id_tabla_departamento_' + id_departamento);
-            tabla.parentNode.removeChild(tabla);
+            $('#tabla_' + id_departamento).remove();
         }else{
                 
             var tabla = document.createElement('table');
@@ -105,7 +92,14 @@
             celda = fila.insertCell(2);
             texto = document.createTextNode("Acción");
             celda.appendChild(texto);
-            $(tabla).prependTo('#tablas_departamentos');
+            $('<div id="tabla_' + id_departamento + '"></div>').prependTo('#tablas_departamentos');
+            tabla_id = '#tabla_' + id_departamento;
+            $(tabla).prependTo(tabla_id);
+            //agregando controles.
+            $('<div id="select_donante"' + id_departamento +'"></div>').prependTo(tabla_id).load('/ajax/donantes_select');
+            $('<input type="button" value="agregar"/>').attr('onClick', "agregar('departamento', " + id_departamento + ")").prependTo(tabla_id);
+            $('<p><label>Monto: </label><input type="text" name="monto_donante" id="id_monto_donante"/>').prependTo(tabla_id);
+
         }
     }
     
@@ -184,18 +178,6 @@
 									</table>
 								<div class="titulo_form">Ubicación</div>
                                 <p><label>Departamentos:</label><p>
-                                <!--TODO:Agregar help text-->
-                                <!--<select multiple='multiple' name='departamentos' id='id_departamentos'>
-                                    <option value='1'>Jinotega</option>
-                                    <option value='2'>Managua</option>
-                                    <option value='3'>Chontales</option>
-                                    <option value='4'>Carazo</option>
-                                </select>
-                                <select multiple='multiple' name='municipios' id='id_municipios'>
-                                    <option value='1'>Jinotega</option>
-                                    <option value='2'>Managua</option>
-                                    <option value='3'>Juigalpaa</option>
-                                </select> -->
                                 <fieldset>
                                     <input type='checkbox' name='departamento' id='id_chk_managua' value='1' onclick="agregarTablaMunicipio(this)">Managua</input>
                                     <input type='checkbox' name='departamento' id='id_chk_jinotega' value='2' onclick="agregarTablaMunicipio(this)">Jinotega</input>
