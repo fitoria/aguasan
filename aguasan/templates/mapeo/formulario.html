@@ -1,4 +1,4 @@
- {%extends "base.html"%}
+{%extends "base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
 	$(function() {
@@ -21,8 +21,13 @@
         fila.id = 'fila-' + (iteraccion - 1);
 
         //seleccionamos los controles de los formularios
-        var controlSelect = document.getElementById("id_" + tipo);
-        var montoInput  = document.getElementById("id_monto_" + tipo);
+        if (id){
+            var controlSelect = document.getElementById("id_" + tipo + "_" + id);
+            var montoInput  = document.getElementById("id_monto_" + tipo + "_" + id);
+        }else{
+            var controlSelect = document.getElementById("id_" + tipo);
+            var montoInput  = document.getElementById("id_monto_" + tipo);
+        }
 
         //celda izquierda - Nombre de donante
         var celdaIzquierda = fila.insertCell(0);
@@ -54,14 +59,22 @@
         var celdaDerecha = fila.insertCell(2);
         var linkBorrar = document.createElement('a');
         linkBorrar.href = '#';
-        linkBorrar.onclick = function() {eliminarFila(linkBorrar, tipo);};
+        if(id){
+            linkBorrar.onclick = function() {eliminarFila(linkBorrar, tipo, id);};
+        }else{
+            linkBorrar.onclick = function() {eliminarFila(linkBorrar, tipo);};
+        }
         linkBorrar.appendChild(document.createTextNode('Eliminar')); 
         celdaDerecha.appendChild(linkBorrar);
     }
 
-    function eliminarFila(elem, tipo)
+    function eliminarFila(elem, tipo, id)
     {
-      var tabla = document.getElementById('id_tabla_' + tipo);
+      if (id){
+          var tabla = document.getElementById('id_tabla_' + tipo + '_' + id);
+      }else{
+          var tabla = document.getElementById('id_tabla_' + tipo);
+      }
       var fila = elem.parentNode.parentNode.rowIndex;
       tabla.deleteRow(fila);
     }
@@ -96,16 +109,19 @@
             tabla_id = '#tabla_' + id_departamento;
             $(tabla).prependTo(tabla_id);
             //agregando controles.
-            $('<div id="select_donante"' + id_departamento +'"></div>').prependTo(tabla_id).load('/ajax/donantes_select');
+            //TODO: clean this shit!!!!
+            $('<div id="controles_select_"' + id_departamento +'"></div>').prependTo(tabla_id).load('/ajax/municipios_select/' + id_departamento );
+            $('#controles_select_' + id_departamento).load('/ajax/donantes_select/');
             $('<input type="button" value="agregar"/>').attr('onClick', "agregar('departamento', " + id_departamento + ")").prependTo(tabla_id);
-            $('<p><label>Monto: </label><input type="text" name="monto_donante" id="id_monto_donante"/>').prependTo(tabla_id);
+            $('<input type="text" name="monto_departamento" />').attr('id', 'id_monto_departamento_' + id_departamento).prependTo(tabla_id);
+            $('<p><label>Monto: </label>').prependTo(tabla_id);
 
         }
     }
     
         </script>
 {%endblock%}  
- {%block contenido%}
+{%block contenido%}
  <div id="titulo">
                    Formulario de entrada de datos
  </div>
@@ -160,7 +176,7 @@
 										</tr>
 									</table>
 								<div class="titulo_form"> Inversión Interna</div>
-									<p><label>Contraparte:</label>
+                                    <p><label>Contraparte:</label>
 									<select id="id_contraparte" name="contraparte">
 										<option value="1">contraparte</option>  
 										<option value="2">contraparte dos</option>  
@@ -179,7 +195,7 @@
 								<div class="titulo_form">Ubicación</div>
                                 <p><label>Departamentos:</label><p>
                                 <fieldset>
-                                    <input type='checkbox' name='departamento' id='id_chk_managua' value='1' onclick="agregarTablaMunicipio(this)">Managua</input>
+                                    <input type='checkbox' name='departamento' id='id_chk_managua' value='101' onclick="agregarTablaMunicipio(this)">Managua</input>
                                     <input type='checkbox' name='departamento' id='id_chk_jinotega' value='2' onclick="agregarTablaMunicipio(this)">Jinotega</input>
                                     <input type='checkbox' name='departamento' id='id_chk_matagalpa' value='3' onclick="agregarTablaMunicipio(this)">Carazo</input>
                                 </fieldset>
