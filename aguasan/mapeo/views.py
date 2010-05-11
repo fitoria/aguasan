@@ -33,6 +33,11 @@ def proyecto(request, id):
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
 
+def lista_proyectos(request):
+    proyectos = Proyecto.objects.all()
+    return render_to_response('mapeo/lista_proyectos.html', proyectos,
+                              context_instance=RequestContext(request))
+
 def agregar_municipio_proyecto(request, id):
     '''se agregaq municipio por medio de ajax'''
     if (request.method == 'POST'):
@@ -68,6 +73,12 @@ def agregar_donante_proyecto(request, id):
             return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
     else:
         return HttpResponse('ERROR')
+
+def agregar_donante(request):
+	return render_to_response('mapeo/agregar_donante.html',context_instance=RequestContext(request))
+
+def agregar_contraparte(request):
+	return render_to_response('mapeo/agregar_contraparte.html',context_instance=RequestContext(request))
 
 def agregar_contraparte_proyecto(request, id):
     '''se agrega contraparte por medio de ajax'''
