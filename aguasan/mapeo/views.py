@@ -56,12 +56,37 @@ def agregar_donante_proyecto(request, id):
     if (request.method == 'POST'):
         form = ProyectoDonanteForm(request.POST)
         if form.is_valid():
-            proyecto_donante = form.save()
+            proyecto = Proyecto.objects.get(id=id)
+            if proyecto:
+                proyecto_donante= form.save(commit=False)
+                proyecto_donante.proyecto = proyecto
+                proyecto_donante.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
         else:
-            pass #retornar los errores en JSON
+            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
     else:
-        pass #TODO: retornar error en JSON           
-        
+        return HttpResponse('ERROR')
+
+def agregar_contraparte_proyecto(request, id):
+    '''se agrega contraparte por medio de ajax'''
+    if (request.method == 'POST'):
+        form = ProyectoContraparteForm(request.POST)
+        if form.is_valid():
+            proyecto = Proyecto.objects.get(id=id)
+            if proyecto:
+                proyecto_contraparte = form.save(commit=False)
+                proyecto_contraparte.proyecto = proyecto
+                proyecto_contraparte.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+    else:
+        return HttpResponse('ERROR')
+
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
 

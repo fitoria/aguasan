@@ -30,19 +30,11 @@
 									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
-									   	<select id="id_estado" name="estado" class="combobox">
-                                            {%for estado in estados%}
-                                            <option value="{{estado.id}}">{{estado.nombre}}</option>  
-                                            {%endfor%}
-										</select>
+                                       {{form.avance}}
 									</div>
 									<div class="campo">
 									   <div class="label izq">Tipo</div>
-									   	<select id="id_tipo" name="tipo" class="combobox">
-                                            {%for tipo in tipos%}
-                                            <option value="{{tipo.id}}">{{tipo.nombre}}</option>  
-                                            {%endfor%}
-										</select>
+                                       {{form.tipo}}
 									</div>
 									<div class="campo izq">
 									   <div class="label izq">Fecha inicio</div><input type="text" name="fecha_inicial" id="id_fecha_inicial" class="textbox"/>

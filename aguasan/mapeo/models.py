@@ -38,7 +38,7 @@ class TipoProyecto(models.Model):
         return self.tipo
 
 class Proyecto(models.Model):
-    nombre = models.CharField(max_length=250)
+    nombre = models.CharField(max_length=400)
     descripcion = models.TextField(_('Descripcion de medidas'))
     avance = models.ForeignKey(Avance)
     tipo = models.ForeignKey(TipoProyecto)
