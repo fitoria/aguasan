@@ -2,8 +2,6 @@ from django.forms import ModelForm
 from models import *
 
 class ProyectoForm(ModelForm):
-    tipo = form.ForeignKey
-    avance = 
     class Meta:
         model = Proyecto
 
