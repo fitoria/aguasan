@@ -3,44 +3,58 @@ from django.http import Http404, HttpResponse
 from mapeo.models import *
 from django.db import transaction
 from lugar.models import Municipio
-from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404
+from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
 from django.template import RequestContext
+from forms import *
 
 def index(request):
 	return render_to_response('index.html',context_instance=RequestContext(request))
 
-@transaction.commit_manually
 def formulario(request):
-    '''Fumado mode: ON'''
     if (request.method == 'POST'):
-        #procesar esta shit abobinacion del demonio x_x
-        proyecto = Proyecto()
-        proyecto.nombre = request.POST['nombre']
-        proyecto.descripcion = request.POST['descripcion']
-        proyecto.fecha_inicial = request.POST['fecha_inicial']
-        proyecto.fecha_final = request.POST['fecha_final']
-        #TODO: Validar avance.
-        proyecto.avance = request.POST['avance']
-
-        
-        
-        #omg una transaccion.
-        try:
-            proyecto.save()
-        except:
-            transaction.rollback()
+        form = ProyectoForm(request.POST)
+        if form.is_valid():
+           print form
+           proyecto = form.save()
+           request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
+           return redirect(proyecto)
         else:
-            transaction.commit()
+            return render_to_response('mapeo/formulario.html', {'form': form},
+                    context_instance=RequestContext(request))
     else:
-        donantes = Donante.objects.all()
-        contrapartes = Contraparte.objects.all()
-        avances = Avance.objects.all()
-        tipos_proyectos = TipoProyecto.objects.all()
-        dicc = {'donantes': donantes, 'contrapartes': contrapartes, 
-                'avances': avances, 'tipos_proyectos': tipos_proyectos}
-        return render_to_response('mapeo/formulario.html', dicc, 
-                                  context_instance=RequestContext(request))
+        form = ProyectoForm()
+        return render_to_response('mapeo/formulario.html', {'form': form},
+                context_instance=RequestContext(request))
 
+def proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    dicc = {'proyecto': proyecto}
+    return render_to_response('mapeo/proyecto.html', dicc,
+                              context_instance=RequestContext(request))
+
+def agregar_municipio_proyecto(request, id):
+    '''se agregaq municipio por medio de ajax'''
+    if (request.method == 'POST'):
+        form = ProyectoMunicipioForm(request.POST)
+        if form.is_valid():
+            print form
+            proyecto_municipio = form.save()
+        else:
+            pass #retornar los errores en JSON
+    else:
+        pass #TODO: retornar error en JSON
+
+def agregar_donante_proyecto(request, id):
+    '''se agrega donante por medio de ajax'''
+    if (request.method == 'POST'):
+        form = ProyectoDonanteForm(request.POST)
+        if form.is_valid():
+            proyecto_donante = form.save()
+        else:
+            pass #retornar los errores en JSON
+    else:
+        pass #TODO: retornar error en JSON           
+        
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
 

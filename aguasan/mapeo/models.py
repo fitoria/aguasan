@@ -35,7 +35,7 @@ class TipoProyecto(models.Model):
     tipo = models.CharField(max_length=100)
     
     def __unicode__(self):
-        return self.avance
+        return self.tipo
 
 class Proyecto(models.Model):
     nombre = models.CharField(max_length=250)
@@ -47,6 +47,9 @@ class Proyecto(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return "/proyecto/%d/" % self.id
 
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
@@ -76,6 +79,7 @@ class ProyectoMunicipio(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
+
 
 class ProyectoDonante(models.Model):
     donante = models.ForeignKey(Donante)

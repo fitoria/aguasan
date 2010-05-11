@@ -2,138 +2,32 @@
 {%block extra_js%}
 <script type="text/javascript">
 	$(function() {
-		$("#id_fecha_inicio").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-		$("#id_fecha_final").datepicker({ dateFormat: 'yy-mm-dd', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
 	});
 </script>
-
-<script type="text/javascript">
-    function agregar(tipo, id)
-    {
-        if (id){
-            var tabla = document.getElementById("id_tabla_" + tipo + "_" + id);
-        }else{
-            var tabla = document.getElementById("id_tabla_" + tipo);
-        }
-        var ultimaFila = tabla.rows.length;
-        var iteraccion = ultimaFila+1;
-        var fila = tabla.insertRow(ultimaFila);
-        fila.id = 'fila-' + (iteraccion - 1);
-
-        //seleccionamos los controles de los formularios
-        if (id){
-            var controlSelect = document.getElementById("id_" + tipo + "_" + id);
-            var montoInput  = document.getElementById("id_monto_" + tipo + "_" + id);
-        }else{
-            var controlSelect = document.getElementById("id_" + tipo);
-            var montoInput  = document.getElementById("id_monto_" + tipo);
-        }
-
-        //celda izquierda - Nombre de donante
-        var celdaIzquierda = fila.insertCell(0);
-        var input= document.createElement('select');
-        input.name = tipo + '_' + iteraccion;
-        input.id = 'id_' + tipo + '_' + iteraccion;
-        var valorSeleccionado = controlSelect.options[controlSelect.selectedIndex].value;
-        var textoSeleccionado = controlSelect.options[controlSelect.selectedIndex].text;
-        var opcion = new Option(textoSeleccionado, valorSeleccionado);
-        input.options.add(opcion);
-        celdaIzquierda.appendChild(input);
-
-        //celda centro - Monto 
-        var celdaCentro= fila.insertCell(1);
-        var inputMonto= document.createElement('input');
-        inputMonto.type = 'text';
-        inputMonto.name = 'monto_' + tipo + '_' + iteraccion;
-        inputMonto.id = 'id_monto_' + tipo + '_' + iteraccion;
-        if (montoInput.value){
-            inputMonto.value = montoInput.value;
-        }else{
-            //TODO: levantar error.
-            alert('error, campo vacío');
-        }
-        inputMonto.readonly = 'readonly';
-        celdaCentro.appendChild(inputMonto);
-
-        //celda derecha - Eliminar 
-        var celdaDerecha = fila.insertCell(2);
-        var linkBorrar = document.createElement('a');
-        linkBorrar.href = '#';
-        if(id){
-            linkBorrar.onclick = function() {eliminarFila(linkBorrar, tipo, id);};
-        }else{
-            linkBorrar.onclick = function() {eliminarFila(linkBorrar, tipo);};
-        }
-        linkBorrar.appendChild(document.createTextNode('Eliminar')); 
-        celdaDerecha.appendChild(linkBorrar);
-    }
-
-    function eliminarFila(elem, tipo, id)
-    {
-      if (id){
-          var tabla = document.getElementById('id_tabla_' + tipo + '_' + id);
-      }else{
-          var tabla = document.getElementById('id_tabla_' + tipo);
-      }
-      var fila = elem.parentNode.parentNode.rowIndex;
-      tabla.deleteRow(fila);
-    }
-    
-    function agregarTablaMunicipio(control)
-    {
-        //validamos si la tabla existe para elminarla.
-        var id_departamento = control.value;
-        if (!control.checked)
-        {        //Se elimina la tabla
-            $('#tabla_' + id_departamento).remove();
-        }else{
-                
-            var tabla = document.createElement('table');
-            tabla.border = 1;
-            tabla.id = 'id_tabla_departamento_' + id_departamento;
-            tabla.name = 'tabla_departamento_' + id_departamento;
-            var ultimaFila = tabla.rows.length;
-            var iteraccion = ultimaFila+1;
-            var fila = tabla.insertRow(ultimaFila);
-            var celda = fila.insertCell(0);
-            var texto = document.createTextNode("Municipio");
-            celda.appendChild(texto);
-            celda = fila.insertCell(1);
-            texto = document.createTextNode("Monto");
-            celda.appendChild(texto);
-            //TODO: Agregar donante.
-            celda = fila.insertCell(2);
-            texto = document.createTextNode("Acción");
-            celda.appendChild(texto);
-            $('<div id="tabla_' + id_departamento + '"></div>').prependTo('#tablas_departamentos');
-            tabla_id = '#tabla_' + id_departamento;
-            $(tabla).prependTo(tabla_id);
-            //agregando controles.
-            //TODO: clean this shit!!!!
-            $('<div id="controles_select_"' + id_departamento +'"></div>').prependTo(tabla_id).load('/ajax/municipios_select/' + id_departamento );
-            $('#controles_select_' + id_departamento).load('/ajax/donantes_select/');
-            $('<input type="button" value="agregar"/>').attr('onClick', "agregar('departamento', " + id_departamento + ")").prependTo(tabla_id);
-            $('<input type="text" name="monto_departamento" />').attr('id', 'id_monto_departamento_' + id_departamento).prependTo(tabla_id);
-            $('<p><label>Monto: </label>').prependTo(tabla_id);
-
-        }
-    }
-    
-        </script>
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
                    Formulario de entrada de datos
  </div>
+ {%if form.errors%}
+   {{form.errors}}
+ </ul>
+ {%endif%}
                    <div id="contenido_interno">
 							<form action="." method="POST" id="formulario" name="formulario">
                                 {% csrf_token %}
+                                {% csrf_token %}
 								<div class="titulo_form"> Datos Generales</div>
 									<div class="campo_ancho">
+                                        {%if form.nombre.errors%}
+                                        <ul>{%for error in  form.nombre.errors%}<li>{{error}}</li>{%endfor%}</ul>
+                                        {%endif%}
 									   <div class="label izq">Nombre</div><input type="text" name="nombre" id="id_nombre" class="textbox_nombre"/>
 									</div>
 									<div class="campo_ancho">
-										<div class="label izq">Descripción</div><textarea id="id_descripcion" class="textarea"></textarea>
+										<div class="label izq">Descripción</div><textarea id="id_descripcion" name="descripcion" class="textarea"></textarea>
 									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
@@ -152,11 +46,12 @@
 										</select>
 									</div>
 									<div class="campo izq">
-									   <div class="label izq">Fecha inicio</div><input type="text" name="fecha_inicio" id="id_fecha_final" class="textbox"/>
+									   <div class="label izq">Fecha inicio</div><input type="text" name="fecha_inicial" id="id_fecha_inicial" class="textbox"/>
 									</div>
 									<div class="campo der">
-									   <div class="label izq">Fecha final</div><input type="text" name="fecha_final" id="id_fecha_inicio" class="textbox"/>
+									   <div class="label izq">Fecha final</div><input type="text" name="fecha_final" id="id_fecha_final" class="textbox"/>
 									</div>
+                                    <input type="submit" value="Crear Proyecto"/>
 									<br style="clear:both">
 									<br>
 								<div class="titulo_form"> Inversión Internacional</div>
