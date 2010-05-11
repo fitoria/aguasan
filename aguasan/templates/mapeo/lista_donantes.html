@@ -9,15 +9,15 @@
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
-                   Lista de proyectos
-                   <a href="/mapeo/formulario"><div id="accion_titulo" class="der">Nuevo Proyecto</div></a>
+                   Lista de Donantes
+                   <a href="#"><div id="accion_titulo" class="der">Nuevo Donante</div></a>
  </div>
 
 
                    <div id="contenido_interno">
-{%for proyecto in proyectos%}
+{%for donante in donantes%}
 	<div class="detalle_proyecto">
-		<a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a>
+		<a href="/donante/{{donante.id}}">{{donante.nombre}}</a>
 		<div class="acciones_detalle der"><a href="#">Editar</a> | <a href="#">Borrar</a></div>
 	</div>
 {%endfor%}

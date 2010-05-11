@@ -45,6 +45,18 @@ def lista_proyectos(request):
     return render_to_response('mapeo/lista_proyectos.html', dicc,
                               context_instance=RequestContext(request))
 
+def lista_donantes(request):
+    donantes = Donante.objects.all()
+    dicc = {'donantes': donantes}
+    return render_to_response('mapeo/lista_donantes.html', dicc,
+                              context_instance=RequestContext(request))
+
+def lista_contrapartes(request):
+    contrapartes = Contraparte.objects.all()
+    dicc = {'contrapartes': contrapartes}
+    return render_to_response('mapeo/lista_contrapartes.html', dicc,
+                              context_instance=RequestContext(request))
+
 def agregar_municipio_proyecto(request, id):
     '''se agrega municipio por medio de ajax'''
     if (request.method == 'POST'):

@@ -1,20 +1,9 @@
 {%extends "base.html"%}
-{%block extra_js%}
-<script type="text/javascript">
-	$(function() {
-		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-	});
-</script>
-{%endblock%}  
 {%block contenido%}
  <div id="titulo">
                    Proyecto
  </div>
-
-
                    <div id="contenido_interno">
-
 {{proyecto.nombre}}
 <br>
 {{proyecto.descripcion}}
