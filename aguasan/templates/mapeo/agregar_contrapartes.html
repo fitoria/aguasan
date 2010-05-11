@@ -1,0 +1,49 @@
+{%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+	$(function() {
+		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+	});
+    function agregar_contraparte(form){
+        $.post('/ajax/agregar/contraparte/{{id}}', {
+            contraparte: form.contraparte.value,
+            monto: form.monto.value,
+        },
+        function(data) { 
+            alert(data);
+            if(data!='OK'){
+                //do error validation
+                alert('error');
+            }
+        });
+    }
+</script>
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de entrada de datos para contrapartes
+ </div>
+ {%if form.errors%}
+   {{form.errors}}
+ </ul>
+ {%endif%}
+                   <div id="contenido_interno">
+							<form action="." method="POST" id="formulario" name="formulario">
+                                {% csrf_token %}
+								<div class="titulo_form">Agregar Contrapartes al proyecto</div>
+									<div class="campo izq">
+									   <div class="label izq">Contraparte</div>
+                                       {{form.contraparte}}
+									</div>
+									<br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Monto</div><input type="text" name="monto" id="id_monto" class="textbox"/>
+									</div>
+									<br style="clear:both">
+                                    <input type="submit" value="Agregar contraparte " onClick="agregar_contraparte(this.form)"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+ {% endblock %}

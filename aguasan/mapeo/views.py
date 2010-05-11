@@ -33,8 +33,15 @@ def proyecto(request, id):
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
 
+def contrapartes_proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    form = ProyectoContraparteForm()
+    dicc = {'form': form, 'id': id}
+    return render_to_response('mapeo/agregar_contrapartes.html', dicc,
+                                  context_instance=RequestContext(request))
+
 def agregar_municipio_proyecto(request, id):
-    '''se agregaq municipio por medio de ajax'''
+    '''se agrega municipio por medio de ajax'''
     if (request.method == 'POST'):
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
@@ -71,7 +78,8 @@ def agregar_donante_proyecto(request, id):
 
 def agregar_contraparte_proyecto(request, id):
     '''se agrega contraparte por medio de ajax'''
-    if (request.method == 'POST'):
+    print 'aljsdlajdsf'
+    if request.is_ajax():
         form = ProyectoContraparteForm(request.POST)
         if form.is_valid():
             proyecto = Proyecto.objects.get(id=id)
@@ -79,12 +87,16 @@ def agregar_contraparte_proyecto(request, id):
                 proyecto_contraparte = form.save(commit=False)
                 proyecto_contraparte.proyecto = proyecto
                 proyecto_contraparte.save()
+                print 'se guardo'
                 return HttpResponse('OK')
             else:
+                print 'error'
                 return HttpResponse('ERROR')
         else:
+            print 'form no valido', form.errors
             return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
     else:
+        print 'request no es ajax'
         return HttpResponse('ERROR')
 
 def mapa(request):

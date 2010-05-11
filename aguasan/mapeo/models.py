@@ -80,9 +80,9 @@ class ProyectoMunicipio(models.Model):
     #tenga un donante especifico
     donante = models.ForeignKey(Donante, blank=True, 
                                 help_text=_("Puede dejar este campo en blanco si no se tiene informacion."))
-    contraparte = models.ForeignKey(Contraparte, blank=True, help_text=_(
+    contraparte = models.ForeignKey(Contraparte, blank=True)
     proyecto = models.ForeignKey(Proyecto)
-
+    
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
 
