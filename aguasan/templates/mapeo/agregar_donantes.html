@@ -5,6 +5,25 @@
 		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
 		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
 	});
+
+    function agregar_donante(form){
+        $.post('/ajax/agregar/donante/{{id}}/', {
+            donante: form.donante.value,
+            monto: form.monto.value,
+        },
+        function(data) { 
+            if(data!='OK'){
+                //do error validation
+                if (data.donante[0]){ $("<p>" + data.donante[0] + "</p>").appendTo('#campo_donante');}
+                if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
+            }
+            else{
+                $("<p>Donante agregado</p>").appendTo("#mensaje");
+                form.donante.value = "";
+                form.monto.value ="";
+               }
+        });
+    }
 </script>
 {%endblock%}  
 {%block contenido%}
@@ -16,18 +35,21 @@
  </ul>
  {%endif%}
                    <div id="contenido_interno">
+                       <div id="mensaje"></div>
+                       <div id="error"></div>
 							<form action="." method="POST" id="formulario" name="formulario">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar Donantes al proyecto</div>
-									<div class="campo izq">
+									<div class="campo izq" id="campo_donante">
 									   <div class="label izq">Donante</div>
+                                       {{form.donante}}
 									</div>
 									<br style="clear:both">
-									<div class="campo izq">
-									   <div class="label izq">Monto</div><input type="text" name="monto_donante" id="id_monto" class="textbox"/>
+									<div class="campo izq" id="campo_monto">
+									   <div class="label izq">Monto</div><input type="text" name="monto" id="id_monto" class="textbox"/>
 									</div>
 									<br style="clear:both">
-                                    <input type="submit" value="Agregar donate "/>
+                                    <input type="button" value="Agregar donate" onClick="agregar_donante(this.form)"/>
 									<br style="clear:both">
 									<br>
 							</form>
