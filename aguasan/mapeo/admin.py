@@ -22,6 +22,10 @@ class PaisAdmin(admin.ModelAdmin):
 class TipoProyectoAdmin(admin.ModelAdmin):
     pass
 
+class ProyectoAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(Proyecto, ProyectoAdmin)
 admin.site.register(TipoProyecto, TipoProyectoAdmin)
 admin.site.register(Avance, AvanceAdmin)
 admin.site.register(TipoDonante, TipoDonanteiAdmin)
