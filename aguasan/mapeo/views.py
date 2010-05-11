@@ -41,7 +41,8 @@ def contrapartes_proyecto(request, id):
                                   context_instance=RequestContext(request))
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
-    return render_to_response('mapeo/lista_proyectos.html', proyectos,
+    dicc = {'proyectos': proyectos}
+    return render_to_response('mapeo/lista_proyectos.html', dicc,
                               context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):

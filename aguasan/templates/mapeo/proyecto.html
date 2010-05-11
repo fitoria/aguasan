@@ -9,16 +9,16 @@
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
-                   Lista de proyectos
+                   Proyecto
  </div>
 
 
                    <div id="contenido_interno">
-{%for proyecto in proyectos%}
-<div class="detalle_proyecto">
-<a href="/mapeo/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a>
-<div class="acciones der">Editar | Borrar</div>
-</div>
-{%endfor%}
+
+{{proyecto.nombre}}
+<br>
+{{proyecto.descripcion}}
+
+
                    </div>
  {% endblock %}
