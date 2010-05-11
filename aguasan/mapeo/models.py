@@ -68,6 +68,11 @@ class Contraparte(models.Model):
     def __unicode__(self):
         return self.nombre
 
+class ProyectoDepartamento(models.Model):
+    '''Modelo usado para agregar todos los municipios y 
+    guardar el monto total por departamento'''
+    pass
+
 class ProyectoMunicipio(models.Model):
     municipio = models.ForeignKey(Municipio)
     monto = models.FloatField()
@@ -75,6 +80,7 @@ class ProyectoMunicipio(models.Model):
     #tenga un donante especifico
     donante = models.ForeignKey(Donante, blank=True, 
                                 help_text=_("Puede dejar este campo en blanco si no se tiene informacion."))
+    contraparte = models.ForeignKey(Contraparte, blank=True, help_text=_(
     proyecto = models.ForeignKey(Proyecto)
 
     def __unicode__(self):
