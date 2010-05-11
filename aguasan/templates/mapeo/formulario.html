@@ -18,7 +18,6 @@
                    <div id="contenido_interno">
 							<form action="." method="POST" id="formulario" name="formulario">
                                 {% csrf_token %}
-                                {% csrf_token %}
 								<div class="titulo_form"> Datos Generales</div>
 									<div class="campo_ancho">
                                         {%if form.nombre.errors%}
@@ -54,47 +53,6 @@
                                     <input type="submit" value="Crear Proyecto"/>
 									<br style="clear:both">
 									<br>
-								<div class="titulo_form"> Inversión Internacional</div>
-									<p><label>Donante:</label>
-									<select id="id_donante" name="donante">
-                                        {% for donante in donantes%}
-                                            <option value="{{donante.id}}">{{donante.nombre}}</option>  
-                                        {%endfor%}
-									</select></p>
-									<p><label>Monto: </label><input type="text" name="monto_donante" id="id_monto_donante"/>
-									<input type="button" onClick="agregar('donante')" value="agregar" /></p>
-									<table name="tabla_donante" id="id_tabla_donante" border="1">
-										<tr>
-											<td>Donante</td>
-											<td>Monto</td>
-											<td>acción</td>
-										</tr>
-									</table>
-								<div class="titulo_form"> Inversión Interna</div>
-                                    <p><label>Contraparte:</label>
-									<select id="id_contraparte" name="contraparte">
-                                        {% for contraparte in contrapartes%}
-                                            <option value="{{contraparte.id}}">{{contraparte.nombre}}</option>  
-                                        {%endfor%}
-									</select></p>
-									<p><label>Monto: </label><input type="text" name="monto" id="id_monto_contraparte"/>
-									<input type="button" onClick="agregar('contraparte')" value="agregar" /></p>
-									<table name="tabla_contraparte" id="id_tabla_contraparte" border="1">
-										<tr>
-											<td>contraparte</td>
-											<td>Monto</td>
-											<td>acción</td>
-										</tr>
-									</table>
-								<div class="titulo_form">Ubicación</div>
-                                <p><label>Departamentos:</label><p>
-                                <fieldset>
-                                    <input type='checkbox' name='departamento' id='id_chk_managua' value='101' onclick="agregarTablaMunicipio(this)">Managua</input>
-                                    <input type='checkbox' name='departamento' id='id_chk_jinotega' value='2' onclick="agregarTablaMunicipio(this)">Jinotega</input>
-                                    <input type='checkbox' name='departamento' id='id_chk_matagalpa' value='3' onclick="agregarTablaMunicipio(this)">Carazo</input>
-                                </fieldset>
-                                <div id="tablas_departamentos"></div>
-                                <input type="submit" value="Guardar"/>
 							</form>
                    </div>
  {% endblock %}

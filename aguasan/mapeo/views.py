@@ -1,6 +1,7 @@
  # -*- coding: UTF-8 -*-
 from django.http import Http404, HttpResponse
 from mapeo.models import *
+from django.utils import simplejson
 from django.db import transaction
 from lugar.models import Municipio
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
@@ -37,12 +38,18 @@ def agregar_municipio_proyecto(request, id):
     if (request.method == 'POST'):
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
-            print form
-            proyecto_municipio = form.save()
+            proyecto = Proyecto.objects.get(id=id)
+            if proyecto:
+                proyecto_municipio = form.save(commit=False)
+                proyecto_municipio.proyecto = proyecto
+                proyecto_municipio.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
         else:
-            pass #retornar los errores en JSON
+            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
     else:
-        pass #TODO: retornar error en JSON
+        return HttpResponse('ERROR')
 
 def agregar_donante_proyecto(request, id):
     '''se agrega donante por medio de ajax'''
