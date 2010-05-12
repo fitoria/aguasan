@@ -69,10 +69,14 @@ def agregar_contraparte(request):
 		form = ContraparteForm(request.POST)
 		if form.is_valid():
 			contraparte = form.save()
-			return render_to_response('contrapartes/lista_contrapartes.html', {'form': form},context_instance=RequestContext(request))
+			return render_to_response('mapeo/lista_contrapartes.html', {'form': form},context_instance=RequestContext(request))
 		else:
-			return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
+			return render_to_response('mapeo/agregar_contraparte.html', {'form': form},
 				context_instance=RequestContext(request))
+	else:
+		form = ContraparteForm()
+		return render_to_response('mapeo/agregar_contraparte.html', {'form': form},
+			context_instance=RequestContext(request))
 
 
 def agregar_municipio_proyecto(request, id):
