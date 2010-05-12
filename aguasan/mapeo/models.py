@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
-from lugar.models import Municipio
+from lugar.models import Municipio, Departamento
 from django.utils.translation import ugettext as _
 
 class Pais(models.Model):
@@ -71,21 +71,30 @@ class Contraparte(models.Model):
 class ProyectoDepartamento(models.Model):
     '''Modelo usado para agregar todos los municipios y 
     guardar el monto total por departamento'''
-    pass
+    proyecto = models.ForeignKey(Proyecto)
+    monto_total = models.FloatField(blank=True, 
+                                   help_text=_('rellenar solo si no se dispone' \
+                                              'de informacion por municipio'))
+    #donantes = models.ManyToManyField(Donante) 
+    departamento = models.ForeignKey(Departamento)
+
+    def __unicode__(self):
+        return"%s en %s" % (self.proyecto.nombre, self.departamento.nombre)
 
 class ProyectoMunicipio(models.Model):
     municipio = models.ForeignKey(Municipio)
     monto = models.FloatField()
-    #se agregó donante por que puede ser que un municipio 
-    #tenga un donante especifico
-    donante = models.ForeignKey(Donante, blank=True, 
-                                help_text=_("Puede dejar este campo en blanco si no se tiene informacion."))
-    contraparte = models.ForeignKey(Contraparte, blank=True)
-    proyecto = models.ForeignKey(Proyecto)
+    donantes = models.ManyToManyField(Donante) 
+    contrapartes = models.ManyToManyField(Contraparte) 
+    proyecto = models.ForeignKey(ProyectoDepartamento)
+    #donante = models.ForeignKey(Donante, blank=True, 
+    #                            help_text=_("Puede dejar este campo" \ 
+    #                                        "en blanco si no se tiene informacion."))
+    #contraparte = models.ForeignKey(Contraparte, blank=True)
+    #proyecto = models.ForeignKey(Proyecto)
     
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
-
 
 class ProyectoDonante(models.Model):
     donante = models.ForeignKey(Donante)
