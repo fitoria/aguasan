@@ -5,6 +5,11 @@ class ProyectoForm(ModelForm):
     class Meta:
         model = Proyecto
 
+class ProyectoDepartamentoForm(ModelForm):
+    class Meta:
+        model = ProyectoDepartamento
+        exclude = ['proyecto']
+
 class ProyectoMunicipioForm(ModelForm):
     class Meta:
         model = ProyectoMunicipio
@@ -23,4 +28,3 @@ class ProyectoContraparteForm(ModelForm):
 class ContraparteForm(ModelForm):
     class Meta:
         model = Contraparte
-
