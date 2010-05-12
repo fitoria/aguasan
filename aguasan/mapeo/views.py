@@ -36,8 +36,15 @@ def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoContraparteForm()
     dicc = {'form': form, 'id': id}
-    return render_to_response('mapeo/agregar_contrapartes.html', dicc,
+    return render_to_response('mapeo/agregar_contraparte_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
+def donantes_proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    form = ProyectoDonanteForm()
+    dicc = {'form': form, 'id': id}
+    return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
