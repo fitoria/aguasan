@@ -57,6 +57,19 @@ def lista_contrapartes(request):
     return render_to_response('mapeo/lista_contrapartes.html', dicc,
                               context_instance=RequestContext(request))
 
+def agregar_contraparte(request):
+	'''Agregando contraparte en formulario por fuera'''
+	if (reques.method == 'POST'):
+		form = ContraparteForm(reques.POST)
+		is form.is_valid():
+			print form
+			contraparte = form.save()
+			return render_to_response('contrapartes/lista_contrapartes.html', {'form': form},
+                    context_instance=RequestContext(request))
+		else:
+            return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
+                    context_instance=RequestContext(request))
+
 def agregar_municipio_proyecto(request, id):
     '''se agrega municipio por medio de ajax'''
     if (request.method == 'POST'):
