@@ -1,0 +1,46 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de agregar donante
+ </div>
+ {%if form.errors%}
+   {{form.errors}}
+ </ul>
+ {%endif%}
+                   <div id="contenido_interno">
+							<form action="." method="POST" id="formulario" name="formulario">
+                                {% csrf_token %}
+								<div class="titulo_form"> Datos Generales</div>
+									<div class="campo_ancho">
+                                        {%if form.nombre.errors%}
+                                        <ul>{%for error in  form.nombre.errors%}<li>{{error}}</li>{%endfor%}</ul>
+                                        {%endif%}
+									   <div class="label izq">Nombre</div><input type="text" name="nombre" id="id_nombre" class="textbox_nombre"/>
+									</div>
+									<div class="campo_ancho">
+										<div class="label izq">Descripción</div><textarea id="id_descripcion" name="descripcion" class="textarea"></textarea>
+									</div>
+									<div class="campo der">
+									   <div class="label izq">País</div>
+                                       {{form.pais}}
+									</div>
+									<div class="campo">
+									   <div class="label izq">Tipo</div>
+                                       {{form.tipo}}
+									</div>
+									<div class="campo izq">
+									   <div class="label izq">Website</div>
+                                       {{form.website}}
+									</div>
+									<div class="campo der">
+									   <div class="label izq">logo</div>
+                                       {{form.logo}}
+									</div>
+                                    <input type="submit" value="Crear Contraparte"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+ {% endblock %}
