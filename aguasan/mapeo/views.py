@@ -93,11 +93,12 @@ def agregar_donante_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
+#TODO: cambiar estos nombres de vista
 def agregar_donante(request):
-	return render_to_response('mapeo/agregar_donante.html',context_instance=RequestContext(request))
+	return render_to_response('mapeo/agregar_donante_proyecto.html',context_instance=RequestContext(request))
 
 def agregar_contraparte(request):
-	return render_to_response('mapeo/agregar_contraparte.html',context_instance=RequestContext(request))
+	return render_to_response('mapeo/agregar_contraparte_proyecto.html',context_instance=RequestContext(request))
 
 def agregar_contraparte_proyecto(request, id):
     '''se agrega contraparte por medio de ajax'''
@@ -124,19 +125,3 @@ def agregar_contraparte_proyecto(request, id):
 
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
-
-def donantes_select(request):
-    '''Vista para crear el select de donantes en el formulario'''
-    donantes = Donante.objects.all()
-    return render_to_response('mapeo/donantes_select.html', {'donantes': donantes})
-
-def contrapartes_select(request):
-    '''Vista para crear el select de contrapartes en el formulario'''
-    contrapartes = Contraparte.objects.all()
-    return render_to_response('mapeo/contrapartes_select.html', {'contrapartes': contrapartes})
-
-def municipios_select(request, id_departamento):
-    '''Vista para crear el select de municipio en el formulario'''
-    municipios = get_list_or_404(Municipio, departamento__id = id_departamento)
-    return render_to_response('mapeo/municipios_select.html', {'municipios': municipios, 'id': id_departamento})
-
