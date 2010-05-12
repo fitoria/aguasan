@@ -44,6 +44,8 @@ class Proyecto(models.Model):
     tipo = models.ForeignKey(TipoProyecto)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.nombre
@@ -53,7 +55,9 @@ class Proyecto(models.Model):
 
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
-    descripcion = models.TextField(_('Descripcion de medidas'))
+    descripcion = models.TextField(_('Descripcion del donante'))
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoDonante)
 
@@ -64,6 +68,8 @@ class Contraparte(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoContraparte)
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.nombre
