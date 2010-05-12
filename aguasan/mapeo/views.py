@@ -1,5 +1,5 @@
  # -*- coding: UTF-8 -*-
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from mapeo.models import *
 from django.utils import simplejson
 from django.db import transaction
@@ -71,13 +71,14 @@ def agregar_contraparte(request):
         form = ContraparteForm(request.POST)
         if form.is_valid():
           contraparte = form.save()
-          return render_to_response('contrapartes/lista_contrapartes.html',
-                                    {'form': form}, context_instance=RequestContext(request))
+          return HttpResponseRedirect('/contrapartes/')
+          #return render_to_response('mapeo/lista_contrapartes.html',
+          #                          {'form': form}, context_instance=RequestContext(request))
         else:
-            return render_to_response('contrapartes/agregar_contraparte.html',
+            return render_to_response('mapeo/agregar_contraparte.html',
                                       {'form': form}, context_instance=RequestContext(request))
     else:
-        return render_to_response('contrapartes/agregar_contraparte.html',
+        return render_to_response('mapeo/agregar_contraparte.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):
