@@ -45,7 +45,22 @@ def donantes_proyecto(request, id):
     return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
+def departamento_proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    form = ProyectoDepartamentoForm()
+    dicc = {'form': form, 'id': id}
+    return render_to_response('mapeo/agregar_departamento_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
 
+
+def municipio_proyecto(request, id_proyecto, id_dept):
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    form = ProyectoMunicipioForm()
+    dicc = {'form': form, 'id_proyecto': id,
+            'id_dept': id_dept}
+    return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+                              
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
