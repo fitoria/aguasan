@@ -71,11 +71,9 @@ def agregar_contraparte(request):
 			contraparte = form.save()
 			return render_to_response('contrapartes/lista_contrapartes.html', {'form': form},context_instance=RequestContext(request))
 		else:
-            return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
-                    context_instance=RequestContext(request))
-    else:
-        return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
-                context_instance=RequestContext(request))
+			return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
+				context_instance=RequestContext(request))
+
 
 def agregar_municipio_proyecto(request, id):
     '''se agrega municipio por medio de ajax'''
