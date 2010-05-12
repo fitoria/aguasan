@@ -22,5 +22,5 @@ class ProyectoContraparteForm(ModelForm):
 
 class ContraparteForm(ModelForm):
     class Meta:
-        model = ProyectoContraparte
-        exclude = ['proyecto']
+        model = Contraparte
+

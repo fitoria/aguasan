@@ -66,6 +66,7 @@ class Donante(models.Model):
 
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
+    descripcion = models.TextField(_('Descripcion del donante'), blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoContraparte)
     logo = models.ImageField(upload_to='donantes/logos/', blank=True)
