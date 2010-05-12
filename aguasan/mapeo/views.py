@@ -45,6 +45,7 @@ def donantes_proyecto(request, id):
     return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
+
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
@@ -64,19 +65,21 @@ def lista_contrapartes(request):
                               context_instance=RequestContext(request))
 
 def agregar_contraparte(request):
-	'''Agregando contraparte en formulario por fuera'''
-	if (request.method == 'POST'):
-		form = ContraparteForm(request.POST)
-		if form.is_valid():
-			contraparte = form.save()
-			return render_to_response('mapeo/lista_contrapartes.html', {'form': form},context_instance=RequestContext(request))
-		else:
-			return render_to_response('mapeo/agregar_contraparte.html', {'form': form},
-				context_instance=RequestContext(request))
-	else:
-		form = ContraparteForm()
-		return render_to_response('mapeo/agregar_contraparte.html', {'form': form},
-			context_instance=RequestContext(request))
+    '''Agregando contraparte en formulario por fuera'''
+    form = ContraparteForm()
+    if (request.method == 'POST'):
+        form = ContraparteForm(request.POST)
+        if form.is_valid():
+            contraparte = form.save()
+            return render_to_response('mapeo/lista_contrapartes.html', 
+                             {'form': form}, context_instance=RequestContext(request))
+        else:
+            return render_to_response('mapeo/agregar_contraparte.html', 
+                             {'form': form}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('mapeo/agregar_contraparte.html', 
+                         {'form': form}, context_instance=RequestContext(request))
+
 
 
 def agregar_municipio_proyecto(request, id):
