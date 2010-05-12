@@ -15,7 +15,6 @@ def formulario(request):
     if (request.method == 'POST'):
         form = ProyectoForm(request.POST)
         if form.is_valid():
-           print form
            proyecto = form.save()
            request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
            return redirect(proyecto)
@@ -59,14 +58,17 @@ def lista_contrapartes(request):
 
 def agregar_contraparte(request):
 	'''Agregando contraparte en formulario por fuera'''
-	if (reques.method == 'POST'):
+	if (request.method == 'POST'):
 		form = ContraparteForm(request.POST)
 		if form.is_valid():
-			print form
 			contraparte = form.save()
 			return render_to_response('contrapartes/lista_contrapartes.html', {'form': form},context_instance=RequestContext(request))
 		else:
-			return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},context_instance=RequestContext(request))
+            return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
+                    context_instance=RequestContext(request))
+    else:
+        return render_to_response('contrapartes/agregar_contraparte.html', {'form': form},
+                context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):
     '''se agrega municipio por medio de ajax'''
@@ -104,16 +106,9 @@ def agregar_donante_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
-#TODO: cambiar estos nombres de vista
-def agregar_donante(request):
-	return render_to_response('mapeo/agregar_donante_proyecto.html',context_instance=RequestContext(request))
-
-def agregar_contraparte(request):
-	return render_to_response('mapeo/agregar_contraparte_proyecto.html',context_instance=RequestContext(request))
 
 def agregar_contraparte_proyecto(request, id):
     '''se agrega contraparte por medio de ajax'''
-    print 'aljsdlajdsf'
     if request.is_ajax():
         form = ProyectoContraparteForm(request.POST)
         if form.is_valid():
@@ -122,16 +117,12 @@ def agregar_contraparte_proyecto(request, id):
                 proyecto_contraparte = form.save(commit=False)
                 proyecto_contraparte.proyecto = proyecto
                 proyecto_contraparte.save()
-                print 'se guardo'
                 return HttpResponse('OK')
             else:
-                print 'error'
                 return HttpResponse('ERROR')
         else:
-            print 'form no valido', form.errors
             return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
     else:
-        print 'request no es ajax'
         return HttpResponse('ERROR')
 
 def mapa(request):
