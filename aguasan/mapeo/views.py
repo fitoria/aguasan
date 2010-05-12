@@ -87,13 +87,43 @@ def agregar_contraparte(request):
         if form.is_valid():
           contraparte = form.save()
           return HttpResponseRedirect('/contrapartes/')
-          #return render_to_response('mapeo/lista_contrapartes.html',
-          #                          {'form': form}, context_instance=RequestContext(request))
         else:
             return render_to_response('mapeo/agregar_contraparte.html',
                                       {'form': form}, context_instance=RequestContext(request))
     else:
         return render_to_response('mapeo/agregar_contraparte.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def agregar_donante(request):
+    '''Agregando donante en formulario por fuera'''
+    form = DonanteForm()
+    if (request.method == 'POST'):
+        form = DonanteForm(request.POST)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/donantes/')
+        else:
+            return render_to_response('mapeo/agregar_donante.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('mapeo/agregar_donante.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def editar_donante(request,id):
+    '''Editando donante en formulario por fuera'''
+    d = Donante.objects.get(pk=id)
+
+    if (request.method == 'POST'):
+        form = DonanteForm(request.POST,instance=d)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/donantes/')
+        else:
+            return render_to_response('mapeo/editar_donante.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        form = DonanteForm(instance=d)
+        return render_to_response('mapeo/editar_donante.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):

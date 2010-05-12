@@ -28,3 +28,7 @@ class ProyectoContraparteForm(ModelForm):
 class ContraparteForm(ModelForm):
     class Meta:
         model = Contraparte
+
+class DonanteForm(ModelForm):
+    class Meta:
+        model = Donante
