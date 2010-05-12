@@ -19,5 +19,6 @@ urlpatterns = patterns('mapeo.views',
     (r'^contrapartes/agregar/$', 'agregar_contraparte'),
     (r'^ajax/agregar/contraparte/(?P<id>\d+)/$', 'agregar_contraparte_proyecto'),
     (r'^ajax/agregar/donante/(?P<id>\d+)/$', 'agregar_donante_proyecto'),
-    #(r'^ajax/agregar/municipio/(?P<id>\d+)/$', 'agregar_municipio_proyecto'),
+    (r'^ajax/agregar/departamento/(?P<id>\d+)/$', 'agregar_departamento_proyecto'),
+    (r'^ajax/agregar/municipio/(?P<id_proyecto>\d+)/(?P<id_dept>)\d+/$', 'agregar_municipio_proyecto'),
 )

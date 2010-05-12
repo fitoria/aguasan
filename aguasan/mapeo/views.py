@@ -140,7 +140,8 @@ def agregar_municipio_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
 
@@ -158,7 +159,8 @@ def agregar_donante_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
 
@@ -177,9 +179,51 @@ def agregar_contraparte_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
+
+def agregar_departamento_proyecto(request, id):
+    ''' agrega departamento al proyecto por medio de ajax'''
+    if request.is_ajax():
+        form = ProyectoDepartamentoForm(request.POST)
+        if form.is_valid():
+            proyecto = Proyecto.objects.get(id=id)
+            if proyecto:
+                proyecto_departamento = form.save(commit=False)
+                proyecto_departamento.proyecto = proyecto
+                proyecto_departamento.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype = 'application/json')
+    else:
+        return HttpResponse('ERROR')
+
+def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
+    ''' agrega departamento al proyecto por medio de ajax'''
+    if request.is_ajax():
+        form = ProyectoDepartamentoForm(request.POST)
+        if form.is_valid():
+            proyecto = Proyecto.objects.get(id=id_proyecto)
+            departamento = Departamento.objects.get(id=id)
+            if proyecto and departamento:
+                proyecto_municipio= form.save(commit=False)
+                proyecto_municipio.proyecto = proyecto
+                proyecto_municipio.departamento = departamento
+                proyecto_municipio.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype = 'application/json')
+    else:
+        return HttpResponse('ERROR')
+
 
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))

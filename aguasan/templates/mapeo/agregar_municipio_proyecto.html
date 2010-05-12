@@ -1,0 +1,54 @@
+{%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+function agregar_contraparte(form){
+        $.post('/ajax/agregar/municipio/{{id}}/{{id_dept}}/', {
+            municipio: form.municipio.value,
+            monto: form.monto.value,
+            donantes: form.donantes.value,
+            contrapartes: form.contrapartes.value,
+        },
+        function(data) { 
+            alert(data);
+            if(data!='OK'){
+                //do error validation
+                alert('error');
+            }
+        });
+    }
+</script>
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de entrada de datos para donantes
+ </div>
+ {%endif%}
+                   <div id="contenido_interno">
+							<form action="." method="POST" id="formulario" name="formulario">
+                                {% csrf_token %}
+								<div class="titulo_form">Agregar municipio al proyecto</div>
+									<div class="campo izq">
+									   <div class="label izq">municipio: </div>
+                                       {{form.municipio}}
+									</div>
+									<br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Monto:</div>
+                                       {{form.monto}}                                     </div>
+                                    <br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Contrapartes:</div>
+                                       {{form.contrapartes}}
+									</div>
+                                    <br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Donantes:</div>
+                                       {{form.donantes}}
+									</div>
+									<br style="clear:both">
+                                    <input type="button" value="Agregar municipio" onClick="agregar_municipio(this.form)"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+ {% endblock %}
