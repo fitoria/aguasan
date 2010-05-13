@@ -494,8 +494,51 @@ h2{
   margin-top:4px;
   margin-left:4px;
   text-shadow: 1px 0 5px #003366;
+}
 
+.seccion .accion_seccion{
+  font-size:13px;
+  color:#fff;
+  font-weight:bold;
+  margin-top:6px;
+  margin-right:4px;
+  background-image:url(../imagen/mas_seccion.png);
+  background-repeat: no-repeat;
+  background-position:left middle;
+  padding-left:20px;
+}
 
+.seccion .accion_seccion_editar{
+  background-image:url(../imagen/editar_seccion.png);
+  background-repeat: no-repeat;
+  background-position:left center;
+}
+
+.columna_interna_285{
+  width:285px;
+}
+
+.columna_interna_460 {
+  width:460px;
+}
+.columna_interna_378{
+  width:378px;
+}
+
+.subtitulo_seccion{
+  border-bottom-width:1px;
+  border-bottom-style:solid;
+  border-bottom-color:#cacaca;
+  margin-top:3px;
+  margin-bottom:3px;
+  padding-bottom:2px;
+  padding-left:15px;
+  font-weight:bold;
+  color:#3f8ace;
+  font-size:14px;  
+  background-image:url(../imagen/bullet_subseccion.png);
+  background-repeat: no-repeat;
+  background-position: left center;
 }
 /* --------------Termina contenido-------------- */
 

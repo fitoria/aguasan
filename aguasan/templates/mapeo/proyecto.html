@@ -6,30 +6,130 @@
                    <div id="contenido_interno">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Información General</div>
-                            <div class="accion_seccion der">Editar</div>
+                            <div class="accion_seccion accion_seccion_editar der">Editar</div>
                         </div>
-                        <div class="columna_interna_285"></div>
-                        <div class="columna_interna_480"></div>
+                        <br style="clear:both">
+                        <div class="columna_interna_285 izq">
+                            {%if proyecto.logo%}
+                            <img src="{{MEDIA_URL}}/{{proyecto.logo}}">
+                            {%endif%}
+                            <div class="subtitulo_seccion">Nombre del Proyecto</div>
+                                <b>{{proyecto.nombre}}</b>
+                            <br><br>
+                            <div class="subtitulo_seccion">Monto</div>
+                                <b>Aporte Externo: </b><br>
+                                <b>Aporte Interno: </b><br>
+                                <b>Monto Total: </b><br>
+                            <br>
+                            <div class="subtitulo_seccion">Estado de avance</div>
+                                <b>{{proyecto.avance}}</b>
+                            <br><br>
+                            <div class="subtitulo_seccion">Finalidad</div>
+                                <b>{{proyecto.tipo}}</b>
+                            <br><br>
+                            <div class="subtitulo_seccion">Periodo</div>
+                                <b>{{proyecto.fecha_inicial}} - {{proyecto.fecha_final}}</b>
+                            <br><br>
+                            {%if proyecto.website%}
+                            <div class="subtitulo_seccion">Sitio Web</div>
+                                <b>{{proyecto.website}}</b>
+                            <br><br>
+                            {%endif%}
+                        </div>
+                        <div class="columna_interna_460 der">
+                            <div class="subtitulo_seccion">Descripción</div>
+                                {{proyecto.descripcion}}
+                            <br><br>
+                            <div class="subtitulo_seccion">Galeria de fotos</div>
+                            <br><br>
+                        </div>
+                        <br style="clear:both">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
                             <div class="accion_seccion der">Agregar</div>
                         </div>
-                        <div class="columna_interna_378">
+                            <table>
+                                <tr>
+                                    <td>Departamentos y municipios</td>
+                                    <td>Inversion</td>
+                                    <td>Accion</td>
+                                </tr>
+                                <!--Aqui hay que iterar el departamento -->
+                                <tr>
+                                    <td>Esteli</td>
+                                    <td> Total : 1000</td>
+                                    <td></td>
+                                </tr>
+                                       <!--Iteracion interna de municipio -->
+                                               <tr>
+                                                   <td>Tola</td>
+                                                   <td>1000</td>
+                                                   <td><a href="#">Eliminar</a></td>
+                                               </tr>
+                                               <tr>
+                                                   <td>Condega</td>
+                                                   <td>2000</td>
+                                                   <td><a href="#">Eliminar</a></td>
+                                               </tr>
+                                        <!--Se termina iteracion de municipio -->
+                                <!--Se termina iteracion de departamento -->
+                                <tr>
+                                    <td>Total del proyecto</td>
+                                    <td>3000</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        <div class="columna_interna_378 izq">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Cooperantes</div>
-                                <div class="accion_seccion der">Agregar cooperante</div>
+                                <div class="accion_seccion der">Nuevo cooperante</div>
                             </div>
+                            <table>
+                                <tr>
+                                    <td>Cooperante</td>
+                                    <td>Inversion</td>
+                                    <td>Accion</td>
+                                </tr>
+                                <!--Aqui hay que iterar -->
+                                <tr>
+                                    <td>lorem</td>
+                                    <td>10</td>
+                                    <td><a href="#">Eliminar</a></td>
+                                </tr>
+                                <!--Se termina iteracion -->
+                                <tr>
+                                    <td>Total Aporte Externo</td>
+                                    <td>1000</td>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="columna_interna_378">
+                        <div class="columna_interna_378 der">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Contrapartes</div>
-                                <div class="accion_seccion der">Agregar contrapartes</div>
+                                <div class="accion_seccion der">Nueva contraparte</div>
                             </div>
+                            <table>
+                                <tr>
+                                    <td>Contraparte</td>
+                                    <td>Inversion</td>
+                                    <td>Accion</td>
+                                </tr>
+                                <!--Aqui hay que iterar -->
+                                <tr>
+                                    <td>lorem</td>
+                                    <td>10</td>
+                                    <td><a href="#">Eliminar</a></td>
+                                </tr>
+                                <!--Se termina iteracion -->
+                                <tr>
+                                    <td>Total Aporte interno</td>
+                                    <td>1000</td>
+                                    <td></td>
+                                </tr>
+                            </table>
                         </div>
-{{proyecto.nombre}}
-<br>
-{{proyecto.descripcion}}
-
+                        <br style="clear:both">
 
                    </div>
  {% endblock %}
