@@ -26,6 +26,23 @@ def formulario(request):
         return render_to_response('mapeo/formulario.html', {'form': form},
                 context_instance=RequestContext(request))
 
+def editar_proyecto(request,id):
+    '''Editando proyecto en formulario por fuera'''
+    p = Proyecto.objects.get(pk=id)
+    if (request.method == 'POST'):
+        form = ProyectoForm(request.POST,instance=p)
+        if form.is_valid():
+          proyecto = form.save()
+          return redirect(proyecto)
+        else:
+            return render_to_response('mapeo/editar_proyecto.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        form = ProyectoForm(instance=p)
+        return render_to_response('mapeo/editar_proyecto.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+
 def proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     dicc = {'proyecto': proyecto}

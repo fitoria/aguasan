@@ -1,0 +1,58 @@
+{%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+	$(function() {
+		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
+	});
+</script>
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de edición
+ </div>
+ {%if form.errors%}
+   {{form.errors}}
+ </ul>
+ {%endif%}
+                   <div id="contenido_interno">
+							<form action="." method="POST" id="formulario" name="formulario">
+                                {% csrf_token %}
+								<div class="titulo_form"> Edición de Datos Generales</div>
+									<div class="campo_ancho">
+                                        {%if form.nombre.errors%}
+                                        <ul>{%for error in  form.nombre.errors%}<li>{{error}}</li>{%endfor%}</ul>
+                                        {%endif%}
+									   <div class="label izq">Nombre</div>{{form.nombre}}
+									</div>
+									<div class="campo_ancho">
+										<div class="label izq">Descripción</div>{{form.descripcion}}
+									</div>
+									<div class="campo der">
+									   <div class="label izq">Avance</div>
+                                       {{form.avance}}
+									</div>
+									<div class="campo">
+									   <div class="label izq">Tipo</div>
+                                       {{form.tipo}}
+									</div>
+									<div class="campo izq">
+									   <div class="label izq">Website</div>
+                                       {{form.website}}
+									</div>
+									<div class="campo der">
+									   <div class="label izq">logo</div>
+                                       {{form.logo}}
+									</div>
+									<div class="campo izq">
+									   <div class="label izq">Fecha inicio</div>{{form.fecha_inicial}}
+									</div>
+									<div class="campo der">
+									   <div class="label izq">Fecha final</div>{{form.fecha_final}}
+									</div>
+                                    <input type="submit" value="Editar Proyecto"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+ {% endblock %}
