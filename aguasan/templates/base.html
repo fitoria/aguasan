@@ -48,7 +48,7 @@
           <!-- Comienza Contenido-->
         <div id="contenido">
                <!-- Comienza Columna izquierda-->
-               <div id="colum_izq" class="izq">
+               <div class="colum_izq izq">
                   <div class="enlace_sidebar icono_filtro">Filtros</div>
                   <div class="enlace_sidebar icono_ayuda">Ayuda</div>
 
@@ -58,6 +58,17 @@
              <!-- Comienza Columna derecha--> 
 
                <div id="colum_der" class="der">
+                   <img src="{{MEDIA_URL}}imagen/titulo_admin.jpg" align="right">
+                   <div class="separador"></div>
+                   <div id="menu_admin">
+                   <div id="usuario_logueado">Usuario: Nombre usuario</div>
+                          <div id="acciones">
+                               <a href="/donantes">DONANTES</a>
+                               <a href="/contrapartes">CONTRAPARTES</a>
+                               <a href="/proyectos">PROYECTOS</a>
+
+                          </div> 
+                   </div>
                    {%block contenido%}{%endblock%}
                   
 

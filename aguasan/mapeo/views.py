@@ -1,5 +1,5 @@
  # -*- coding: UTF-8 -*-
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect
 from mapeo.models import *
 from django.utils import simplejson
 from django.db import transaction
@@ -15,7 +15,6 @@ def formulario(request):
     if (request.method == 'POST'):
         form = ProyectoForm(request.POST)
         if form.is_valid():
-           print form
            proyecto = form.save()
            request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
            return redirect(proyecto)
@@ -37,19 +36,111 @@ def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoContraparteForm()
     dicc = {'form': form, 'id': id}
-    return render_to_response('mapeo/agregar_contrapartes.html', dicc,
+    return render_to_response('mapeo/agregar_contraparte_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
 def donantes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoDonanteForm()
     dicc = {'form': form, 'id': id}
-    return render_to_response('mapeo/agregar_donantes.html', dicc,
+    return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
+
+def departamento_proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    form = ProyectoDepartamentoForm()
+    dicc = {'form': form, 'id': id}
+    return render_to_response('mapeo/agregar_departamento_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+
+
+def municipio_proyecto(request, id_proyecto, id_dept):
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+    form = ProyectoMunicipioForm()
+    dicc = {'form': form, 'id_proyecto': id,
+            'id_dept': id_dept}
+    return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+                              
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
-    return render_to_response('mapeo/lista_proyectos.html', proyectos,
+    dicc = {'proyectos': proyectos}
+    return render_to_response('mapeo/lista_proyectos.html', dicc,
                               context_instance=RequestContext(request))
+
+def lista_donantes(request):
+    donantes = Donante.objects.all()
+    dicc = {'donantes': donantes}
+    return render_to_response('mapeo/lista_donantes.html', dicc,
+                              context_instance=RequestContext(request))
+
+def lista_contrapartes(request):
+    contrapartes = Contraparte.objects.all()
+    dicc = {'contrapartes': contrapartes}
+    return render_to_response('mapeo/lista_contrapartes.html', dicc,
+                              context_instance=RequestContext(request))
+
+def agregar_contraparte(request):
+    '''Agregando contraparte en formulario por fuera'''
+    form = ContraparteForm()
+    if (request.method == 'POST'):
+        form = ContraparteForm(request.POST)
+        if form.is_valid():
+          contraparte = form.save()
+          return HttpResponseRedirect('/contrapartes/')
+        else:
+            return render_to_response('mapeo/agregar_contraparte.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('mapeo/agregar_contraparte.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def agregar_donante(request):
+    '''Agregando donante en formulario por fuera'''
+    form = DonanteForm()
+    if (request.method == 'POST'):
+        form = DonanteForm(request.POST)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/donantes/')
+        else:
+            return render_to_response('mapeo/agregar_donante.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        return render_to_response('mapeo/agregar_donante.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def editar_donante(request,id):
+    '''Editando donante en formulario por fuera'''
+    d = Donante.objects.get(pk=id)
+    if (request.method == 'POST'):
+        form = DonanteForm(request.POST,instance=d)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/donantes/')
+        else:
+            return render_to_response('mapeo/editar_donante.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        form = DonanteForm(instance=d)
+        return render_to_response('mapeo/editar_donante.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def editar_contraparte(request,id):
+    '''Editando contraparte en formulario por fuera'''
+    d = Contraparte.objects.get(pk=id)
+    if (request.method == 'POST'):
+        form = ContraparteForm(request.POST,instance=d)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/contrapartes/')
+        else:
+            return render_to_response('mapeo/editar_contraparte.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        form = ContraparteForm(instance=d)
+        return render_to_response('mapeo/editar_contraparte.html',
+                                  {'form': form}, context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):
     '''se agrega municipio por medio de ajax'''
@@ -65,7 +156,8 @@ def agregar_municipio_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
 
@@ -83,7 +175,8 @@ def agregar_donante_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
 
@@ -101,25 +194,51 @@ def agregar_contraparte_proyecto(request, id):
             else:
                 return HttpResponse('ERROR')
         else:
-            return HttpResponse(simplejson.dumps(form.errors), mimetype="application/json")
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
     else:
         return HttpResponse('ERROR')
 
+def agregar_departamento_proyecto(request, id):
+    ''' agrega departamento al proyecto por medio de ajax'''
+    if request.is_ajax():
+        form = ProyectoDepartamentoForm(request.POST)
+        if form.is_valid():
+            proyecto = Proyecto.objects.get(id=id)
+            if proyecto:
+                proyecto_departamento = form.save(commit=False)
+                proyecto_departamento.proyecto = proyecto
+                proyecto_departamento.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype = 'application/json')
+    else:
+        return HttpResponse('ERROR')
+
+def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
+    ''' agrega departamento al proyecto por medio de ajax'''
+    if request.is_ajax():
+        form = ProyectoDepartamentoForm(request.POST)
+        if form.is_valid():
+            proyecto = Proyecto.objects.get(id=id_proyecto)
+            departamento = Departamento.objects.get(id=id)
+            if proyecto and departamento:
+                proyecto_municipio= form.save(commit=False)
+                proyecto_municipio.proyecto = proyecto
+                proyecto_municipio.departamento = departamento
+                proyecto_municipio.save()
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors), 
+                                mimetype = 'application/json')
+    else:
+        return HttpResponse('ERROR')
+
+
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
-
-def donantes_select(request):
-    '''Vista para crear el select de donantes en el formulario'''
-    donantes = Donante.objects.all()
-    return render_to_response('mapeo/donantes_select.html', {'donantes': donantes})
-
-def contrapartes_select(request):
-    '''Vista para crear el select de contrapartes en el formulario'''
-    contrapartes = Contraparte.objects.all()
-    return render_to_response('mapeo/contrapartes_select.html', {'contrapartes': contrapartes})
-
-def municipios_select(request, id_departamento):
-    '''Vista para crear el select de municipio en el formulario'''
-    municipios = get_list_or_404(Municipio, departamento__id = id_departamento)
-    return render_to_response('mapeo/municipios_select.html', {'municipios': municipios, 'id': id_departamento})
-

@@ -1,11 +1,6 @@
 {%extends "base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
-	$(function() {
-		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-	});
-
     function agregar_contraparte(form){
         $.post('/ajax/agregar/contraparte/{{id}}/', {
             contraparte: form.contraparte.value,
@@ -18,7 +13,7 @@
                 if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
-                $("<p>Donante agregado</p>").appendTo("#mensaje");
+                $("<p>Contraparte agregado</p>").appendTo("#mensaje");
                 form.donante.value = "";
                 form.monto.value ="";
                }
@@ -35,16 +30,19 @@
  </ul>
  {%endif%}
                    <div id="contenido_interno">
+                       <div id="mensaje"></div>
 							<form action="."  id="formulario" name="formulario">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar Contrapartes al proyecto</div>
 									<div class="campo izq">
 									   <div class="label izq">Contraparte</div>
                                        {{form.contraparte}}
+                                       <div id="campo_contraparte"></div>
 									</div>
 									<br style="clear:both">
 									<div class="campo izq">
 									   <div class="label izq">Monto</div><input type="text" name="monto" id="id_monto" class="textbox"/>
+                                       <div id="campo_monto"></div>
 									</div>
 									<br style="clear:both">
                                     <input type="button" value="Agregar contraparte " onClick="agregar_contraparte(this.form)"/>

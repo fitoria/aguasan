@@ -1,0 +1,43 @@
+{%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+function agregar_contraparte(form){
+        $.post('/ajax/agregar/departamento/{{id}}', {
+            departamento: form.departamento.value,
+            monto_total: form.monto_total.value,
+        },
+        function(data) { 
+            alert(data);
+            if(data!='OK'){
+                //do error validation
+                alert('error');
+            }
+        });
+    }
+</script>
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de entrada de datos para donantes
+ </div>
+ {%endif%}
+                   <div id="contenido_interno">
+							<form action="." method="POST" id="formulario" name="formulario">
+                                {% csrf_token %}
+								<div class="titulo_form">Agregar Departamento al proyecto</div>
+									<div class="campo izq">
+									   <div class="label izq">Departamento: </div>
+                                       {{form.departamento}}
+									</div>
+									<br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Monto:</div>
+                                       {{form.monto_total}} {{form.monto_total.help_text}}
+									</div>
+									<br style="clear:both">
+                                    <input type="button" value="Agregar Departamento" onClick="agregar_departamento(this.form)"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+ {% endblock %}

@@ -1,6 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
-from lugar.models import Municipio
+from lugar.models import Municipio, Departamento
 from django.utils.translation import ugettext as _
 
 class Pais(models.Model):
@@ -10,6 +10,10 @@ class Pais(models.Model):
 
     def __unicode__(self):
         return "%s(%s)" % (self.nombre, self.codigo)
+
+    class Meta:
+        verbose_name_plural = _('Paises')
+        verbose_name = _('Pais')
 
 class TipoDonante(models.Model):
     tipo = models.CharField(max_length=20, unique=True)
@@ -44,6 +48,8 @@ class Proyecto(models.Model):
     tipo = models.ForeignKey(TipoProyecto)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.nombre
@@ -53,7 +59,9 @@ class Proyecto(models.Model):
 
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
-    descripcion = models.TextField(_('Descripcion de medidas'))
+    descripcion = models.TextField(_('Descripcion del donante'))
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoDonante)
 
@@ -62,8 +70,11 @@ class Donante(models.Model):
 
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
+    descripcion = models.TextField(_('Descripcion del donante'), blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoContraparte)
+    logo = models.ImageField(upload_to='donantes/logos/', blank=True)
+    website = models.URLField(blank=True)
 
     def __unicode__(self):
         return self.nombre
@@ -71,21 +82,36 @@ class Contraparte(models.Model):
 class ProyectoDepartamento(models.Model):
     '''Modelo usado para agregar todos los municipios y 
     guardar el monto total por departamento'''
-    pass
+    proyecto = models.ForeignKey(Proyecto)
+    monto_total = models.FloatField(blank=True, 
+                                   help_text=_('rellenar solo si no se dispone ' \
+                                              'de informacion por municipio'))
+    #donantes = models.ManyToManyField(Donante) 
+    departamento = models.ForeignKey(Departamento)
+
+    def __unicode__(self):
+        return"%s en %s" % (self.proyecto.nombre, self.departamento.nombre)
+
+    class Meta:
+        unique_together = ['proyecto', 'departamento']
 
 class ProyectoMunicipio(models.Model):
     municipio = models.ForeignKey(Municipio)
     monto = models.FloatField()
-    #se agregó donante por que puede ser que un municipio 
-    #tenga un donante especifico
-    donante = models.ForeignKey(Donante, blank=True, 
-                                help_text=_("Puede dejar este campo en blanco si no se tiene informacion."))
-    contraparte = models.ForeignKey(Contraparte, blank=True)
-    proyecto = models.ForeignKey(Proyecto)
+    donantes = models.ManyToManyField(Donante) 
+    contrapartes = models.ManyToManyField(Contraparte) 
+    proyecto = models.ForeignKey(ProyectoDepartamento)
+    #donante = models.ForeignKey(Donante, blank=True, 
+    #                            help_text=_("Puede dejar este campo" \ 
+    #                                        "en blanco si no se tiene informacion."))
+    #contraparte = models.ForeignKey(Contraparte, blank=True)
+    #proyecto = models.ForeignKey(Proyecto)
     
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
 
+    class Meta:
+        unique_together = ['proyecto', 'municipio']
 
 class ProyectoDonante(models.Model):
     donante = models.ForeignKey(Donante)
@@ -95,6 +121,9 @@ class ProyectoDonante(models.Model):
     def __unicode__(self):
         return "%s - %s" % (self.donante.nombre, self.proyecto.nombre)
 
+    class Meta:
+        unique_together = ['proyecto', 'donante']
+
 class ProyectoContraparte(models.Model):
     contraparte = models.ForeignKey(Contraparte)
     proyecto = models.ForeignKey(Proyecto)
@@ -102,3 +131,6 @@ class ProyectoContraparte(models.Model):
 
     def __unicode__(self):
         return "%s - %s" % (self.contraparte.nombre, self.proyecto.nombre)
+
+    class Meta:
+        unique_together = ['proyecto', 'contraparte']

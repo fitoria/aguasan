@@ -10,12 +10,16 @@
 {%block contenido%}
  <div id="titulo">
                    Lista de proyectos
+                   <a href="/mapeo/formulario"><div id="accion_titulo" class="der">Nuevo Proyecto</div></a>
  </div>
 
 
                    <div id="contenido_interno">
-{%for proyecto in proyectos.object_list%}
-{{proyecto.nombre}}
+{%for proyecto in proyectos%}
+	<div class="detalle_proyecto">
+		<a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a>
+		<div class="acciones_detalle der"><a href="#">Editar</a> | <a href="#">Borrar</a></div>
+	</div>
 {%endfor%}
                    </div>
  {% endblock %}

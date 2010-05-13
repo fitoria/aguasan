@@ -1,0 +1,19 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Lista de Contrapartes
+                   <a href="/contrapartes/agregar"><div id="accion_titulo" class="especial der">Nueva Contraparte</div></a>
+ </div>
+
+
+                   <div id="contenido_interno">
+{%for contraparte in contrapartes%}
+	<div class="detalle_proyecto">
+		<a href="/contraparte/{{contraparte.id}}">{{contraparte.nombre}}</a>
+		<div class="acciones_detalle der"><a href="/contrapartes/editar/{{contraparte.id}}">Editar</a> | <a href="#">Borrar</a></div>
+	</div>
+{%endfor%}
+                   </div>
+ {% endblock %}

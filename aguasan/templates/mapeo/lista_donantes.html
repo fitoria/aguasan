@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Lista de Donantes
+                   <a href="/donantes/agregar"><div id="accion_titulo" class="der">Nuevo Donante</div></a>
+ </div>
+
+
+                   <div id="contenido_interno">
+{%for donante in donantes%}
+	<div class="detalle_proyecto">
+		<a href="/donante/{{donante.id}}">{{donante.nombre}}</a>
+		<div class="acciones_detalle der"><a href="/donantes/editar/{{donante.id}}">Editar</a> | <a href="#">Borrar</a></div>
+	</div>
+{%endfor%}
+                   </div>
+ {% endblock %}
