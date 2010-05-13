@@ -8,7 +8,6 @@
         },
         function(data) { 
             if(data!='OK'){
-                //do error validation
                 if (data.contraparte[0]){ $("<p>" + data.contraparte[0] + "</p>").appendTo('#campo_contraparte');}
                 if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
