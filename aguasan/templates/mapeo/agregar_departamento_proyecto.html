@@ -1,17 +1,22 @@
 {%extends "base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
-function agregar_contraparte(form){
-        $.post('/ajax/agregar/departamento/{{id}}', {
+function agregar_departamento(form){
+        $.post('/ajax/agregar/departamento/{{id}}/', {
             departamento: form.departamento.value,
             monto_total: form.monto_total.value,
         },
         function(data) { 
-            alert(data);
             if(data!='OK'){
-                //do error validation
-                alert('error');
+                if (data.departamento[0]){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
+                if (data.monto_total[0]){ $("<p>" + data.monto_total[0] + "</p>").appendTo('#campo_monto');}
             }
+            else{
+                $("<p>Departamento agregado</p>").appendTo("#mensaje");
+                form.donante.value = "";
+                form.monto_total.value ="";
+               }
+
         });
     }
 </script>
@@ -20,19 +25,21 @@ function agregar_contraparte(form){
  <div id="titulo">
                    Formulario de entrada de datos para donantes
  </div>
- {%endif%}
                    <div id="contenido_interno">
+                       <div id="mensaje"></div>
 							<form action="." method="POST" id="formulario" name="formulario">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar Departamento al proyecto</div>
 									<div class="campo izq">
 									   <div class="label izq">Departamento: </div>
                                        {{form.departamento}}
+                                       <div id="campo_departamento"></div>
 									</div>
 									<br style="clear:both">
 									<div class="campo izq">
 									   <div class="label izq">Monto:</div>
                                        {{form.monto_total}} {{form.monto_total.help_text}}
+                                       <div id="campo_monto"></div>
 									</div>
 									<br style="clear:both">
                                     <input type="button" value="Agregar Departamento" onClick="agregar_departamento(this.form)"/>

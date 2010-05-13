@@ -57,7 +57,7 @@ def departamento_proyecto(request, id):
 def municipio_proyecto(request, id_proyecto, id_dept):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     form = ProyectoMunicipioForm()
-    dicc = {'form': form, 'id_proyecto': id,
+    dicc = {'form': form, 'id_proyecto': id_proyecto,
             'id_dept': id_dept}
     return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
@@ -142,12 +142,13 @@ def editar_contraparte(request,id):
         return render_to_response('mapeo/editar_contraparte.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
-def agregar_municipio_proyecto(request, id):
+def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
+    #TODO: validar por id_dept
     if request.is_ajax():
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
-            proyecto = Proyecto.objects.get(id=id)
+            proyecto = ProyectoDepartamento.objects.get(proyecto=id_proyecto, departamento=id_dept)
             if proyecto:
                 proyecto_municipio = form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
