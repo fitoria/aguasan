@@ -112,7 +112,6 @@ def agregar_donante(request):
 def editar_donante(request,id):
     '''Editando donante en formulario por fuera'''
     d = Donante.objects.get(pk=id)
-
     if (request.method == 'POST'):
         form = DonanteForm(request.POST,instance=d)
         if form.is_valid():
@@ -124,6 +123,22 @@ def editar_donante(request,id):
     else:
         form = DonanteForm(instance=d)
         return render_to_response('mapeo/editar_donante.html',
+                                  {'form': form}, context_instance=RequestContext(request))
+
+def editar_contraparte(request,id):
+    '''Editando contraparte en formulario por fuera'''
+    d = Contraparte.objects.get(pk=id)
+    if (request.method == 'POST'):
+        form = ContraparteForm(request.POST,instance=d)
+        if form.is_valid():
+          donante = form.save()
+          return HttpResponseRedirect('/contrapartes/')
+        else:
+            return render_to_response('mapeo/editar_contraparte.html',
+                                      {'form': form}, context_instance=RequestContext(request))
+    else:
+        form = ContraparteForm(instance=d)
+        return render_to_response('mapeo/editar_contraparte.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
 def agregar_municipio_proyecto(request, id):

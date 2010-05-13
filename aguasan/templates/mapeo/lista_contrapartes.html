@@ -1,11 +1,5 @@
 {%extends "base.html"%}
 {%block extra_js%}
-<script type="text/javascript">
-	$(function() {
-		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-		$("#id_fecha_final").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
-	});
-</script>
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
@@ -17,8 +11,8 @@
                    <div id="contenido_interno">
 {%for contraparte in contrapartes%}
 	<div class="detalle_proyecto">
-		<a href="/contraparte/{{donante.id}}">{{contraparte.nombre}}</a>
-		<div class="acciones_detalle der"><a href="#">Editar</a> | <a href="#">Borrar</a></div>
+		<a href="/contraparte/{{contraparte.id}}">{{contraparte.nombre}}</a>
+		<div class="acciones_detalle der"><a href="/contrapartes/editar/{{contraparte.id}}">Editar</a> | <a href="#">Borrar</a></div>
 	</div>
 {%endfor%}
                    </div>
