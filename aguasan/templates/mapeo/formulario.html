@@ -26,7 +26,8 @@
 									   <div class="label izq">Nombre</div><input type="text" name="nombre" id="id_nombre" class="textbox_nombre"/>
 									</div>
 									<div class="campo_ancho">
-										<div class="label izq">Descripción</div><textarea id="id_descripcion" name="descripcion" class="textarea"></textarea>
+										<div class="label izq">Descripción</div>
+                                        {{form.descripcion}}
 									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
@@ -45,10 +46,12 @@
                                        {{form.logo}}
 									</div>
 									<div class="campo izq">
-									   <div class="label izq">Fecha inicio</div><input type="text" name="fecha_inicial" id="id_fecha_inicial" class="textbox"/>
+									   <div class="label izq">Fecha inicio</div>
+                                       {{form.fecha_incial}}
 									</div>
 									<div class="campo der">
-									   <div class="label izq">Fecha final</div><input type="text" name="fecha_final" id="id_fecha_final" class="textbox"/>
+									   <div class="label izq">Fecha final</div>
+                                       {{form.fecha_final}}
 									</div>
                                     <input type="submit" value="Crear Proyecto"/>
 									<br style="clear:both">
