@@ -1,4 +1,17 @@
 {%extends "base.html"%}
+{%block extra_js%}
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.simplemodal-1.3.min.js"></script>
+<link type="text/css" href="{{MEDIA_URL}}css/simple-modal.css" rel="stylesheet"/>
+<script type="text/javascript">
+$(document).ready(function() {
+
+$("#link_nueva_contraparte").click(function(){
+    $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
+    //accion pa refrescar la shit.
+});
+});
+</script>
+{%endblock%}
 {%block contenido%}
  <div id="titulo">
                    Proyecto
@@ -107,7 +120,7 @@
                         <div class="columna_interna_378 der">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Contrapartes</div>
-                                <div class="accion_seccion der">Nueva contraparte</div>
+                                <div class="accion_seccion der" id="nueva_contraparte"><a href="#" id="link_nueva_contraparte">Nueva contraparte</a></div>
                             </div>
                             <table>
                                 <tr>
@@ -132,4 +145,11 @@
                         <br style="clear:both">
 
                    </div>
+
+                   <iframe style="display: none;" id="modal_content" src="" 
+                       width="450px" 
+                       height="280px" 
+                       scrolling="no" 
+                       frameborder="0">
+                   </iframe>
  {% endblock %}
