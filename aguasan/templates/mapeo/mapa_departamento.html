@@ -1,0 +1,20 @@
+{%extends "base.html"%}
+{%block extra_js%}
+        <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.maphilight.min.js"></script>
+                <script>$(function() {
+                $('.mapa').maphilight({fade: true, stroke: true, strokeColor: '336699',fillColor: 'd0ddff', fillOpacity: 0.5});
+        });</script>
+{%endblock%}
+ {%block contenido%}
+ <div id="titulo">
+                   Selección por Departamento
+ </div>
+                   <div id="contenido_interno">
+
+                            <img src="{{MEDIA_URL}}imagen/matagalpa.jpg" class="mapa" usemap="#matagalpa" width="534" height="516" border="0">
+                            <map name="matagalpa">
+                                                        <area href="#" title="Matagalpa" shape="poly" coords="176.33,285.55,182.84,289.75, 182.20,282.03,188.20,277.13,180.67,275.35,177.86,268.13,173.84,274.75,166.11,275.18, 171.16,281.05, 169.18,288.54"></area>
+                                                        <area href="#" title="Matagalpa" shape="circle" coords="79.50,288.50,7.25"></area>
+                            </map>
+                   </div>
+{%endblock%}

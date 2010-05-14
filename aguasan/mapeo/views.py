@@ -1,6 +1,7 @@
  # -*- coding: UTF-8 -*-
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from mapeo.models import *
+from lugar.models import *
 from django.utils import simplejson
 from django.db import transaction
 from lugar.models import Municipio
@@ -260,3 +261,9 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
 
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
+
+def departamento(request,id):
+    departamento=Departamento.objects.get(id=id)
+    dicc = {'departamento': departamento}
+    return render_to_response('mapeo/mapa_departamento.html', dicc,
+                              context_instance=RequestContext(request))
