@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Textarea, TextInput, Select
 from models import *
 
 class ProyectoForm(ModelForm):
@@ -8,9 +8,10 @@ class ProyectoForm(ModelForm):
             'descripcion': Textarea(attrs={'class': 'textarea'}),
             'nombre': TextInput(attrs={'class': 'textbox_nombre'}),
             'website': TextInput(attrs={'class': 'textbox'}),
-            'fecha_inicial': TextInput(attrs={'class': 'textbox hasDatepicker'}),
-            'fecha_final': TextInput(attrs={'class': 'textbox hasDatepicker'}),
-            #TODO: ponerle bien la class a los combobox
+            'fecha_inicial': TextInput(attrs={'class': 'textbox'}),
+            'fecha_final': TextInput(attrs={'class': 'textbox'}),
+            'avance': Select(attrs={'class':'combobox'}),
+            'tipo': Select(attrs={'class':'combobox'}),
         }
 
 class ProyectoDepartamentoForm(ModelForm):
@@ -36,7 +37,21 @@ class ProyectoContraparteForm(ModelForm):
 class ContraparteForm(ModelForm):
     class Meta:
         model = Contraparte
+        widgets = {
+            'descripcion': Textarea(attrs={'class': 'textarea'}),
+            'nombre': TextInput(attrs={'class': 'textbox_nombre'}),
+            'website': TextInput(attrs={'class': 'textbox'}),
+            'pais': Select(attrs={'class':'combobox'}),
+            'tipo': Select(attrs={'class':'combobox'}),
+        }
 
 class DonanteForm(ModelForm):
     class Meta:
         model = Donante
+        widgets = {
+            'descripcion': Textarea(attrs={'class': 'textarea'}),
+            'nombre': TextInput(attrs={'class': 'textbox_nombre'}),
+            'website': TextInput(attrs={'class': 'textbox'}),
+            'pais': Select(attrs={'class':'combobox'}),
+            'tipo': Select(attrs={'class':'combobox'}),
+        }
