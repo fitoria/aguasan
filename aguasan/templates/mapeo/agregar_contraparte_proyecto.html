@@ -1,4 +1,4 @@
-{%extends "base.html"%}
+{%extends "modal_base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
     function agregar_contraparte(form){
@@ -13,9 +13,7 @@
             }
             else{
                 $("<p>Contraparte agregado</p>").appendTo("#mensaje");
-                form.donante.value = "";
-                form.monto.value ="";
-                window.parent.$.modal.close(true);
+                window.parent.$.modal.close();
                }
         });
     }
@@ -46,6 +44,7 @@
 									</div>
 									<br style="clear:both">
                                     <input type="button" value="Agregar contraparte " onClick="agregar_contraparte(this.form)"/>
+                                    <input type="button" value="Cancelar" onClick="window.parent.$.modal.close();"/>
 									<br style="clear:both">
 									<br>
 							</form>

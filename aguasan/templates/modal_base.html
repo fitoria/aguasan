@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<html lang="es">
+<head>
+    <title>SISTEMA DE INFORMACION AGUASAN {%block title%}{%endblock%}</title>
+    <style type="text/css">
+        @import url({{MEDIA_URL}}css/estilo.css);
+    </style>
+
+    <link type="text/css" href="{{MEDIA_URL}}css/jquery-ui-1.8.1.custom.css" rel="stylesheet" />	
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-ui-1.8.1.custom.min.js"></script>
+    {%block extra_js%}{%endblock%}
+			
+</head>
+<body>
+     <div id="contenedor" class="centro">
+        
+      
+          <!-- Comienza Contenido-->
+        <div id="contenido">
+               <div id="colum_der" class="der">
+                   {%block contenido%}{%endblock%}
+	     	   </div>
+	     	 <!-- termina Columna derecha-->
+            <div class="separador" ></div>
+         </div>
+            
+        <!-- Termina Contenido-->
+        
+
+        
+    </div>
+    <!-- Termina Contenedor-->
+</body>
+</html>
