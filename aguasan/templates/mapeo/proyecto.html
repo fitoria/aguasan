@@ -8,7 +8,7 @@ $(document).ready(function() {
     cargar_donantes();
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
-        $("#modal_content").modal();
+        $("#modal_content").modal({overlayClose:true});
         cargar_contrapartes();
     });
     $("#nuevo_cooperante").click(function(){
