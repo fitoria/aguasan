@@ -4,7 +4,6 @@
 <link type="text/css" href="{{MEDIA_URL}}css/simple-modal.css" rel="stylesheet"/>
 <script type="text/javascript">
 $(document).ready(function() {
-
     cargar_contrapartes();
     cargar_donantes();
     $("#nueva_contraparte").click(function(){
@@ -28,6 +27,7 @@ $(document).ready(function() {
         //accion pa refrescar la shit.
     });
 });
+
 function cargar_contrapartes(){
     $("#tabla_contrapartes").find("tr:gt(0)").remove();
     $.getJSON('/ajax/lista/contrapartes/{{proyecto.id}}/', 
@@ -43,7 +43,7 @@ function cargar_contrapartes(){
 }
 function cargar_donantes(){
     $("#tabla_donantes").find("tr:gt(0)").remove();
-    $.getJSON('/ajax/lista/contrapartes/{{proyecto.id}}/', 
+    $.getJSON('/ajax/lista/donantes/{{proyecto.id}}/', 
             function(data) {
                 $.each(data.lista, function(i,item){
                     $('<tr><td>' + item.donante+ 
