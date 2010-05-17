@@ -49,6 +49,11 @@ def proyecto(request, id):
     dicc = {'proyecto': proyecto}
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
+                              
+def lista_proyecto_municipio(request,id):
+    proyecto_mun = ProyectoMunicipio.objects.filter(municipio__id=id)
+    proyecto_dept = ProyectoDepartamento.get(id=proyecto_num__proyecto__id)
+    lista_proyecto = Proyecto.filter(id=proyecto_dept__proyecto__id)
 
 def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)

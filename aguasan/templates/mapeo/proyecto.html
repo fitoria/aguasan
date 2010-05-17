@@ -7,7 +7,7 @@ $(document).ready(function() {
 
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
-        $("#modal_content").modal();
+        $("#modal_content").modal({overlayClose:true});
         //accion pa refrescar la shit.
     });
     $("#nuevo_cooperante").click(function(){
@@ -21,7 +21,7 @@ $(document).ready(function() {
         //accion pa refrescar la shit.
     });
     $("#nuevo_municipio").click(function(){
-        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/{{}}/municipio'});
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento//municipio'});
         $("#modal_content").modal();
         //accion pa refrescar la shit.
     });
