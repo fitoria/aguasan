@@ -5,11 +5,26 @@
 <script type="text/javascript">
 $(document).ready(function() {
 
-$("#link_nueva_contraparte").click(function(){
-    $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
-    $("#modal_content").modal();
-    //accion pa refrescar la shit.
-});
+    $("#nueva_contraparte").click(function(){
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
+        $("#modal_content").modal();
+        //accion pa refrescar la shit.
+    });
+    $("#nuevo_cooperante").click(function(){
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/donantes/'});
+        $("#modal_content").modal();
+        //accion pa refrescar la shit.
+    });
+    $("#nuevo_departamento").click(function(){
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/'});
+        $("#modal_content").modal();
+        //accion pa refrescar la shit.
+    });
+    $("#nuevo_municipio").click(function(){
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/{{}}/municipio'});
+        $("#modal_content").modal();
+        //accion pa refrescar la shit.
+    });
 });
 </script>
 {%endblock%}
@@ -60,7 +75,7 @@ $("#link_nueva_contraparte").click(function(){
                         <br style="clear:both">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
-                            <div class="accion_seccion der">Agregar</div>
+                            <div class="accion_seccion der" id="nuevo_departamento">Agregar</div>
                         </div>
                             <table>
                                 <tr>
@@ -96,7 +111,7 @@ $("#link_nueva_contraparte").click(function(){
                         <div class="columna_interna_378 izq">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Cooperantes</div>
-                                <div class="accion_seccion der">Nuevo cooperante</div>
+                                <div class="accion_seccion der" id="nuevo_cooperante"><a href="#">Nuevo cooperante</a></div>
                             </div>
                             <table>
                                 <tr>

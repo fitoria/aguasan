@@ -1,4 +1,4 @@
-{%extends "base.html"%}
+{%extends "modal_base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
     function agregar_donante(form){
@@ -13,9 +13,8 @@
                 if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
-                $("<p>Donante agregado</p>").appendTo("#mensaje");
-                form.donante.value = "";
-                form.monto.value ="";
+                //$("<p>Donante agregado</p>").appendTo("#mensaje");
+                window.parent.$.modal.close();
                }
         });
     }
@@ -36,12 +35,13 @@
 								<div class="titulo_form">Agregar Donantes al proyecto</div>
 									<div class="campo izq">
 									   <div class="label izq">Donante</div>
+                                       {{form.donante}}
 									</div>
-                                    {{form.donante}}
                                     <div id="campo_donante" ></div>
 									<br style="clear:both">
 									<div class="campo izq">
-									   <div class="label izq">Monto</div><input type="text" name="monto_donante" id="id_monto" class="textbox"/>
+									   <div class="label izq">Monto</div>
+                                       {{form.monto}}
                                     <div id="campo_monto" ></div>
 									</div>
 									<br style="clear:both">
