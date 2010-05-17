@@ -300,6 +300,32 @@ def lista_contrapartes_proyecto(request, id):
     return HttpResponse(simplejson.dumps(diccionario_resultado), 
             mimetype='application/json')
 
+def lista_lugares(request, id):
+    proyecto_departamentos = ProyectoDepartamento.objects.filter(proyecto__id = id)
+    lista = []
+    for depart in proyecto_departamentos:
+        proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto__id = id,
+                proyecto = depart)
+        lista_municipios = []
+        for mun in proyecto_municipios:
+            #TODO: agregarle contrapartes y esa shit
+            dicc_municipios = {'municipio': mun.municipio.nombre,
+                               'municipio_id': mun.municipio.id,
+                               'monto': mun.monto,
+                               }
+            lista_municipios.append(dicc_municipios)
+
+        dicc = {'departamento': depart.departamento.nombre,
+                'municipios': lista_municipios,
+                'id_proyecto': depart.proyecto.id,
+                'id_departamento': depart.departamento.id,
+                'monto_total': depart.monto_total,
+                }
+        lista.append(dicc)
+    
+    return HttpResponse(simplejson.dumps(lista), 
+            mimetype='application/json')
+                
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
 
