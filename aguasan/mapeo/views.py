@@ -6,6 +6,7 @@ from django.utils import simplejson
 from django.db import transaction
 from lugar.models import Municipio
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
+from django.core import serializers
 from django.template import RequestContext
 from forms import *
 
@@ -258,6 +259,41 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
     else:
         return HttpResponse('ERROR')
 
+def lista_donantes_proyecto(request, id):
+    lista_donantes = ProyectoDonante.objects.filter(proyecto__id = id)
+    resultados = []
+    monto_total = 0
+    for elemento in lista_donantes:
+        dicc = {'id': elemento.id, 
+                'donante': elemento.donante.nombre,
+                'id_donante': elemento.donante.id,
+                'id_proyecto': id,
+                'monto': elemento.monto
+                }
+        monto_total += elemento.monto
+        resultados.append(dicc)
+
+    diccionario_resultado = {'lista': resultados, 'monto_total': monto_total} 
+    return HttpResponse(simplejson.dumps(diccionario_resultado), 
+            mimetype='application/json')
+
+def lista_contrapartes_proyecto(request, id):
+    lista_contrapartes = ProyectoContraparte.objects.filter(proyecto__id = id)
+    resultados = []
+    monto_total = 0
+    for elemento in lista_contrapartes:
+        dicc = {'id': elemento.id, 
+                'contraparte': elemento.contraparte.nombre,
+                'id_contraparte': elemento.contraparte.id,
+                'id_proyecto': id,
+                'monto': elemento.monto
+                }
+        monto_total += elemento.monto
+        resultados.append(dicc)
+    
+    diccionario_resultado = {'lista': resultados, 'monto_total': monto_total} 
+    return HttpResponse(simplejson.dumps(diccionario_resultado), 
+            mimetype='application/json')
 
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
