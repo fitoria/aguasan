@@ -7,6 +7,7 @@ $(document).ready(function() {
 
 $("#link_nueva_contraparte").click(function(){
     $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
+    $("#modal_content").modal();
     //accion pa refrescar la shit.
 });
 });
@@ -147,7 +148,7 @@ $("#link_nueva_contraparte").click(function(){
                    </div>
 
                    <iframe style="display: none;" id="modal_content" src="" 
-                       width="450px" 
+                       width="600px" 
                        height="280px" 
                        scrolling="no" 
                        frameborder="0">
