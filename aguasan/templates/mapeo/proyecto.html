@@ -53,6 +53,17 @@ function cargar_donantes(){
                 $('<tr><td>Total Aporte Externo</td><td>' + 
                     data.monto_total + '</td></tr>').appendTo("#tabla_donantes");
     });
+
+function cargar_lugares(){
+    $("#tabla_lugares").find("tr:gt(0)").remove();
+    $.getJSON('/ajax/lista/lugares/{{proyecto.id}}/',
+            function(data) {
+                $.each(data, function(i, item){
+                    ("<tr><td><b>" + item.departamento +
+                     "</b></td><td><b>" + item.monto_total + "</b></td></tr>" +
+                     "
+                    });
+            });
 }
 </script>
 {%endblock%}
