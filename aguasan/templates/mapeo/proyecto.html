@@ -6,6 +6,7 @@
 $(document).ready(function() {
     cargar_contrapartes();
     cargar_donantes();
+    cargar_lugares();
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
         $("#modal_content").modal({overlayClose:true});
@@ -21,13 +22,16 @@ $(document).ready(function() {
         $("#modal_content").modal();
         //accion pa refrescar la shit.
     });
-    $("#nuevo_municipio").click(function(){
-        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento//municipio'});
-        $("#modal_content").modal();
-        //accion pa refrescar la shit.
-    });
 });
 
+function agregarMunicipio(id_dept){
+    var url = '/proyecto/{{proyecto.id}}/departamento/' + 
+        id_dept + '/municipio';
+    $("#modal_content").attr({'src': url});
+    $("#modal_content").modal();
+    cargar_lugares();
+}
+    
 function cargar_contrapartes(){
     $("#tabla_contrapartes").find("tr:gt(0)").remove();
     $.getJSON('/ajax/lista/contrapartes/{{proyecto.id}}/', 
@@ -53,17 +57,30 @@ function cargar_donantes(){
                 $('<tr><td>Total Aporte Externo</td><td>' + 
                     data.monto_total + '</td></tr>').appendTo("#tabla_donantes");
     });
+}
 
 function cargar_lugares(){
     $("#tabla_lugares").find("tr:gt(0)").remove();
     $.getJSON('/ajax/lista/lugares/{{proyecto.id}}/',
             function(data) {
-                $.each(data, function(i, item){
-                    ("<tr><td><b>" + item.departamento +
-                     "</b></td><td><b>" + item.monto_total + "</b></td></tr>" +
-                     "
+                var tabla;
+                $.each(data.lista, function(i, item){
+                     tabla = "<tr><td><b>" + item.departamento +
+                     "</b></td><td><b>" + item.monto_total + 
+                     "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
+                     item.id_departamento + ")'>Agregar Municipio</a></td></tr>";
+
+                     $.each(item.municipios, function(i, subitem){
+                         tabla += "<tr><td>" + subitem.municipio + 
+                         "</td><td>" + subitem.monto + 
+                         "</td></tr>";
+                         });
                     });
-            });
+                tabla += "<tr><td><b>Total del proyecto</b></td><td><b>" +
+                    data.monto_total_proyecto + "</b></td><td></td></tr>";
+                $(tabla).appendTo("#tabla_lugares");
+                
+        });
 }
 </script>
 {%endblock%}
@@ -116,37 +133,13 @@ function cargar_lugares(){
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
                             <div class="accion_seccion der" id="nuevo_departamento">Agregar</div>
                         </div>
-                            <table class="tabla_proyecto">
+                            <table class="tabla_proyecto" id="tabla_lugares">
                                 <tr>
                                     <th>Departamentos y municipios</th>
                                     <th>Inversion</th>
                                     <th>Accion</th>
                                 </tr>
-                                <!--Aqui hay que iterar el departamento -->
-                                <tr>
-                                    <td>Esteli</td>
-                                    <td> Total : 1000</td>
-                                    <td></td>
-                                </tr>
-                                       <!--Iteracion interna de municipio -->
-                                               <tr>
-                                                   <td>Tola</td>
-                                                   <td>1000</td>
-                                                   <td><a href="#">Eliminar</a></td>
-                                               </tr>
-                                               <tr>
-                                                   <td>Condega</td>
-                                                   <td>2000</td>
-                                                   <td><a href="#">Eliminar</a></td>
-                                               </tr>
-                                        <!--Se termina iteracion de municipio -->
-                                <!--Se termina iteracion de departamento -->
-                                <tr>
-                                    <td><b>Total del proyecto</b></td>
-                                    <td><b>3000</b></td>
-                                    <td></td>
-                                </tr>
-                            </table>
+                             </table>
                         <div class="columna_interna_378 izq">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Cooperantes</div>
@@ -179,7 +172,7 @@ function cargar_lugares(){
 
                    <iframe style="display: none;" id="modal_content" src="" 
                        width="600px" 
-                       height="280px" 
+                       height="400px" 
                        scrolling="no" 
                        frameborder="0">
                    </iframe>

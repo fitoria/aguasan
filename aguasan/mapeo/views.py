@@ -303,6 +303,7 @@ def lista_contrapartes_proyecto(request, id):
 def lista_lugares(request, id):
     proyecto_departamentos = ProyectoDepartamento.objects.filter(proyecto__id = id)
     lista = []
+    monto_total = 0
     for depart in proyecto_departamentos:
         proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto__id = id,
                 proyecto = depart)
@@ -313,6 +314,7 @@ def lista_lugares(request, id):
                                'municipio_id': mun.municipio.id,
                                'monto': mun.monto,
                                }
+            monto_total += mun.monto
             lista_municipios.append(dicc_municipios)
 
         dicc = {'departamento': depart.departamento.nombre,
@@ -322,8 +324,9 @@ def lista_lugares(request, id):
                 'monto_total': depart.monto_total,
                 }
         lista.append(dicc)
+        resultados = {'lista': lista, 'monto_total_proyecto': monto_total} 
     
-    return HttpResponse(simplejson.dumps(lista), 
+    return HttpResponse(simplejson.dumps(resultados), 
             mimetype='application/json')
                 
 def mapa(request):
