@@ -4,16 +4,17 @@
 <link type="text/css" href="{{MEDIA_URL}}css/simple-modal.css" rel="stylesheet"/>
 <script type="text/javascript">
 $(document).ready(function() {
-
+    cargar_contrapartes();
+    cargar_donantes();
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
         $("#modal_content").modal({overlayClose:true});
-        //accion pa refrescar la shit.
+        cargar_contrapartes();
     });
     $("#nuevo_cooperante").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/donantes/'});
         $("#modal_content").modal();
-        //accion pa refrescar la shit.
+        cargar_donantes();
     });
     $("#nuevo_departamento").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/'});
@@ -26,6 +27,33 @@ $(document).ready(function() {
         //accion pa refrescar la shit.
     });
 });
+
+function cargar_contrapartes(){
+    $("#tabla_contrapartes").find("tr:gt(0)").remove();
+    $.getJSON('/ajax/lista/contrapartes/{{proyecto.id}}/', 
+            function(data) {
+                $.each(data.lista, function(i,item){
+                    $('<tr><td>' + item.contraparte + 
+                        '</td><td>' + item.monto + 
+                        '</td></tr>').appendTo("#tabla_contrapartes");
+                });
+                $('<tr><td>Total Aporte Externo</td><td>' + 
+                    data.monto_total + '</td></tr>').appendTo("#tabla_contrapartes");
+    });
+}
+function cargar_donantes(){
+    $("#tabla_donantes").find("tr:gt(0)").remove();
+    $.getJSON('/ajax/lista/donantes/{{proyecto.id}}/', 
+            function(data) {
+                $.each(data.lista, function(i,item){
+                    $('<tr><td>' + item.donante+ 
+                        '</td><td>' + item.monto + 
+                        '</td></tr>').appendTo("#tabla_donantes");
+                });
+                $('<tr><td>Total Aporte Externo</td><td>' + 
+                    data.monto_total + '</td></tr>').appendTo("#tabla_donantes");
+    });
+}
 </script>
 {%endblock%}
 {%block contenido%}
@@ -77,11 +105,11 @@ $(document).ready(function() {
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
                             <div class="accion_seccion der" id="nuevo_departamento">Agregar</div>
                         </div>
-                            <table>
+                            <table class="tabla_proyecto">
                                 <tr>
-                                    <td>Departamentos y municipios</td>
-                                    <td>Inversion</td>
-                                    <td>Accion</td>
+                                    <th>Departamentos y municipios</th>
+                                    <th>Inversion</th>
+                                    <th>Accion</th>
                                 </tr>
                                 <!--Aqui hay que iterar el departamento -->
                                 <tr>
@@ -103,8 +131,8 @@ $(document).ready(function() {
                                         <!--Se termina iteracion de municipio -->
                                 <!--Se termina iteracion de departamento -->
                                 <tr>
-                                    <td>Total del proyecto</td>
-                                    <td>3000</td>
+                                    <td><b>Total del proyecto</b></td>
+                                    <td><b>3000</b></td>
                                     <td></td>
                                 </tr>
                             </table>
@@ -113,23 +141,11 @@ $(document).ready(function() {
                                 <div class="titulo_seccion izq">Cooperantes</div>
                                 <div class="accion_seccion der" id="nuevo_cooperante"><a href="#">Nuevo cooperante</a></div>
                             </div>
-                            <table>
+                            <table id="tabla_donantes" class="tabla_proyecto">
                                 <tr>
-                                    <td>Cooperante</td>
-                                    <td>Inversion</td>
-                                    <td>Accion</td>
-                                </tr>
-                                <!--Aqui hay que iterar -->
-                                <tr>
-                                    <td>lorem</td>
-                                    <td>10</td>
-                                    <td><a href="#">Eliminar</a></td>
-                                </tr>
-                                <!--Se termina iteracion -->
-                                <tr>
-                                    <td>Total Aporte Externo</td>
-                                    <td>1000</td>
-                                    <td></td>
+                                    <th>Cooperante</th>
+                                    <th>Inversion</th>
+                                    <th>Accion</th>
                                 </tr>
                             </table>
                         </div>
@@ -138,23 +154,11 @@ $(document).ready(function() {
                                 <div class="titulo_seccion izq">Contrapartes</div>
                                 <div class="accion_seccion der" id="nueva_contraparte"><a href="#" id="link_nueva_contraparte">Nueva contraparte</a></div>
                             </div>
-                            <table>
-                                <tr>
-                                    <td>Contraparte</td>
-                                    <td>Inversion</td>
-                                    <td>Accion</td>
-                                </tr>
-                                <!--Aqui hay que iterar -->
-                                <tr>
-                                    <td>lorem</td>
-                                    <td>10</td>
-                                    <td><a href="#">Eliminar</a></td>
-                                </tr>
-                                <!--Se termina iteracion -->
-                                <tr>
-                                    <td>Total Aporte interno</td>
-                                    <td>1000</td>
-                                    <td></td>
+                            <table id="tabla_contrapartes" class="tabla_proyecto">
+                                <tr class="header_tabla">
+                                    <th>Contraparte</th>
+                                    <th>Inversion</th>
+                                    <th>Accion</th>
                                 </tr>
                             </table>
                         </div>
