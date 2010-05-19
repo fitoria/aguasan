@@ -10,11 +10,11 @@ function agregar_municipio(form){
         },
         function(data) { 
             if(data!='OK'){
-                if (data.error){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
-                if (data.municipio[0]){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
-                if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
-                if (data.donantes[0]){ $("<p>" + data.donantes[0] + "</p>").appendTo('#campo_donantes');}
-                if (data.contrapartes[0]){ $("<p>" + data.contrapartes[0] + "</p>").appendTo('#campo_contrapartes');}
+                if (typeof(data.error)!=undefined){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
+                if (typeof(data.municipio[0])!=undefined){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
+                if (typeof(data.monto[0])!=undefined){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
+                if (typeof(data.donantes[0])!=undefined){ $("<p>" + data.donantes[0] + "</p>").appendTo('#campo_donantes');}
+                if (typeof(data.contrapartes[0])!=undefined){ $("<p>" + data.contrapartes[0] + "</p>").appendTo('#campo_contrapartes');}
             }
             else{
                 $("<p>Departamento agregado</p>").appendTo("#mensaje");
