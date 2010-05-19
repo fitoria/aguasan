@@ -180,7 +180,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
                 except ValidationError, e:
-                    error_dict = {'error': 'El departamento ya fue agregado'}
+                    error_dict = {'error': 'El municipio ya fue agregado'}
                     return HttpResponse(simplejson.dumps(error_dict),
                             mimetype='application/json')
 
@@ -206,7 +206,7 @@ def agregar_donante_proyecto(request, id):
                     proyecto_donante.full_clean()
                     proyecto_donante.save()
                 except ValidationError, e:
-                    error_dict = {'error': 'El donante ya fue agregado'}
+                    error_dict = {'error': 'El cooperante ya fue agregado'}
                     return HttpResponse(simplejson.dumps(error_dict),
                             mimetype='application/json')
 
@@ -286,7 +286,7 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
                 except ValidationError, e:
-                    error_dict = {'error': 'El departamento ya fue agregado'}
+                    error_dict = {'error': 'El municipio ya fue agregado'}
                     return HttpResponse(simplejson.dumps(error_dict),
                             mimetype='application/json')
 

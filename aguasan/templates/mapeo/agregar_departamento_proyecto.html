@@ -8,9 +8,9 @@ function agregar_departamento(form){
         },
         function(data) { 
             if(data!='OK'){
-                if (data.error){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
-                if (data.departamento[0]){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
-                if (data.monto_total[0]){ $("<p>" + data.monto_total[0] + "</p>").appendTo('#campo_monto');}
+                if (typeof(data.error)!=undefined){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
+                if (typeof(data.departamento[0])!=undefined){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
+                if (typeof(data.monto_total[0])!=undefined){ $("<p>" + data.monto_total[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
                 $("<p>Departamento agregado</p>").appendTo("#mensaje");
