@@ -8,6 +8,7 @@
         },
         function(data) { 
             if(data!='OK'){
+                if (data.error){ $("<p>" + data.error + "</p>").appendTo("mensaje");}
                 if (data.contraparte[0]){ $("<p>" + data.contraparte[0] + "</p>").appendTo('#campo_contraparte');}
                 if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }

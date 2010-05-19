@@ -7,6 +7,7 @@ from django.db import transaction
 from lugar.models import Municipio
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
 from django.core import serializers
+from django.core.validators import ValidationError
 from django.template import RequestContext
 from forms import *
 
@@ -168,7 +169,6 @@ def editar_contraparte(request,id):
 
 def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
-    #TODO: validar por id_dept
     if request.is_ajax():
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
@@ -176,7 +176,14 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
             if proyecto:
                 proyecto_municipio = form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
-                proyecto_municipio.save()
+                try:
+                    proyecto_municipio.full_clean()
+                    proyecto_municipio.save()
+                except ValidationError, e:
+                    error_dict = {'error': 'El departamento ya fue agregado'}
+                    return HttpResponse(simplejson.dumps(error_dict),
+                            mimetype='application/json')
+
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')
@@ -195,7 +202,14 @@ def agregar_donante_proyecto(request, id):
             if proyecto:
                 proyecto_donante= form.save(commit=False)
                 proyecto_donante.proyecto = proyecto
-                proyecto_donante.save()
+                try:
+                    proyecto_donante.full_clean()
+                    proyecto_donante.save()
+                except ValidationError, e:
+                    error_dict = {'error': 'El donante ya fue agregado'}
+                    return HttpResponse(simplejson.dumps(error_dict),
+                            mimetype='application/json')
+
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')
@@ -214,7 +228,14 @@ def agregar_contraparte_proyecto(request, id):
             if proyecto:
                 proyecto_contraparte = form.save(commit=False)
                 proyecto_contraparte.proyecto = proyecto
-                proyecto_contraparte.save()
+                try:
+                    proyecto_contraparte.full_clean()
+                    proyecto_contraparte.save()
+                except ValidationError, e:
+                    error_dict = {'error': 'La contraparte ya fue agregada'}
+                    return HttpResponse(simplejson.dumps(error_dict),
+                            mimetype='application/json')
+
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')
@@ -233,7 +254,14 @@ def agregar_departamento_proyecto(request, id):
             if proyecto:
                 proyecto_departamento = form.save(commit=False)
                 proyecto_departamento.proyecto = proyecto
-                proyecto_departamento.save()
+                try:
+                    proyecto_departamento.full_clean()
+                    proyecto_departamento.save()
+                except ValidationError, e:
+                    error_dict = {'error': 'El departamento ya fue agregado'}
+                    return HttpResponse(simplejson.dumps(error_dict),
+                            mimetype='application/json')
+
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')
@@ -254,7 +282,14 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
                 proyecto_municipio= form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
                 proyecto_municipio.departamento = departamento
-                proyecto_municipio.save()
+                try:
+                    proyecto_municipio.full_clean()
+                    proyecto_municipio.save()
+                except ValidationError, e:
+                    error_dict = {'error': 'El departamento ya fue agregado'}
+                    return HttpResponse(simplejson.dumps(error_dict),
+                            mimetype='application/json')
+
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')

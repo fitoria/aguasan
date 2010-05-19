@@ -9,11 +9,12 @@
         function(data) { 
             if(data!='OK'){
                 //do error validation
+                if (data.error){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
                 if (data.donante[0]){ $("<p>" + data.donante[0] + "</p>").appendTo('#campo_donante');}
                 if (data.monto[0]){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
-                //$("<p>Donante agregado</p>").appendTo("#mensaje");
+                $("<p>Donante agregado</p>").appendTo("#mensaje");
                 window.parent.$.modal.close();
                }
         });
