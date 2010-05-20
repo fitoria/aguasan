@@ -56,7 +56,7 @@ def proyecto(request, id):
         monto_total_proyecto = monto_externo+monto_nacional
     elif monto_externo:
         monto_total_proyecto = monto_externo
-    elif: monto_nacional: 
+    elif monto_nacional: 
         monto_total_proyecto = monto_nacional
     else:
         monto_total_proyecto = 0
