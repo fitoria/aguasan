@@ -56,11 +56,6 @@ def proyecto(request, id):
     dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
-                              
-def lista_proyecto_municipio(request,id):
-    proyecto_mun = ProyectoMunicipio.objects.filter(municipio__id=id)
-    proyecto_dept = ProyectoDepartamento.get(id=proyecto_num__proyecto__id)
-    lista_proyecto = Proyecto.filter(id=proyecto_dept__proyecto__id)
 
 def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
@@ -281,12 +276,11 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
     if request.is_ajax():
         form = ProyectoDepartamentoForm(request.POST)
         if form.is_valid():
-            proyecto = Proyecto.objects.get(id=id_proyecto)
-            departamento = Departamento.objects.get(id=id)
+            proyecto = ProyectoDepartamento.objects.get(id=id_proyecto, 
+                    departamento__id=id_dept)
             if proyecto and departamento:
                 proyecto_municipio= form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
-                proyecto_municipio.departamento = departamento
                 try:
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
@@ -345,8 +339,7 @@ def lista_lugares(request, id):
     lista = []
     monto_total = 0
     for depart in proyecto_departamentos:
-        proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto__id = id,
-                proyecto = depart)
+        proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto = depart)
         lista_municipios = []
         for mun in proyecto_municipios:
             #TODO: agregarle contrapartes y esa shit
@@ -393,8 +386,8 @@ def proyectos_donante(request, id_donante):
     proyectos = []
     for proyecto_donante in _proyectos_donante:
         proyectos.append(proyecto_donante.proyecto)
-
-    return render_to_response('mapeo/proyectos_donante.html', proyectos,
+    donante=Donante.objects.get(id=id_donante)
+    return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
                               context_instance=RequestContext(request))
 
 def proyectos_departamento(request, id_dept):

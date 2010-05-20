@@ -66,7 +66,7 @@ function cargar_lugares(){
             function(data) {
                 var tabla;
                 $.each(data.lista, function(i, item){
-                     tabla = "<tr><td><b>" + item.departamento +
+                     tabla += "<tr><td><b>" + item.departamento +
                      "</b></td><td><b>$" + item.monto_total + 
                      "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
                      item.id_departamento + ")'>Agregar Municipio</a></td></tr>";
@@ -138,7 +138,7 @@ function cargar_lugares(){
                                 <tr>
                                     <th>Departamentos y municipios</th>
                                     <th>Inversion</th>
-                                    <th>Accion</th>
+                                    <th><b></b></th>
                                 </tr>
                              </table>
                         <div class="columna_interna_378 izq">
@@ -150,7 +150,7 @@ function cargar_lugares(){
                                 <tr>
                                     <th>Cooperante</th>
                                     <th>Inversion</th>
-                                    <th>Accion</th>
+                                    <th><b></b></th>
                                 </tr>
                             </table>
                         </div>
@@ -163,7 +163,7 @@ function cargar_lugares(){
                                 <tr class="header_tabla">
                                     <th>Contraparte</th>
                                     <th>Inversion</th>
-                                    <th>Accion</th>
+                                    <th><b></b></th>
                                 </tr>
                             </table>
                         </div>

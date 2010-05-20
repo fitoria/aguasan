@@ -1,0 +1,25 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}
+{%block contenido%}
+ <div id="titulo">
+                   Proyecto
+ </div>
+                   <div id="contenido_interno">
+                   {{donante.nombre}}
+                        <div class="seccion">
+                            <div class="titulo_seccion izq">Lista de proyectos</div>
+                        </div>
+                    {%for proyecto in proyectos%}
+                    {{proyecto.nombre}}
+                    {%endfor%}
+
+                   </div>
+
+                   <iframe style="display: none;" id="modal_content" src="" 
+                       width="600px" 
+                       height="400px" 
+                       scrolling="no" 
+                       frameborder="0">
+                   </iframe>
+ {% endblock %}
