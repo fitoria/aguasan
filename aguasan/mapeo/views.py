@@ -372,3 +372,31 @@ def departamento(request,id):
     dicc = {'departamento': departamento}
     return render_to_response('mapeo/mapa_departamento.html', dicc,
                               context_instance=RequestContext(request))
+
+def proyectos_municipio(request, id_municipio):
+    '''listado de proyectos por municipio'''
+    _proyectos_municipio = ProyectoMunicipio.objects.filter(municipio__id = id_municipio)
+    proyectos = []
+    for proyecto_municipio in _proyectos_municipio:
+        proyectos.append(proyecto_municipio.proyecto.proyecto)
+
+    return render_to_response('mapeo/proyectos_municipio.html', proyectos,
+                              context_instance=RequestContext(request))
+
+def proyectos_donante(request, id_donante):
+    _proyectos_donante = ProyectoDonante.objects.filter(donante__id=id_donante)
+    proyectos = []
+    for proyecto_donante in _proyectos_donante:
+        proyectos.append(proyecto_donante.proyecto)
+
+    return render_to_response('mapeo/proyectos_donante.html', proyectos,
+                              context_instance=RequestContext(request))
+
+def proyectos_departamento(request, id_dept):
+    _proyectos_departamento = ProyectoDepartamento.objects.filter(departamento__id=id_dept)
+    proyectos = []
+    for proyecto_departamento in _proyectos_departamento:
+        proyectos.append(proyecto_departamento)
+
+    return render_to_response('mapeo/proyectos_departamento.html', proyectos,
+                              context_instance=RequestContext(request))
