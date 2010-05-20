@@ -10,7 +10,7 @@
             if(data!='OK'){
                 //do error validation
                 if (typeof(data.error)!=undefined){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
-                if (typeof(data.donante[0](!=undefined){ $("<p>" + data.donante[0] + "</p>").appendTo('#campo_donante');}
+                if (typeof(data.donante[0]!=undefined){ $("<p>" + data.donante[0] + "</p>").appendTo('#campo_donante');}
                 if (typeof(data.monto[0])!=undefined){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
