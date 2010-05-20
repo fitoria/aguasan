@@ -1,4 +1,5 @@
 {%extends "base.html"%}
+{% load humanize %}
 {%block extra_js%}
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.simplemodal-1.3.min.js"></script>
 <link type="text/css" href="{{MEDIA_URL}}css/simple-modal.css" rel="stylesheet"/>
@@ -41,8 +42,8 @@ function cargar_contrapartes(){
                         '</td><td>' + item.monto + 
                         '</td></tr>').appendTo("#tabla_contrapartes");
                 });
-                $('<tr><td>Total Aporte Externo</td><td>' + 
-                    data.monto_total + '</td></tr>').appendTo("#tabla_contrapartes");
+                $('<tr><td><b>Total Aporte Externo</b></td><td><b>' + 
+                    data.monto_total + '</b></td></tr>').appendTo("#tabla_contrapartes");
     });
 }
 function cargar_donantes(){
@@ -54,8 +55,8 @@ function cargar_donantes(){
                         '</td><td>' + item.monto + 
                         '</td></tr>').appendTo("#tabla_donantes");
                 });
-                $('<tr><td>Total Aporte Externo</td><td>' + 
-                    data.monto_total + '</td></tr>').appendTo("#tabla_donantes");
+                $('<tr><td><b>Total Aporte Externo</b></td><td><b>' + 
+                    data.monto_total + '</b></td></tr>').appendTo("#tabla_donantes");
     });
 }
 
@@ -91,7 +92,7 @@ function cargar_lugares(){
                    <div id="contenido_interno">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Información General</div>
-                            <div class="accion_seccion accion_seccion_editar der">Editar</div>
+                            <a href="/proyectos/editar/{{proyecto.id}}"<div class="accion_seccion accion_seccion_editar der">Editar</div></a>
                         </div>
                         <br style="clear:both">
                         <div class="columna_interna_285 izq">
@@ -102,9 +103,9 @@ function cargar_lugares(){
                                 <b>{{proyecto.nombre}}</b>
                             <br><br>
                             <div class="subtitulo_seccion">Monto</div>
-                                <b>Aporte Externo: </b><br>
-                                <b>Aporte Interno: </b><br>
-                                <b>Monto Total: </b><br>
+                                <b>Aporte Externo:</b> ${{monto_externo|intcomma}}<br>
+                                <b>Aporte Nacional:</b> ${{monto_nacional|intcomma}}<br>
+                                <b>Monto Total: </b>${{monto_total_proyecto|intcomma}}<br>
                             <br>
                             <div class="subtitulo_seccion">Estado de avance</div>
                                 <b>{{proyecto.avance}}</b>
