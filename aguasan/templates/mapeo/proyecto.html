@@ -65,7 +65,7 @@ function cargar_lugares(){
             function(data) {
                 var tabla;
                 $.each(data.lista, function(i, item){
-                     tabla = "<tr><td><b>" + item.departamento +
+                     tabla += "<tr><td><b>" + item.departamento +
                      "</b></td><td><b>" + item.monto_total + 
                      "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
                      item.id_departamento + ")'>Agregar Municipio</a></td></tr>";

@@ -85,10 +85,9 @@ class ProyectoDepartamento(models.Model):
     '''Modelo usado para agregar todos los municipios y 
     guardar el monto total por departamento'''
     proyecto = models.ForeignKey(Proyecto)
-    monto_total = models.FloatField(blank=True, 
+    monto_total = models.FloatField(blank=True, null=True,  
                                    help_text=_('rellenar solo si no se dispone ' \
                                               'de informacion por municipio'))
-    #donantes = models.ManyToManyField(Donante) 
     departamento = models.ForeignKey(Departamento)
 
     def __unicode__(self):
@@ -100,14 +99,9 @@ class ProyectoDepartamento(models.Model):
 class ProyectoMunicipio(models.Model):
     municipio = models.ForeignKey(Municipio)
     monto = models.FloatField()
-    donantes = models.ManyToManyField(Donante) 
-    contrapartes = models.ManyToManyField(Contraparte) 
+    donantes = models.ManyToManyField(Donante, null=True, blank=True) 
+    contrapartes = models.ManyToManyField(Contraparte, null=True, blank=True) 
     proyecto = models.ForeignKey(ProyectoDepartamento)
-    #donante = models.ForeignKey(Donante, blank=True, 
-    #                            help_text=_("Puede dejar este campo" \ 
-    #                                        "en blanco si no se tiene informacion."))
-    #contraparte = models.ForeignKey(Contraparte, blank=True)
-    #proyecto = models.ForeignKey(Proyecto)
     
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
@@ -137,17 +131,17 @@ class ProyectoContraparte(models.Model):
     class Meta:
         unique_together = ['proyecto', 'contraparte']
 
-class ProyectoFotos(models.Model):
-    '''Modelo para guardar las fotos de un proyecto'''
-    proyecto = models.ForeignKey(Proyecto)
-    #TODO: definir bien el tamano.
-    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((640,480),(800,600)))  
-    descripcion = models.TextField(blank=True)
-    fecha = models.DateField(auto_now=True)
-
-    def __unicode__(self):
-        return "%s (%s)" % (self.id, self.proyecto.nombre)
-
-    class Meta:
-        verbose_name_plural = 'Fotos del proyecto'
-        verbose_name = 'Foto del proyecto'
+#class ProyectoFotos(models.Model):
+#    '''Modelo para guardar las fotos de un proyecto'''
+#    proyecto = models.ForeignKey(Proyecto)
+#    #TODO: definir bien el tamano.
+#    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((640,480),(800,600)))  
+#    descripcion = models.TextField(blank=True)
+#    fecha = models.DateField(auto_now=True)
+#
+#    def __unicode__(self):
+#        return "%s (%s)" % (self.id, self.proyecto.nombre)
+#
+#    class Meta:
+#        verbose_name_plural = 'Fotos del proyecto'
+#        verbose_name = 'Foto del proyecto'

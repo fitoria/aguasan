@@ -276,12 +276,11 @@ def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
     if request.is_ajax():
         form = ProyectoDepartamentoForm(request.POST)
         if form.is_valid():
-            proyecto = Proyecto.objects.get(id=id_proyecto)
-            departamento = Departamento.objects.get(id=id)
+            proyecto = ProyectoDepartamento.objects.get(id=id_proyecto, 
+                    departamento__id=id_dept)
             if proyecto and departamento:
                 proyecto_municipio= form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
-                proyecto_municipio.departamento = departamento
                 try:
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
@@ -340,8 +339,7 @@ def lista_lugares(request, id):
     lista = []
     monto_total = 0
     for depart in proyecto_departamentos:
-        proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto__id = id,
-                proyecto = depart)
+        proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto = depart)
         lista_municipios = []
         for mun in proyecto_municipios:
             #TODO: agregarle contrapartes y esa shit
