@@ -3,23 +3,39 @@
 {%endblock%}
 {%block contenido%}
  <div id="titulo">
-                   Proyecto
+                   Perfil de cooperante
  </div>
                    <div id="contenido_interno">
-                   {{donante.nombre}}
+                    <div class="subtitulo_seccion">Nombre del Cooperante</div>
+                      <b>{{donante.nombre}}</b>
+                      <br>
+                    <div class="subtitulo_seccion">Descripción</div>
+                      {{donante.descripcion}}
+                      <br>
+                      <br>
+
                         <div class="seccion">
                             <div class="titulo_seccion izq">Lista de proyectos</div>
                         </div>
-                    {%for proyecto in proyectos%}
-                    {{proyecto.nombre}}
-                    {%endfor%}
+                                <table class="tabla_proyecto" id="tabla_lugares">
+                                <tr>
+                                    <th>Proyectos</th>
+                                    <th>Estado</th>
+                                    <th>Finalidad</th>
+                                </tr>
+                                {%for proyecto in proyectos%}
+                                <tr>
+                                    <td><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></td>
+                                    <td>{{proyecto.avance}}</td>
+                                    <td>{{proyecto.tipo}}</td>
+                                </tr>
+                                
+                                {%endfor%}
+                             </table>
+<br><br>
+<img src="{{MEDIA_URL}}/imagen/mapa_proximamente.jpg">
 
                    </div>
 
-                   <iframe style="display: none;" id="modal_content" src="" 
-                       width="600px" 
-                       height="400px" 
-                       scrolling="no" 
-                       frameborder="0">
-                   </iframe>
+
  {% endblock %}

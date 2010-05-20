@@ -10,7 +10,6 @@
     <link type="text/css" href="{{MEDIA_URL}}css/jquery-ui-1.8.1.custom.css" rel="stylesheet" />	
 	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-1.4.2.min.js"></script>
 	<script type="text/javascript" src="{{MEDIA_URL}}js/jquery-ui-1.8.1.custom.min.js"></script>
-
     {%block extra_js%}{%endblock%}
 			
 </head>
@@ -18,7 +17,7 @@
   <!-- Comienza el header -->
         <div id="header">
            <div id="header_contenedor">
-			   <div id="logo" class="izq">Sistema de información AGUASAN</div>
+			   <div id="logo" class="izq">Sistema de Información de Proyectos de Agua en Nicaragua</div>
 			   <div id="imagen_header" class="der"></div>
 			   <div class="separador"></div>
 <!--
@@ -49,8 +48,8 @@
         <div id="contenido">
                <!-- Comienza Columna izquierda-->
                <div class="colum_izq izq">
-                  <div class="enlace_sidebar icono_filtro">Filtros</div>
-                  <div class="enlace_sidebar icono_ayuda">Ayuda</div>
+                  <a href="/"><div class="enlace_sidebar icono_filtro">Filtros</div></a>
+                  <a href=""><div class="enlace_sidebar icono_ayuda">Ayuda</div></a>
 
                </div>
              <!-- termina Columna izquierda--> 
@@ -63,7 +62,7 @@
                    <div id="menu_admin">
                    <div id="usuario_logueado">Usuario: Nombre usuario</div>
                           <div id="acciones">
-                               <a href="/donantes">DONANTES</a>
+                               <a href="/donantes">COOPERANTES</a>
                                <a href="/contrapartes">CONTRAPARTES</a>
                                <a href="/proyectos">PROYECTOS</a>
 

@@ -369,7 +369,9 @@ def lista_lugares(request, id):
     
     return HttpResponse(simplejson.dumps(resultados), 
             mimetype='application/json')
-                
+
+#Estas vistas tienen que ver con salidas#        
+        
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
 
@@ -405,4 +407,10 @@ def proyectos_departamento(request, id_dept):
         proyectos.append(proyecto_departamento)
 
     return render_to_response('mapeo/proyectos_departamento.html', proyectos,
+                              context_instance=RequestContext(request))
+                              
+def lista_donantes_boton(request):
+    donantes = Donante.objects.all()
+    dicc = {'donantes': donantes}
+    return render_to_response('mapeo/boton_donante.html', dicc,
                               context_instance=RequestContext(request))
