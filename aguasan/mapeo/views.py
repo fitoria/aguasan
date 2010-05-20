@@ -387,8 +387,8 @@ def proyectos_municipio(request, id_municipio):
     proyectos = []
     for proyecto_municipio in _proyectos_municipio:
         proyectos.append(proyecto_municipio.proyecto.proyecto)
-
-    return render_to_response('mapeo/proyectos_municipio.html', proyectos,
+    municipio=Municipio.objects.get(id=id_municipio)
+    return render_to_response('mapeo/proyectos_municipio.html', {'proyectos':proyectos,'municipio':municipio},
                               context_instance=RequestContext(request))
 
 def proyectos_donante(request, id_donante):
@@ -400,6 +400,14 @@ def proyectos_donante(request, id_donante):
     return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
                               context_instance=RequestContext(request))
 
+def lista_donantes_boton(request):
+    donantes = Donante.objects.all()
+    dicc = {'donantes': donantes}
+    return render_to_response('mapeo/boton_donante.html', dicc,
+                              context_instance=RequestContext(request))
+
+# ESte aun no se usa
+
 def proyectos_departamento(request, id_dept):
     _proyectos_departamento = ProyectoDepartamento.objects.filter(departamento__id=id_dept)
     proyectos = []
@@ -409,8 +417,4 @@ def proyectos_departamento(request, id_dept):
     return render_to_response('mapeo/proyectos_departamento.html', proyectos,
                               context_instance=RequestContext(request))
                               
-def lista_donantes_boton(request):
-    donantes = Donante.objects.all()
-    dicc = {'donantes': donantes}
-    return render_to_response('mapeo/boton_donante.html', dicc,
-                              context_instance=RequestContext(request))
+
