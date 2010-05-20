@@ -17,9 +17,11 @@ class ProyectoForm(ModelForm):
 class ProyectoDepartamentoForm(ModelForm):
     class Meta:
         model = ProyectoDepartamento
-        exclude = ['proyecto']
+        exclude = ['proyecto', 'monto_total']
 
 class ProyectoMunicipioForm(ModelForm):
+    #def __init__(id_departamento):
+        
     class Meta:
         model = ProyectoMunicipio
         exclude = ['proyecto']
