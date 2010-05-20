@@ -39,10 +39,10 @@ function cargar_contrapartes(){
             function(data) {
                 $.each(data.lista, function(i,item){
                     $('<tr><td>' + item.contraparte + 
-                        '</td><td>' + item.monto + 
+                        '</td><td>$' + item.monto + 
                         '</td></tr>').appendTo("#tabla_contrapartes");
                 });
-                $('<tr><td><b>Total Aporte Externo</b></td><td><b>' + 
+                $('<tr><td><b>Total Aporte Externo</b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_contrapartes");
     });
 }
@@ -52,10 +52,10 @@ function cargar_donantes(){
             function(data) {
                 $.each(data.lista, function(i,item){
                     $('<tr><td>' + item.donante+ 
-                        '</td><td>' + item.monto + 
+                        '</td><td>$' + item.monto + 
                         '</td></tr>').appendTo("#tabla_donantes");
                 });
-                $('<tr><td><b>Total Aporte Externo</b></td><td><b>' + 
+                $('<tr><td><b>Total Aporte Externo</b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_donantes");
     });
 }
@@ -67,17 +67,17 @@ function cargar_lugares(){
                 var tabla;
                 $.each(data.lista, function(i, item){
                      tabla = "<tr><td><b>" + item.departamento +
-                     "</b></td><td><b>" + item.monto_total + 
+                     "</b></td><td><b>$" + item.monto_total + 
                      "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
                      item.id_departamento + ")'>Agregar Municipio</a></td></tr>";
 
                      $.each(item.municipios, function(i, subitem){
                          tabla += "<tr><td>" + subitem.municipio + 
-                         "</td><td>" + subitem.monto + 
+                         "</td><td>$" + subitem.monto + 
                          "</td></tr>";
                          });
                     });
-                tabla += "<tr><td><b>Total del proyecto</b></td><td><b>" +
+                tabla += "<tr><td><b>Total del proyecto</b></td><td><b>$" +
                     data.monto_total_proyecto + "</b></td><td></td></tr>";
                 $(tabla).appendTo("#tabla_lugares");
                 
