@@ -52,7 +52,15 @@ def proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     monto_externo=ProyectoDonante.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
     monto_nacional=ProyectoContraparte.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
-    monto_total_proyecto= monto_externo+monto_nacional
+    if monto_externo and monto_nacional:
+        monto_total_proyecto = monto_externo+monto_nacional
+    elif monto_externo:
+        monto_total_proyecto = monto_externo
+    elif: monto_nacional: 
+        monto_total_proyecto = monto_nacional
+    else:
+        monto_total_proyecto = 0
+
     dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
