@@ -10,6 +10,8 @@ from django.core import serializers
 from django.core.validators import ValidationError
 from django.template import RequestContext
 from forms import *
+from django.db.models import Sum
+
 
 def index(request):
 	return render_to_response('index.html',context_instance=RequestContext(request))
@@ -48,7 +50,10 @@ def editar_proyecto(request,id):
 
 def proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
-    dicc = {'proyecto': proyecto}
+    monto_externo=ProyectoDonante.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
+    monto_nacional=ProyectoContraparte.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
+    monto_total_proyecto= monto_externo+monto_nacional
+    dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
                               
