@@ -85,7 +85,7 @@ class ProyectoDepartamento(models.Model):
     '''Modelo usado para agregar todos los municipios y 
     guardar el monto total por departamento'''
     proyecto = models.ForeignKey(Proyecto)
-    monto_total = models.FloatField(blank=True, null=True,  
+    monto_total = models.FloatField(blank=True, default=0,  
                                    help_text=_('rellenar solo si no se dispone ' \
                                               'de informacion por municipio'))
     departamento = models.ForeignKey(Departamento)
@@ -105,6 +105,11 @@ class ProyectoMunicipio(models.Model):
     
     def __unicode__(self):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.proyecto.nombre)
+
+    def save(self, *args, **kwargs):
+        self.proyecto.monto_total = ProyectoMunicipio.object.filter(id=self.proyecto.id).aggregate(monto=Sum('monto'))['monto']
+        self.proyecto.save()
+        super(ProyectoMunicipio, self).save(*args, **kwargs)
 
     class Meta:
         unique_together = ['proyecto', 'municipio']
