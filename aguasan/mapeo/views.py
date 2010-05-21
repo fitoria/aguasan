@@ -97,6 +97,7 @@ def departamento_proyecto(request, id):
 def municipio_proyecto(request, id_proyecto, id_dept):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     form = ProyectoMunicipioForm()
+    form.fields['municipio'].queryset = Municipio.objects.filter(departamento__id=id_dept)
     dicc = {'form': form, 'id_proyecto': id_proyecto,
             'id_dept': id_dept}
     return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
@@ -436,5 +437,3 @@ def proyectos_departamento(request, id_dept):
 
     return render_to_response('mapeo/proyectos_departamento.html', proyectos,
                               context_instance=RequestContext(request))
-                              
-
