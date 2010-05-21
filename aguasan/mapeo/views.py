@@ -298,10 +298,10 @@ def agregar_departamento_proyecto(request, id):
         return HttpResponse('ERROR')
 
 @login_required
-def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
+def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     ''' agrega departamento al proyecto por medio de ajax'''
     if request.is_ajax():
-        form = ProyectoDepartamentoForm(request.POST)
+        form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
             proyecto = ProyectoDepartamento.objects.get(id=id_proyecto, 
                     departamento__id=id_dept)
@@ -365,6 +365,7 @@ def lista_lugares(request, id):
     proyecto_departamentos = ProyectoDepartamento.objects.filter(proyecto__id = id)
     lista = []
     monto_total = 0
+    resultados = {'lista': [], 'monto_total_proyecto':0}
     for depart in proyecto_departamentos:
         proyecto_municipios = ProyectoMunicipio.objects.filter(proyecto = depart)
         lista_municipios = []
