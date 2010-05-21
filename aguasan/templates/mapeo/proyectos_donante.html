@@ -6,12 +6,21 @@
                    Perfil de cooperante
  </div>
                    <div id="contenido_interno">
+                    {%if donante.logo%}
+                    <img src="{{MEDIA_URL}}/{{donante.logo}}"class="der">
+                    {%endif%}
                     <div class="subtitulo_seccion">Nombre del Cooperante</div>
                       <b>{{donante.nombre}}</b>
                       <br>
+
                     <div class="subtitulo_seccion">Descripción</div>
                       {{donante.descripcion}}
                       <br>
+                    {%if donante.website%}
+                    <div class="subtitulo_seccion">Sitio Web</div>
+                      {{donante.website}}
+                      <br>
+                      {%endif%}
                       <br>
 
                         <div class="seccion">

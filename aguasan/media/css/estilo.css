@@ -354,7 +354,6 @@ h2{
   background-image:url(../imagen/fondoboton2.png);
   background-repeat: repeat-x;
   float:none;
-  border:0;
 }
 
 #foto_menu{
@@ -571,8 +570,9 @@ h2{
 }
 
 .boton_donante{
-  width:183px;
-  height:85px;
+  width:163px;
+  height:80px;
+  padding:10px;
   border-width:1px;
   border-style:solid;
   border-color:#b7dae7;
@@ -586,12 +586,13 @@ h2{
   float:left;
   margin-right:5px;
   margin-bottom:5px;
-  
+  text-align:center;
 }
 
 .boton_donante_hover{
-  width:183px;
-  height:85px;
+  width:163px;
+  height:80px;
+  padding:10px;
   border-width:1px;
   border-style:solid;
   border-color:#33B0D3;
@@ -605,6 +606,7 @@ h2{
   float:left;
   margin-right:5px;
   margin-bottom:5px;
+  text-align:center;
 }
 
 /* --------------Termina contenido-------------- */

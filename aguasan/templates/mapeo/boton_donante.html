@@ -7,7 +7,11 @@
  </div>
                    <div id="contenido_interno">
                     {%for donante in donantes%}
-                      <a href="/proyectos/donantes/{{donante.id}}"><div class="boton_donante" onmouseover="this.className='boton_donante_hover'" onmouseout="this.className='boton_donante'" ">{{donante.nombre}}</div></a>
+                      <a href="/proyectos/donantes/{{donante.id}}"><div class="boton_donante" onmouseover="this.className='boton_donante_hover'" onmouseout="this.className='boton_donante'" >
+                      {%if donante.logo%}
+                      <img src="{{MEDIA_URL}}/{{donante.logo}}"><br>
+                      {%endif%}
+                      {{donante.nombre}}</div></a>
                     {%endfor%}
                     <br style="clear:both"/>
                    </div>
