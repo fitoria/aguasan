@@ -569,6 +569,44 @@ h2{
 .header_tabla{
   background:#deeef4;
 }
+
+.boton_donante{
+  width:183px;
+  height:85px;
+  border-width:1px;
+  border-style:solid;
+  border-color:#b7dae7;
+  background:#fff;
+  border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  -webkit-box-shadow:#949494 0px 1px 2px;
+  -moz-box-shadow:#949494 0px 1px 2px;
+  box-shadow:#949494 0px 1px 2px;
+  float:left;
+  margin-right:5px;
+  margin-bottom:5px;
+  
+}
+
+.boton_donante_hover{
+  width:183px;
+  height:85px;
+  border-width:1px;
+  border-style:solid;
+  border-color:#33B0D3;
+  background:#fff;
+  border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  -webkit-box-shadow:#b7dae7 0px 1px 2px;
+  -moz-box-shadow:#b7dae7 0px 1px 2px;
+  box-shadow:#b7dae7 0px 1px 2px;
+  float:left;
+  margin-right:5px;
+  margin-bottom:5px;
+}
+
 /* --------------Termina contenido-------------- */
 
 /* --------------Comienza footer-------------- */

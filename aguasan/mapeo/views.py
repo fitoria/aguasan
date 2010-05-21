@@ -1,73 +1,73 @@
- # -*- coding: UTF-8 -*-
-from django.http import Http404, HttpResponse, HttpResponseRedirect
-from mapeo.models import *
-from django.contrib.auth.decorators import login_required
-from lugar.models import *
-from django.utils import simplejson
-from django.db import transaction
-from lugar.models import Municipio
-from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
-from django.core import serializers
-from django.core.validators import ValidationError
-from django.template import RequestContext
-from forms import *
-from django.db.models import Sum
+     # -*- coding: UTF-8 -*-
+    from django.http import Http404, HttpResponse, HttpResponseRedirect
+    from mapeo.models import *
+    from django.contrib.auth.decorators import login_required
+    from lugar.models import *
+    from django.utils import simplejson
+    from django.db import transaction
+    from lugar.models import Municipio
+    from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
+    from django.core import serializers
+    from django.core.validators import ValidationError
+    from django.template import RequestContext
+    from forms import *
+    from django.db.models import Sum
 
 
-def index(request):
-	return render_to_response('index.html',context_instance=RequestContext(request))
+    def index(request):
+        return render_to_response('index.html',context_instance=RequestContext(request))
 
-@login_required
-def formulario(request):
-    if (request.method == 'POST'):
-        form = ProyectoForm(request.POST)
-        if form.is_valid():
-           proyecto = form.save()
-           request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
-           return redirect(proyecto)
+    @login_required
+    def formulario(request):
+        if (request.method == 'POST'):
+            form = ProyectoForm(request.POST)
+            if form.is_valid():
+               proyecto = form.save()
+               request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
+               return redirect(proyecto)
+            else:
+                return render_to_response('mapeo/formulario.html', {'form': form},
+                        context_instance=RequestContext(request))
         else:
+            form = ProyectoForm()
             return render_to_response('mapeo/formulario.html', {'form': form},
                     context_instance=RequestContext(request))
-    else:
-        form = ProyectoForm()
-        return render_to_response('mapeo/formulario.html', {'form': form},
-                context_instance=RequestContext(request))
 
-@login_required
-def editar_proyecto(request,id):
-    '''Editando proyecto en formulario por fuera'''
-    p = Proyecto.objects.get(pk=id)
-    if (request.method == 'POST'):
-        form = ProyectoForm(request.POST,instance=p)
-        if form.is_valid():
-          proyecto = form.save()
-          return redirect(proyecto)
+    @login_required
+    def editar_proyecto(request,id):
+        '''Editando proyecto en formulario por fuera'''
+        p = Proyecto.objects.get(pk=id)
+        if (request.method == 'POST'):
+            form = ProyectoForm(request.POST,instance=p)
+            if form.is_valid():
+              proyecto = form.save()
+              return redirect(proyecto)
+            else:
+                return render_to_response('mapeo/editar_proyecto.html',
+                                          {'form': form}, context_instance=RequestContext(request))
         else:
+            form = ProyectoForm(instance=p)
             return render_to_response('mapeo/editar_proyecto.html',
                                       {'form': form}, context_instance=RequestContext(request))
-    else:
-        form = ProyectoForm(instance=p)
-        return render_to_response('mapeo/editar_proyecto.html',
-                                  {'form': form}, context_instance=RequestContext(request))
 
 
-def proyecto(request, id):
-    proyecto = get_object_or_404(Proyecto, id=id)
-    monto_externo=ProyectoDonante.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
-    monto_nacional=ProyectoContraparte.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
-    if monto_externo and monto_nacional:
-        monto_total_proyecto = monto_externo+monto_nacional
-    elif monto_externo:
-        monto_total_proyecto = monto_externo
-    elif monto_nacional: 
-        monto_total_proyecto = monto_nacional
-    else:
-        monto_total_proyecto = 0
+    def proyecto(request, id):
+        proyecto = get_object_or_404(Proyecto, id=id)
+        monto_externo=ProyectoDonante.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
+        monto_nacional=ProyectoContraparte.objects.filter(proyecto=id).aggregate(monto=Sum('monto'))['monto']
+        if monto_externo and monto_nacional:
+            monto_total_proyecto = monto_externo+monto_nacional
+        elif monto_externo:
+            monto_total_proyecto = monto_externo
+        elif monto_nacional: 
+            monto_total_proyecto = monto_nacional
+        else:
+            monto_total_proyecto = 0
 
-    dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
-    return render_to_response('mapeo/proyecto.html', dicc,
-                              context_instance=RequestContext(request))
-                              
+        dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
+        return render_to_response('mapeo/proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+                                  
 @login_required
 def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
@@ -388,7 +388,9 @@ def lista_lugares(request, id):
     
     return HttpResponse(simplejson.dumps(resultados), 
             mimetype='application/json')
-                
+
+#Estas vistas tienen que ver con salidas#        
+        
 def mapa(request):
 	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
 
@@ -404,8 +406,8 @@ def proyectos_municipio(request, id_municipio):
     proyectos = []
     for proyecto_municipio in _proyectos_municipio:
         proyectos.append(proyecto_municipio.proyecto.proyecto)
-
-    return render_to_response('mapeo/proyectos_municipio.html', proyectos,
+    municipio=Municipio.objects.get(id=id_municipio)
+    return render_to_response('mapeo/proyectos_municipio.html', {'proyectos':proyectos,'municipio':municipio},
                               context_instance=RequestContext(request))
 
 def proyectos_donante(request, id_donante):
@@ -413,9 +415,17 @@ def proyectos_donante(request, id_donante):
     proyectos = []
     for proyecto_donante in _proyectos_donante:
         proyectos.append(proyecto_donante.proyecto)
-
-    return render_to_response('mapeo/proyectos_donante.html', proyectos,
+    donante=Donante.objects.get(id=id_donante)
+    return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
                               context_instance=RequestContext(request))
+
+def lista_donantes_boton(request):
+    donantes = Donante.objects.all()
+    dicc = {'donantes': donantes}
+    return render_to_response('mapeo/boton_donante.html', dicc,
+                              context_instance=RequestContext(request))
+
+# ESte aun no se usa
 
 def proyectos_departamento(request, id_dept):
     _proyectos_departamento = ProyectoDepartamento.objects.filter(departamento__id=id_dept)
@@ -425,3 +435,5 @@ def proyectos_departamento(request, id_dept):
 
     return render_to_response('mapeo/proyectos_departamento.html', proyectos,
                               context_instance=RequestContext(request))
+                              
+

@@ -1,0 +1,14 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}
+ {%block contenido%}
+ <div id="titulo">
+                   Seleccione a un Cooperante
+ </div>
+                   <div id="contenido_interno">
+                    {%for donante in donantes%}
+                      <a href="/proyectos/donantes/{{donante.id}}"><div class="boton_donante" onmouseover="this.className='boton_donante_hover'" onmouseout="this.className='boton_donante'" ">{{donante.nombre}}</div></a>
+                    {%endfor%}
+                    <br style="clear:both"/>
+                   </div>
+{%endblock%}
