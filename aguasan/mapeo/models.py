@@ -104,7 +104,7 @@ class ProyectoMunicipio(models.Model):
     proyecto = models.ForeignKey(ProyectoDepartamento)
     
     def __unicode__(self):
-        return "%s - %s" % (self.municipio.nombre, self.proyecto.nombre)
+        return "%s - %s" % (self.municipio.nombre, self.proyecto.proyecto.nombre)
 
     class Meta:
         unique_together = ['proyecto', 'municipio']

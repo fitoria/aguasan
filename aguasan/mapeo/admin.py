@@ -25,6 +25,14 @@ class TipoProyectoAdmin(admin.ModelAdmin):
 class ProyectoAdmin(admin.ModelAdmin):
     pass
 
+class ProyectoDepartamentoAdmin(admin.ModelAdmin):
+    pass
+
+class ProyectoMunicipioAdmin(admin.ModelAdmin):
+    pass
+
+admin.site.register(ProyectoDepartamento, ProyectoDepartamentoAdmin)
+admin.site.register(ProyectoMunicipio, ProyectoMunicipioAdmin)
 admin.site.register(Proyecto, ProyectoAdmin)
 admin.site.register(TipoProyecto, TipoProyectoAdmin)
 admin.site.register(Avance, AvanceAdmin)
