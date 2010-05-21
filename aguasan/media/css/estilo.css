@@ -513,6 +513,10 @@ h2{
   background-position:left center;
 }
 
+.accion_seccion a, accion_seccion a:visited{
+color:#fff;
+}
+
 .columna_interna_285{
   width:285px;
 }
@@ -565,6 +569,10 @@ h2{
   height:25px;
 }
 
+.tabla_proyecto a{
+color:#3D77CB;
+font-weight:bold;
+}
 .header_tabla{
   background:#deeef4;
 }
