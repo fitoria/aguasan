@@ -64,9 +64,14 @@ def proyecto(request, id):
     else:
         monto_total_proyecto = 0
 
-    dicc = {'proyecto': proyecto,'monto_externo':monto_externo,'monto_nacional':monto_nacional,'monto_total_proyecto':monto_total_proyecto}
+    dicc = {
+            'proyecto': proyecto,
+            'monto_externo':monto_externo,
+            'monto_nacional':monto_nacional,
+            'monto_total_proyecto':monto_total_proyecto
+           }
     return render_to_response('mapeo/proyecto.html', dicc,
-                                  context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))
                                   
 @login_required
 def contrapartes_proyecto(request, id):
