@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, TextInput, Select
+from django.forms import ModelForm, Textarea, TextInput, Select, ChoiceField
 from models import *
 
 class ProyectoForm(ModelForm):
@@ -20,8 +20,6 @@ class ProyectoDepartamentoForm(ModelForm):
         exclude = ['proyecto', 'monto_total']
 
 class ProyectoMunicipioForm(ModelForm):
-    #def __init__(id_departamento):
-        
     class Meta:
         model = ProyectoMunicipio
         exclude = ['proyecto']
