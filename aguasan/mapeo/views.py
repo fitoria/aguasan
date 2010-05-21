@@ -309,7 +309,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     if request.is_ajax():
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
-            proyecto = ProyectoDepartamento.objects.get(id=id_proyecto, 
+            proyecto = ProyectoDepartamento.objects.get(proyecto__id=id_proyecto, 
                     departamento__id=id_dept)
             if proyecto and departamento:
                 proyecto_municipio= form.save(commit=False)
