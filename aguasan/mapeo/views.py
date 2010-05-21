@@ -1,6 +1,7 @@
  # -*- coding: UTF-8 -*-
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from mapeo.models import *
+from django.contrib.auth.decorators import login_required
 from lugar.models import *
 from django.utils import simplejson
 from django.db import transaction
@@ -16,6 +17,7 @@ from django.db.models import Sum
 def index(request):
 	return render_to_response('index.html',context_instance=RequestContext(request))
 
+@login_required
 def formulario(request):
     if (request.method == 'POST'):
         form = ProyectoForm(request.POST)
@@ -31,6 +33,7 @@ def formulario(request):
         return render_to_response('mapeo/formulario.html', {'form': form},
                 context_instance=RequestContext(request))
 
+@login_required
 def editar_proyecto(request,id):
     '''Editando proyecto en formulario por fuera'''
     p = Proyecto.objects.get(pk=id)
@@ -65,11 +68,7 @@ def proyecto(request, id):
     return render_to_response('mapeo/proyecto.html', dicc,
                               context_instance=RequestContext(request))
                               
-def lista_proyecto_municipio(request,id):
-    proyecto_mun = ProyectoMunicipio.objects.filter(municipio__id=id)
-    proyecto_dept = ProyectoDepartamento.get(id=proyecto_num__proyecto__id)
-    lista_proyecto = Proyecto.filter(id=proyecto_dept__proyecto__id)
-
+@login_required
 def contrapartes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoContraparteForm()
@@ -77,6 +76,7 @@ def contrapartes_proyecto(request, id):
     return render_to_response('mapeo/agregar_contraparte_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
+@login_required
 def donantes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoDonanteForm()
@@ -84,6 +84,7 @@ def donantes_proyecto(request, id):
     return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
+@login_required
 def departamento_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoDepartamentoForm()
@@ -92,6 +93,7 @@ def departamento_proyecto(request, id):
                                   context_instance=RequestContext(request))
 
 
+@login_required
 def municipio_proyecto(request, id_proyecto, id_dept):
     proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     form = ProyectoMunicipioForm()
@@ -100,24 +102,28 @@ def municipio_proyecto(request, id_proyecto, id_dept):
     return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
                               
+@login_required
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
     return render_to_response('mapeo/lista_proyectos.html', dicc,
                               context_instance=RequestContext(request))
 
+@login_required
 def lista_donantes(request):
     donantes = Donante.objects.all()
     dicc = {'donantes': donantes}
     return render_to_response('mapeo/lista_donantes.html', dicc,
                               context_instance=RequestContext(request))
 
+@login_required
 def lista_contrapartes(request):
     contrapartes = Contraparte.objects.all()
     dicc = {'contrapartes': contrapartes}
     return render_to_response('mapeo/lista_contrapartes.html', dicc,
                               context_instance=RequestContext(request))
 
+@login_required
 def agregar_contraparte(request):
     '''Agregando contraparte en formulario por fuera'''
     form = ContraparteForm()
@@ -133,6 +139,7 @@ def agregar_contraparte(request):
         return render_to_response('mapeo/agregar_contraparte.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
+@login_required
 def agregar_donante(request):
     '''Agregando donante en formulario por fuera'''
     form = DonanteForm()
@@ -148,6 +155,7 @@ def agregar_donante(request):
         return render_to_response('mapeo/agregar_donante.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
+@login_required
 def editar_donante(request,id):
     '''Editando donante en formulario por fuera'''
     d = Donante.objects.get(pk=id)
@@ -164,6 +172,7 @@ def editar_donante(request,id):
         return render_to_response('mapeo/editar_donante.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
+@login_required
 def editar_contraparte(request,id):
     '''Editando contraparte en formulario por fuera'''
     d = Contraparte.objects.get(pk=id)
@@ -180,6 +189,7 @@ def editar_contraparte(request,id):
         return render_to_response('mapeo/editar_contraparte.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
+@login_required
 def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
     if request.is_ajax():
@@ -206,6 +216,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     else:
         return HttpResponse('ERROR')
 
+@login_required
 def agregar_donante_proyecto(request, id):
     '''se agrega donante por medio de ajax'''
     if request.is_ajax():
@@ -232,6 +243,7 @@ def agregar_donante_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
+@login_required
 def agregar_contraparte_proyecto(request, id):
     '''se agrega contraparte por medio de ajax'''
     if request.is_ajax():
@@ -258,6 +270,7 @@ def agregar_contraparte_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
+@login_required
 def agregar_departamento_proyecto(request, id):
     ''' agrega departamento al proyecto por medio de ajax'''
     if request.is_ajax():
@@ -284,6 +297,7 @@ def agregar_departamento_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
+@login_required
 def agregar_muincipio_proyecto(request, id_proyecto, id_dept):
     ''' agrega departamento al proyecto por medio de ajax'''
     if request.is_ajax():
