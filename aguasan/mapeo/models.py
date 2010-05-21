@@ -3,6 +3,7 @@ from django.db import models
 from lugar.models import Municipio, Departamento
 from django.utils.translation import ugettext as _
 from thumbs import ImageWithThumbsField
+from django.db.models import Sum
 
 
 class Pais(models.Model):
@@ -107,9 +108,9 @@ class ProyectoMunicipio(models.Model):
         return "%s - %s" % (self.municipio.nombre, self.proyecto.proyecto.nombre)
 
     def save(self, *args, **kwargs):
-        self.proyecto.monto_total = ProyectoMunicipio.object.filter(id=self.proyecto.id).aggregate(monto=Sum('monto'))['monto']
-        self.proyecto.save()
         super(ProyectoMunicipio, self).save(*args, **kwargs)
+        self.proyecto.monto_total = ProyectoMunicipio.objects.filter(proyecto__id=self.proyecto.id).aggregate(monto=Sum('monto'))['monto']
+        self.proyecto.save()
 
     class Meta:
         unique_together = ['proyecto', 'municipio']
