@@ -1,3 +1,10 @@
-Filtrar por tipo de inversión
-Agregar columna a la lista de proyectos, por donante, monto, contraparte y ordenar por columna
-Salida por contraparte
+
+///////////TAREAS O FEATURES PENDIENTES////////////
+Las tareas se organizan en orden de prioridad, Con leyenda Finalizada (si), (no)
+
+(no) Filtrar por tipo de inversión
+(no) Login de usuarios y bloqueos de panel de administracion
+(no) Recargar en ficha proyecto cuando se agregue un dato, sin necesidad de recargar la página.
+(no) Agregar columna a la lista de proyectos, por donante, monto, contraparte y ordenar por columna en tabla de salida
+(no) Salida por contraparte
+(no) Explorar el APi de google para mapas magicos overcools
