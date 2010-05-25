@@ -62,3 +62,5 @@ MEDIA_ROOT = PROJECT_DIR + '/media'
 # trailing slash if there is a path component (optional in other cases).
 # Examples: "http://media.lawrence.com", "http://example.com/media/"
 MEDIA_URL = '/archivos/'
+LOGIN_URL = '/cuenta/login/'
+LOGIN_REDIRECT_URL = '/'

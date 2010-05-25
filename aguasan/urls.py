@@ -18,6 +18,11 @@ urlpatterns = patterns('',
     (r'^admin/', include(admin.site.urls)),
     (r'^', include('mapeo.urls')),
     (r'^$', 'mapeo.views.index'),
+    (r'^cuenta/login/$', 'django.contrib.auth.views.login', {'template_name': 'usuarios/login.html'}),
+    (r'^cuenta/cambiar-pass/$', 'django.contrib.auth.views.password_change',
+                {'template_name': 'usuarios/password_change.html',
+                 'post_change_redirect': '/'}),
+    (r'^cuenta/logout/$', 'django.contrib.auth.views.logout', {'next_page': '/'}),
 )
 
 if settings.DEBUG:
