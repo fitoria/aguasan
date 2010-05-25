@@ -432,6 +432,13 @@ def lista_donantes_boton(request):
     return render_to_response('mapeo/boton_donante.html', dicc,
                               context_instance=RequestContext(request))
 
+def proyectos_inversion(request, id_tipo):
+    tipo = get_object_or_404(TipoProyecto, id=id_tipo)
+    proyectos = Proyecto.objects.filter(tipo = tipo)
+    dicc = {'proyectos': proyectos}
+    return render_to_response('mapeo/proyectos_inversion.html', dicc,
+                               context_instance=RequestContext(request))
+
 # ESte aun no se usa
 
 def proyectos_departamento(request, id_dept):

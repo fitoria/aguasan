@@ -1,0 +1,32 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}
+{%block contenido%}
+ <div id="titulo">
+                   Perfil de cooperante
+ </div>
+                   <div id="contenido_interno">
+                        <div class="seccion">
+                            <div class="titulo_seccion izq">Lista de proyectos</div>
+                        </div>
+                                <table class="tabla_proyecto" id="tabla_lugares">
+                                <tr>
+                                    <th>Proyectos</th>
+                                    <th>Estado</th>
+                                    <th>Finalidad</th>
+                                </tr>
+                                {%for proyecto in proyectos%}
+                                <tr>
+                                    <td><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></td>
+                                    <td>{{proyecto.avance}}</td>
+                                    <td>{{proyecto.tipo}}</td>
+                                </tr>
+                                
+                                {%endfor%}
+                             </table>
+<br><br>
+<img src="{{MEDIA_URL}}/imagen/mapa_proximamente.jpg">
+   </div>
+
+
+ {% endblock %}
