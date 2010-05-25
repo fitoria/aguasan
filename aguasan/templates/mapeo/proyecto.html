@@ -8,6 +8,7 @@ $(document).ready(function() {
     cargar_contrapartes();
     cargar_donantes();
     cargar_lugares();
+    {%if user.is_authenticated%}
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
         $("#modal_content").modal({overlayClose:true});
@@ -23,8 +24,10 @@ $(document).ready(function() {
         $("#modal_content").modal();
         cargar_lugares();
     });
+    {%endif%}
 });
 
+{%if user.is_authenticated%}
 function agregarMunicipio(id_dept){
     var url = '/proyecto/{{proyecto.id}}/departamento/' + 
         id_dept + '/municipio';
@@ -32,6 +35,7 @@ function agregarMunicipio(id_dept){
     $("#modal_content").modal();
     cargar_lugares();
 }
+{%endif%}
     
 function cargar_contrapartes(){
     $("#tabla_contrapartes").find("tr:gt(0)").remove();
@@ -132,7 +136,7 @@ function cargar_lugares(){
                         <br style="clear:both">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
-                            <div class="accion_seccion der" id="nuevo_departamento"><a href="#">Agregar Departamento</a></div>
+                            {%if user.is_authenticated%}<div class="accion_seccion der" id="nuevo_departamento"><a href="#">Agregar Departamento</a></div>{%endif%}
                         </div>
                             <table class="tabla_proyecto" id="tabla_lugares">
                                 <tr>
@@ -144,7 +148,7 @@ function cargar_lugares(){
                         <div class="columna_interna_378 izq">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Cooperantes</div>
-                                <div class="accion_seccion der" id="nuevo_cooperante"><a href="#">Nuevo cooperante</a></div>
+                                {% if user.is_authenticated %}<div class="accion_seccion der" id="nuevo_cooperante"><a href="#">Nuevo cooperante</a></div>{%endif%}
                             </div>
                             <table id="tabla_donantes" class="tabla_proyecto">
                                 <tr>
@@ -157,7 +161,7 @@ function cargar_lugares(){
                         <div class="columna_interna_378 der">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Contrapartes</div>
-                                <div class="accion_seccion der" id="nueva_contraparte"><a href="#" id="link_nueva_contraparte">Nueva contraparte</a></div>
+                                {%if user.is_authenticated%}<div class="accion_seccion der" id="nueva_contraparte"><a href="#" id="link_nueva_contraparte">Nueva contraparte</a></div>{%endif%}
                             </div>
                             <table id="tabla_contrapartes" class="tabla_proyecto">
                                 <tr class="header_tabla">

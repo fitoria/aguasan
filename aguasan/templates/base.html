@@ -28,15 +28,17 @@
 			   </div>
 
 -->
-
 			   <div id="login" class="der">
-			       <form>
-			        
-			            <input id="user" type="text" value="usuario" onfocus="if(this.value==this.defaultValue)this.value='';">
-			            <input id="password" type="password" value="" onfocus="if(this.value==this.defaultValue)this.value='';">
+               {%if not user.is_authenticated %}
+			       <form action="/cuenta/login/" method="POST">
+                        {% csrf_token %}
+			            <input id="id_username" name="username" type="text" value="usuario" onfocus="if(this.value==this.defaultValue)this.value='';">
+			            <input id="id_password" name="password" type="password" value="" onfocus="if(this.value==this.defaultValue)this.value='';">
 			            <input id="button" type="submit" value="entrar">
-			             
 			       </form>
+               {%else%}
+                   Bienvenido/a: {{user.username}}
+               {%endif%}
 			   </div>
            </div>
         </div>
@@ -69,10 +71,8 @@
                           </div> 
                    </div>
                    {%block contenido%}{%endblock%}
-                  
-
 	     	   </div>
-	     	 <!-- termina Columna derecha--> 
+	     	 <!-- termina Columna derecha-->
             <div class="separador" ></div>
             
          </div>
