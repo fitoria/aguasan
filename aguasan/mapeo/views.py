@@ -420,6 +420,7 @@ def proyectos_donante(request, id_donante):
     for proyecto_donante in _proyectos_donante:
         proyectos.append(proyecto_donante.proyecto)
     donante=Donante.objects.get(id=id_donante)
+    
     return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
                               context_instance=RequestContext(request))
 def proyectos_contraparte(request, id_contraparte):
