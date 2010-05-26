@@ -9,18 +9,14 @@ $(document).ready(function() {
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
         $("#modal_content").modal({overlayClose:true});
-        cargar_contrapartes();
     });
     $("#nuevo_cooperante").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/donantes/'});
         $("#modal_content").modal();
-        alert('nuevo');
-        cargar_donantes();
     });
     $("#nuevo_departamento").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/'});
         $("#modal_content").modal();
-        cargar_lugares();
     });
     {%endif%}
 
