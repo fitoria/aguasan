@@ -18,6 +18,7 @@ function agregar_municipio(form){
             }
             else{
                 $("<p>Departamento agregado</p>").appendTo("#mensaje");
+                window.parent.cargar_lugares();
                 window.parent.$.modal.close();
                }
         });

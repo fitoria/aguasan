@@ -5,7 +5,7 @@ Las tareas se organizan en orden de prioridad, Con leyenda Finalizada (si), (no)
 (Listo @fitoria) Filtrar por tipo de inversión
 (no) Cuando se agrega un municipion no debe ser exigido seleccionar donante y contraparte
 (Listo @fitoria) Login de usuarios y bloqueos de panel de administracion
-(no) Recargar en ficha proyecto cuando se agregue un dato, sin necesidad de recargar la página.
+(Listo @fitoria) Recargar en ficha proyecto cuando se agregue un dato, sin necesidad de recargar la página.
 (no) Agregar columna a la lista de proyectos, por donante, monto, contraparte y ordenar por columna en tabla de salida
 (Listo @fitoria) Salida por contraparte
 (no) Explorar el APi de google para mapas magicos overcools

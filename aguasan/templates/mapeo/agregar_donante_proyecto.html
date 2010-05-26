@@ -15,6 +15,7 @@
             }
             else{
                 $("<p>Donante agregado</p>").appendTo("#mensaje");
+                window.parent.cargar_donantes();
                 window.parent.$.modal.close();
                }
         });
