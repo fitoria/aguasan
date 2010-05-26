@@ -108,25 +108,22 @@ def municipio_proyecto(request, id_proyecto, id_dept):
     return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
                               
-@login_required
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
     return render_to_response('mapeo/lista_proyectos.html', dicc,
                               context_instance=RequestContext(request))
 
-@login_required
-def lista_donantes(request):
+def lista_donantes(request, template_name):
     donantes = Donante.objects.all()
     dicc = {'donantes': donantes}
-    return render_to_response('mapeo/lista_donantes.html', dicc,
+    return render_to_response(template_name, dicc,
                               context_instance=RequestContext(request))
 
-@login_required
-def lista_contrapartes(request):
+def lista_contrapartes(request, template_name):
     contrapartes = Contraparte.objects.all()
     dicc = {'contrapartes': contrapartes}
-    return render_to_response('mapeo/lista_contrapartes.html', dicc,
+    return render_to_response(template_name, dicc,
                               context_instance=RequestContext(request))
 
 @login_required
@@ -425,11 +422,13 @@ def proyectos_donante(request, id_donante):
     donante=Donante.objects.get(id=id_donante)
     return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
                               context_instance=RequestContext(request))
-
-def lista_donantes_boton(request):
-    donantes = Donante.objects.all()
-    dicc = {'donantes': donantes}
-    return render_to_response('mapeo/boton_donante.html', dicc,
+def proyectos_contraparte(request, id_contraparte):
+    _proyectos_contraparte = ProyectoContraparte.objects.filter(contraparte__id=id_contraparte)
+    proyectos = []
+    for proyecto_contraparte in _proyectos_contraparte:
+        proyectos.append(proyecto_contraparte.proyecto)
+    contraparte = Contraparte.objects.get(id=id_contraparte)
+    return render_to_response('mapeo/proyectos_contraparte.html',{'contraparte':contraparte,'proyectos':proyectos},
                               context_instance=RequestContext(request))
 
 def proyectos_inversion(request, id_tipo):
@@ -440,7 +439,6 @@ def proyectos_inversion(request, id_tipo):
                                context_instance=RequestContext(request))
 
 # ESte aun no se usa
-
 def proyectos_departamento(request, id_dept):
     _proyectos_departamento = ProyectoDepartamento.objects.filter(departamento__id=id_dept)
     proyectos = []

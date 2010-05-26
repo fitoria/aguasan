@@ -1,0 +1,18 @@
+{%extends "base.html"%}
+{%block extra_js%}
+{%endblock%}
+ {%block contenido%}
+ <div id="titulo">
+                   Seleccione una Contraparte
+ </div>
+                   <div id="contenido_interno">
+                    {%for contraparte in contrapartes%}
+                      <a href="/proyectos/contrapartes/{{contraparte.id}}"><div class="boton_donante" onmouseover="this.className='boton_donante_hover'" onmouseout="this.className='boton_donante'" >
+                      {%if contraparte.logo%}
+                      <img src="{{MEDIA_URL}}/{{contraparte.logo}}"><br>
+                      {%endif%}
+                      {{contraparte.nombre}}</div></a>
+                    {%endfor%}
+                    <br style="clear:both"/>
+                   </div>
+{%endblock%}
