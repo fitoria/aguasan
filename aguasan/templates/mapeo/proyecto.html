@@ -70,10 +70,16 @@ function cargar_lugares(){
             function(data) {
                 var tabla;
                 $.each(data.lista, function(i, item){
+                     {%if user.is_authenticated %}
                      tabla += "<tr><td><b>" + item.departamento +
                      "</b></td><td><b>$" + item.monto_total + 
                      "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
                      item.id_departamento + ")'>Agregar Municipio</a></td></tr>";
+                     {%else%}
+                     tabla += "<tr><td><b>" + item.departamento +
+                     "</b></td><td><b>$" + item.monto_total + 
+                     "</b></td><td></td></tr>";
+                     {%endif%}
 
                      $.each(item.municipios, function(i, subitem){
                          tabla += "<tr><td>" + subitem.municipio + 
@@ -96,7 +102,7 @@ function cargar_lugares(){
                    <div id="contenido_interno">
                         <div class="seccion">
                             <div class="titulo_seccion izq">Información General</div>
-                            <a href="/proyectos/editar/{{proyecto.id}}"<div class="accion_seccion accion_seccion_editar der">Editar</div></a>
+                            {%if user.is_authenticated%}<a href="/proyectos/editar/{{proyecto.id}}"<div class="accion_seccion accion_seccion_editar der">Editar</div></a>{%endif%}
                         </div>
                         <br style="clear:both">
                         <div class="columna_interna_285 izq">
