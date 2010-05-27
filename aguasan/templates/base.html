@@ -62,7 +62,7 @@
                    <img src="{{MEDIA_URL}}imagen/titulo_admin.jpg" align="right">
                    <div class="separador"></div>
                    <div id="menu_admin">
-                   <div id="usuario_logueado">Usuario: Nombre usuario</div>
+                       <div id="usuario_logueado">Usuario:{% if user.is_authenticated %} {{user.username}}{%else%} Anónimo {%endif%}</div>
                           <div id="acciones">
                                <a href="/donantes">COOPERANTES</a>
                                <a href="/contrapartes">CONTRAPARTES</a>
