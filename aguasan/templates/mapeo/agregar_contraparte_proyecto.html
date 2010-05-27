@@ -8,9 +8,9 @@
         },
         function(data) { 
             if(data!='OK'){
-                if (typeof(data.error)!=undefined){ $("<p>" + data.error + "</p>").appendTo("mensaje");}
-                if (typeof(data.contraparte[0])!=undefined){ $("<p>" + data.contraparte[0] + "</p>").appendTo('#campo_contraparte');}
-                if (typeof(data.monto[0])!=undefined){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
+                if (data.hasOwnProperty('error')){ $("<p>" + data.error + "</p>").appendTo("mensaje");}
+                if (data.hasOwnProperty('contraparte')){ $("<p>" + data.contraparte[0] + "</p>").appendTo('#campo_contraparte');}
+                if (data.hasOwnProperty('monto')){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
             }
             else{
                 //$("<p>Contraparte agregado</p>").appendTo("#mensaje");
