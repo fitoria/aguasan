@@ -137,17 +137,17 @@ class ProyectoContraparte(models.Model):
     class Meta:
         unique_together = ['proyecto', 'contraparte']
 
-#class ProyectoFotos(models.Model):
-#    '''Modelo para guardar las fotos de un proyecto'''
-#    proyecto = models.ForeignKey(Proyecto)
-#    #TODO: definir bien el tamano.
-#    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((640,480),(800,600)))  
-#    descripcion = models.TextField(blank=True)
-#    fecha = models.DateField(auto_now=True)
-#
-#    def __unicode__(self):
-#        return "%s (%s)" % (self.id, self.proyecto.nombre)
-#
-#    class Meta:
-#        verbose_name_plural = 'Fotos del proyecto'
-#        verbose_name = 'Foto del proyecto'
+class ProyectoFotos(models.Model):
+    '''Modelo para guardar las fotos de un proyecto'''
+    proyecto = models.ForeignKey(Proyecto)
+    #TODO: definir bien el tamano.
+    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((640,480),(800,600)))  
+    descripcion = models.TextField(blank=True)
+    fecha = models.DateField(auto_now=True)
+
+    def __unicode__(self):
+        return "%s (%s)" % (self.id, self.proyecto.nombre)
+
+    class Meta:
+        verbose_name_plural = 'Fotos del proyecto'
+        verbose_name = 'Foto del proyecto'
