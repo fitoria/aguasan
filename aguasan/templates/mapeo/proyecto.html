@@ -42,6 +42,9 @@ function eliminarElemento(elemento, id){
                 alert(data);
                 }
             });
+    cargar_contrapartes();
+    cargar_donantes();
+    cargar_lugares();
 }
 {%endif%}
     
@@ -52,7 +55,8 @@ function cargar_contrapartes(){
                 $.each(data.lista, function(i,item){
                     $('<tr><td>' + item.contraparte + 
                         '</td><td>$' + item.monto + 
-                        '</td></tr>').appendTo("#tabla_contrapartes");
+                        '</td><td><a href="#" onClick=eliminarElemento("contraparte",'+
+                            item.id + ') >Eliminar</a></tr>').appendTo("#tabla_contrapartes");
                 });
                 $('<tr><td><b>Total Aporte Externo</b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_contrapartes");
@@ -65,7 +69,8 @@ function cargar_donantes(){
                 $.each(data.lista, function(i,item){
                     $('<tr><td>' + item.donante+ 
                         '</td><td>$' + item.monto + 
-                        '</td></tr>').appendTo("#tabla_donantes");
+                        '</td><td><a href="#" onClick=eliminarElemento("donante",' + 
+                        item.id + ')>Eliminar</a></td></tr>').appendTo("#tabla_donantes");
                 });
                 $('<tr><td><b>Total Aporte Externo</b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_donantes");
@@ -82,7 +87,9 @@ function cargar_lugares(){
                      tabla += "<tr><td><b>" + item.departamento +
                      "</b></td><td><b>$" + item.monto_total + 
                      "</b></td><td><a href='#' id='nuevo_municipio' onClick='agregarMunicipio(" + 
-                     item.id_departamento + ")'>Agregar Municipio</a></td></tr>";
+                     item.id_departamento + ")'>Agregar Municipio</a> " + 
+                     "<a href='#' onClick=eliminarElemento('departamento'," + 
+                     item.id + ") >Eliminar</a></td></tr>";
                      {%else%}
                      tabla += "<tr><td><b>" + item.departamento +
                      "</b></td><td><b>$" + item.monto_total + 
@@ -92,7 +99,8 @@ function cargar_lugares(){
                      $.each(item.municipios, function(i, subitem){
                          tabla += "<tr><td>" + subitem.municipio + 
                          "</td><td>$" + subitem.monto + 
-                         "</td></tr>";
+                         "</td><td><a href='#' onClick=eliminarElemento('municipio'," + 
+                         subitem.id + ") >Eliminar</a></td></tr>";
                          });
                     });
                 tabla += "<tr><td><b>Total del proyecto</b></td><td><b>$" +

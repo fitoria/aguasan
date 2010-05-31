@@ -393,6 +393,7 @@ def lista_lugares(request, id):
             dicc_municipios = {'municipio': mun.municipio.nombre,
                                'municipio_id': mun.municipio.id,
                                'monto': mun.monto,
+                               'id': mun.id,
                                }
             monto_total += mun.monto
             lista_municipios.append(dicc_municipios)
@@ -402,6 +403,7 @@ def lista_lugares(request, id):
                 'id_proyecto': depart.proyecto.id,
                 'id_departamento': depart.departamento.id,
                 'monto_total': depart.monto_total,
+                'id': depart.id,
                 }
         lista.append(dicc)
         resultados = {'lista': lista, 'monto_total_proyecto': monto_total} 
