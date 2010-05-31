@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
+from models import ProyectoContraparte, ProyectoDonante, ProyectoDepartamento, ProyectoMunicipio
 
 
 urlpatterns = patterns('mapeo.views',
@@ -26,9 +27,13 @@ urlpatterns = patterns('mapeo.views',
     (r'^contrapartes/agregar/$', 'agregar_contraparte'),
     (r'^contrapartes/editar/(?P<id>\d+)/$', 'editar_contraparte'),
     (r'^ajax/agregar/contraparte/(?P<id>\d+)/$', 'agregar_contraparte_proyecto'),
+    (r'^ajax/eliminar/contraparte/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoContraparte}),
     (r'^ajax/agregar/donante/(?P<id>\d+)/$', 'agregar_donante_proyecto'),
+    (r'^ajax/eliminar/donante/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoDonante}),
     (r'^ajax/agregar/departamento/(?P<id>\d+)/$', 'agregar_departamento_proyecto'),
+    (r'^ajax/eliminar/departamento/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoDepartamento}),
     (r'^ajax/agregar/municipio/(?P<id_proyecto>\d+)/(?P<id_dept>\d+)/$', 'agregar_municipio_proyecto'),
+    (r'^ajax/eliminar/municipio/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoMunicipio}),
     (r'^ajax/lista/donantes/(?P<id>\d+)/$', 'lista_donantes_proyecto'),
     (r'^ajax/lista/contrapartes/(?P<id>\d+)/$', 'lista_contrapartes_proyecto'),
     (r'^ajax/lista/lugares/(?P<id>\d+)/$', 'lista_lugares'),

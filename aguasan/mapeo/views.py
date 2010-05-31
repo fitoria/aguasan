@@ -328,6 +328,22 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     else:
         return HttpResponse('ERROR')
 
+@login_required
+def eliminar_elemento_proyecto(request, id, model):
+    '''Metodo para eliminar elemento de un proyecto
+    sirve para ProyectoContraparte, ProyectoMunicipio,
+    ProyectoDepartamento, ProyectoDonante
+    ejemplo de uso en el urls.py
+    ('r^eliminar/foo/(?P<id>)/$', 'eliminar_elemento_proyecto', {'model': Foo}
+    nota: tiene que ser vía ajax'''
+    if request.is_ajax():
+        elemento = get_object_or_404(model, id=id)
+        elemento.delete()
+        mensaje = '%s eliminado' % elemento.__unicode__()
+        return HttpResponse(mensaje)
+    else:
+        raise Http404
+
 def lista_donantes_proyecto(request, id):
     lista_donantes = ProyectoDonante.objects.filter(proyecto__id = id)
     resultados = []

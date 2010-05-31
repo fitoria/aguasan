@@ -31,7 +31,17 @@ function agregarMunicipio(id_dept){
         id_dept + '/municipio';
     $("#modal_content").attr({'src': url});
     $("#modal_content").modal();
-    cargar_lugares();
+}
+
+function eliminarElemento(elemento, id){
+    var url = '/ajax/eliminar/' + elemento +
+        '/' + id + '/';
+    $.ajax({
+            url: url,
+            success: function(data){
+                alert(data);
+                }
+            });
 }
 {%endif%}
     
