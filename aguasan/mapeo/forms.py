@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, TextInput, Select, ChoiceField
+from django.forms import *
 from models import *
 
 class ProyectoForm(ModelForm):
@@ -20,6 +20,10 @@ class ProyectoDepartamentoForm(ModelForm):
         exclude = ['proyecto', 'monto_total']
 
 class ProyectoMunicipioForm(ModelForm):
+    donantes = ModelMultipleChoiceField(widget=CheckboxSelectMultiple,
+            queryset = Donante.objects.all())
+    contrapartes = ModelMultipleChoiceField(widget=CheckboxSelectMultiple, 
+            queryset = Contraparte.objects.all())
     class Meta:
         model = ProyectoMunicipio
         exclude = ['proyecto']

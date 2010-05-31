@@ -205,6 +205,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
                 try:
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
+                    proyecto_municipio.save_m2m()
                 except ValidationError, e:
                     error_dict = {'error': 'El municipio ya fue agregado'}
                     return HttpResponse(simplejson.dumps(error_dict),
