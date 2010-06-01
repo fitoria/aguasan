@@ -20,7 +20,7 @@ def index(request):
 @login_required
 def formulario(request):
     if (request.method == 'POST'):
-        form = ProyectoForm(request.POST)
+        form = ProyectoForm(request.POST, request.FILES)
         if form.is_valid():
            proyecto = form.save()
            request.session['mensaje'] = "El proyecto se a guardado correctamente, puede ahora editarlo"
@@ -38,7 +38,7 @@ def editar_proyecto(request,id):
     '''Editando proyecto en formulario por fuera'''
     p = Proyecto.objects.get(pk=id)
     if (request.method == 'POST'):
-        form = ProyectoForm(request.POST,instance=p)
+        form = ProyectoForm(request.POST, request.FILES, instance=p)
         if form.is_valid():
           proyecto = form.save()
           return redirect(proyecto)
@@ -49,7 +49,6 @@ def editar_proyecto(request,id):
         form = ProyectoForm(instance=p)
         return render_to_response('mapeo/editar_proyecto.html',
                                   {'form': form}, context_instance=RequestContext(request))
-
 
 def proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
@@ -131,7 +130,7 @@ def agregar_contraparte(request):
     '''Agregando contraparte en formulario por fuera'''
     form = ContraparteForm()
     if (request.method == 'POST'):
-        form = ContraparteForm(request.POST)
+        form = ContraparteForm(request.POST, request.FILES)
         if form.is_valid():
           contraparte = form.save()
           return HttpResponseRedirect('/contrapartes/')
@@ -147,7 +146,7 @@ def agregar_donante(request):
     '''Agregando donante en formulario por fuera'''
     form = DonanteForm()
     if (request.method == 'POST'):
-        form = DonanteForm(request.POST)
+        form = DonanteForm(request.POST, request.FILES)
         if form.is_valid():
           donante = form.save()
           return HttpResponseRedirect('/donantes/')
@@ -163,7 +162,7 @@ def editar_donante(request,id):
     '''Editando donante en formulario por fuera'''
     d = Donante.objects.get(pk=id)
     if (request.method == 'POST'):
-        form = DonanteForm(request.POST,instance=d)
+        form = DonanteForm(request.POST, request.FILES, instance=d)
         if form.is_valid():
           donante = form.save()
           return HttpResponseRedirect('/donantes/')
@@ -180,7 +179,7 @@ def editar_contraparte(request,id):
     '''Editando contraparte en formulario por fuera'''
     d = Contraparte.objects.get(pk=id)
     if (request.method == 'POST'):
-        form = ContraparteForm(request.POST,instance=d)
+        form = ContraparteForm(request.POST, request.FILES, instance=d)
         if form.is_valid():
           donante = form.save()
           return HttpResponseRedirect('/contrapartes/')
