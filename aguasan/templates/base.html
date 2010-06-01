@@ -37,7 +37,7 @@
 			            <input id="button" type="submit" value="entrar">
 			       </form>
                {%else%}
-                   Bienvenido/a: {{user.username}}
+                   Bienvenido/a: {{user.username}} | <a href="/cuenta/logout/">Salir</a>
                {%endif%}
 			   </div>
            </div>
@@ -59,10 +59,11 @@
              <!-- Comienza Columna derecha--> 
 
                <div id="colum_der" class="der">
+                   {% if user.is_authenticated %}
                    <img src="{{MEDIA_URL}}imagen/titulo_admin.jpg" align="right">
                    <div class="separador"></div>
                    <div id="menu_admin">
-                       <div id="usuario_logueado">Usuario:{% if user.is_authenticated %} {{user.username}}{%else%} Anónimo {%endif%}</div>
+                       <div id="usuario_logueado">Usuario: {{user.username}}Anónimo</div>
                           <div id="acciones">
                                <a href="/donantes">COOPERANTES</a>
                                <a href="/contrapartes">CONTRAPARTES</a>
@@ -70,6 +71,7 @@
 
                           </div> 
                    </div>
+                   {%endif%}
                    {%block contenido%}{%endblock%}
 	     	   </div>
 	     	 <!-- termina Columna derecha-->

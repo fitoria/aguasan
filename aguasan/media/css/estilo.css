@@ -93,6 +93,14 @@ h2{
   color: #FFF;
 }
 
+#login a, #login a:visited{
+  color:#fff;
+}
+
+#login a:hover{
+  color:#E3E3E3;
+}
+
 #user{
   border-width:0px;
     border-radius:4px;
@@ -430,6 +438,18 @@ h2{
   background:#fff;
   height:120px;
   font-size:11px;
+}
+
+.campo ul{
+  border:medium none;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  text-align:left;
+}
+
+.campo li{
+  float:left;
 }
 
 .detalle_proyecto{

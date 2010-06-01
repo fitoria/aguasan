@@ -26,9 +26,6 @@ function agregar_municipio(form){
 </script>
 {%endblock%}  
 {%block contenido%}
- <div id="titulo">
-                   Formulario de entrada de datos para donantes
- </div>
                    <div id="contenido_interno">
                        <div id="mensaje"></div>
 							<form action="."  id="formulario" name="formulario">
@@ -46,13 +43,13 @@ function agregar_municipio(form){
                                        <div id="campo_monto"></div>
                                     <br style="clear:both">
 									<div class="campo izq">
-									   <div class="label izq">Contrapartes:</div>
+									   <div class="label izq">Contrapartes:</div><br>
                                        {{form.contrapartes}}
                                        <div id="campo_contrapartes"></div>
 									</div>
                                     <br style="clear:both">
 									<div class="campo izq">
-									   <div class="label izq">Donantes:</div>
+									   <div class="label izq">Donantes:</div><br>
                                        {{form.donantes}}
                                        <div id="campo_donantes"></div>
 									</div>
