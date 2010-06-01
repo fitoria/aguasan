@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from models import ProyectoContraparte, ProyectoDonante, ProyectoDepartamento, ProyectoMunicipio
+from models import *
 
 
 urlpatterns = patterns('mapeo.views',
@@ -12,6 +12,7 @@ urlpatterns = patterns('mapeo.views',
     (r'^proyecto/(?P<id>\d+)/donantes/$', 'donantes_proyecto'),
     (r'^proyecto/(?P<id>\d+)/contrapartes/$', 'contrapartes_proyecto'),
     (r'^proyecto/(?P<id>\d+)/departamento/$', 'departamento_proyecto'),
+    (r'^proyecto/(?P<id>\d+)/fotos/$', 'fotos_proyecto'),
     (r'^proyecto/(?P<id_proyecto>\d+)/departamento/(?P<id_dept>\d+)/municipio$', 'municipio_proyecto'),
     (r'^proyectos/$', 'lista_proyectos'),
     (r'^proyectos/donantes/(?P<id_donante>\d+)/$', 'proyectos_donante'),
@@ -34,6 +35,8 @@ urlpatterns = patterns('mapeo.views',
     (r'^ajax/eliminar/departamento/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoDepartamento}),
     (r'^ajax/agregar/municipio/(?P<id_proyecto>\d+)/(?P<id_dept>\d+)/$', 'agregar_municipio_proyecto'),
     (r'^ajax/eliminar/municipio/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoMunicipio}),
+    (r'^ajax/agregar/fotos/(?P<id_proyecto>\d+)/$', 'agregar_fotos_proyecto'),
+    (r'^ajax/eliminar/foto/(?P<id>\d+)/$', 'eliminar_elemento_proyecto', {'model': ProyectoFotos}),
     (r'^ajax/lista/donantes/(?P<id>\d+)/$', 'lista_donantes_proyecto'),
     (r'^ajax/lista/contrapartes/(?P<id>\d+)/$', 'lista_contrapartes_proyecto'),
     (r'^ajax/lista/lugares/(?P<id>\d+)/$', 'lista_lugares'),

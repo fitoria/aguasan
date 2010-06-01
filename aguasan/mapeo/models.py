@@ -141,7 +141,7 @@ class ProyectoFotos(models.Model):
     '''Modelo para guardar las fotos de un proyecto'''
     proyecto = models.ForeignKey(Proyecto)
     #TODO: definir bien el tamano.
-    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((640,480),(800,600)))  
+    foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((135, 115), (640,480),(800,600)))  
     descripcion = models.TextField(blank=True)
     fecha = models.DateField(auto_now=True)
 

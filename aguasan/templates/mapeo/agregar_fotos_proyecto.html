@@ -1,0 +1,63 @@
+{%extends "modal_base.html"%}
+{%block extra_js%}
+<script type="text/javascript">
+    function agregar_foto(form){
+        $.post('/ajax/agregar/fotos/{{id}}/', {
+            foto: form.foto.value,
+            descripcion: form.descripcion.value,
+            //fecha: form.fecha.value,  
+        },
+        function(data) { 
+            if(data!='OK'){
+                if (data.hasOwnProperty('error')){ $("<p>" + data.error + "</p>").appendTo("mensaje");}
+                if (data.hasOwnProperty('descripcion')){ $("<p>" + data.descripcion[0] + "</p>").appendTo('#campo_descripcion');}
+                //if (data.hasOwnProperty('fecha')){ $("<p>" + data.fecha[0] + "</p>").appendTo('#campo_fecha');}
+                if (data.hasOwnProperty('foto')){ $("<p>" + data.foto[0] + "</p>").appendTo('#campo_foto');}
+            }
+            else{
+                //$("<p>Contraparte agregado</p>").appendTo("#mensaje");
+                //window.parent.cargar_fotos();
+                window.parent.$.modal.close();
+               }
+        });
+    }
+</script>
+{%endblock%}  
+{%block contenido%}
+ <div id="titulo">
+                   Formulario de entrada de Fotos al Proyecto
+ </div>
+ {%if form.errors%}
+   {{form.errors}}
+ </ul>
+ {%endif%}	
+                   <div id="contenido_interno">
+                       <div id="mensaje"></div>
+							<form action="."  id="formulario" name="formulario" method="POST"  enctype="multipart/form-data">
+                                {% csrf_token %}
+								<div class="titulo_form">Agregar Foto al Proyecto</div>
+									<div class="campo izq">
+									   <div class="label izq">Foto</div>
+                                       {{form.foto}}
+                                       <div id="campo_foto"></div>
+									</div>
+									<br style="clear:both">
+									<div class="campo izq">
+									   <div class="label izq">Descripcion:</div>
+                                       {{form.descripcion}}
+                                       <div id="campo_descripcion"></div>
+									</div>
+                                    <!--<div class="campo izq">
+									   <div class="label izq">Fecha:</div>
+                                       {{form.fecha}}
+                                       <div id="campo_fecha"></div>
+                                   </div>-->
+									<br style="clear:both">
+                                    <input type="button" value="Agregar contraparte " onClick="agregar_foto(this.form)"/>
+                                    <input type="button" value="Cancelar" onClick="window.parent.$.modal.close();"/>
+									<br style="clear:both">
+									<br>
+							</form>
+                   </div>
+
+ {% endblock %}
