@@ -18,6 +18,10 @@ $(document).ready(function() {
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/departamento/'});
         $("#modal_content").modal();
     });
+    $("#nueva_foto").click(function(){
+        $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/fotos/'});
+        $("#modal_content").modal();
+    });
     {%endif%}
 
     cargar_contrapartes();
@@ -154,6 +158,7 @@ function cargar_lugares(){
                             <br><br>
                             <div class="subtitulo_seccion">Galeria de fotos</div>
                             <br><br>
+                            <a href="#" id="nueva_foto">Agregar Fotos</a>
                         </div>
                         <br style="clear:both">
                         <div class="seccion">

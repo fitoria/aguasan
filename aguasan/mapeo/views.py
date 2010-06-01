@@ -81,6 +81,14 @@ def contrapartes_proyecto(request, id):
                                   context_instance=RequestContext(request))
 
 @login_required
+def fotos_proyecto(request, id):
+    proyecto = get_object_or_404(Proyecto, id=id)
+    form = ProyectoFotosForm()
+    dicc = {'form': form, 'id': id}
+    return render_to_response('mapeo/agregar_fotos_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
+
+@login_required
 def donantes_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoDonanteForm()
@@ -328,6 +336,23 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     else:
         return HttpResponse('ERROR')
 
+@login_required
+def agregar_fotos_proyecto(request, id):
+    '''Vista para agregar fotos al proyecto'''
+    if request.is_ajax():
+        form = ProyectoFotosForm(request.POST, request.FILES)
+        proyecto = get_object_or_404(Proyecto, id=id)
+        if form.is_valid():
+            foto = form.save(commit=False)
+            foto.proyecto = proyecto
+            foto.save()
+            return HttpResponse('OK')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype = 'application/json')
+    else:
+        return HttpResponse('ERROR')
+                                
 @login_required
 def eliminar_elemento_proyecto(request, id, model):
     '''Metodo para eliminar elemento de un proyecto

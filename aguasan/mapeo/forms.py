@@ -59,3 +59,11 @@ class DonanteForm(ModelForm):
             'pais': Select(attrs={'class':'combobox'}),
             'tipo': Select(attrs={'class':'combobox'}),
         }
+
+class ProyectoFotosForm(ModelForm):
+    class Meta:
+        model = ProyectoFotos
+        exclude = ['proyecto']
+        widgets = {
+            'fecha': TextInput(attrs={'class': 'textbox'}),
+            }
