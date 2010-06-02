@@ -142,6 +142,7 @@ class ProyectoFotos(models.Model):
     proyecto = models.ForeignKey(Proyecto)
     #TODO: definir bien el tamano.
     foto = ImageWithThumbsField(upload_to='proyecto/fotos', sizes=((135, 115), (640,480),(800,600)))  
+    titulo = models.CharField(max_length=50, blank=True)
     descripcion = models.TextField(blank=True)
     fecha = models.DateField(auto_now=True)
 

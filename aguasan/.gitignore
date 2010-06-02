@@ -2,3 +2,4 @@
 *.swp
 settings_local.py
 *.sqlite3
+media/proyecto/*

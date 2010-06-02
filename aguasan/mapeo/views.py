@@ -84,9 +84,18 @@ def contrapartes_proyecto(request, id):
 def fotos_proyecto(request, id):
     proyecto = get_object_or_404(Proyecto, id=id)
     form = ProyectoFotosForm()
-    dicc = {'form': form, 'id': id}
+    if (request.method == 'POST'):
+        form = ProyectoFotosForm(request.POST, request.FILES)
+        proyecto = get_object_or_404(Proyecto, id=id)
+        if form.is_valid():
+            foto = form.save(commit=False)
+            foto.proyecto = proyecto
+            foto.save()
+            dicc = {'form': form, 'id': id, 'guardado': True}
+    else:
+        dicc = {'form': form, 'id': id}
     return render_to_response('mapeo/agregar_fotos_proyecto.html', dicc,
-                                  context_instance=RequestContext(request))
+                              context_instance=RequestContext(request))
 
 @login_required
 def donantes_proyecto(request, id):
@@ -103,7 +112,6 @@ def departamento_proyecto(request, id):
     dicc = {'form': form, 'id': id}
     return render_to_response('mapeo/agregar_departamento_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
-
 
 @login_required
 def municipio_proyecto(request, id_proyecto, id_dept):
@@ -337,23 +345,6 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
         return HttpResponse('ERROR')
 
 @login_required
-def agregar_fotos_proyecto(request, id):
-    '''Vista para agregar fotos al proyecto'''
-    if request.is_ajax():
-        form = ProyectoFotosForm(request.POST, request.FILES)
-        proyecto = get_object_or_404(Proyecto, id=id)
-        if form.is_valid():
-            foto = form.save(commit=False)
-            foto.proyecto = proyecto
-            foto.save()
-            return HttpResponse('OK')
-        else:
-            return HttpResponse(simplejson.dumps(form.errors),
-                                mimetype = 'application/json')
-    else:
-        return HttpResponse('ERROR')
-                                
-@login_required
 def eliminar_elemento_proyecto(request, id, model):
     '''Metodo para eliminar elemento de un proyecto
     sirve para ProyectoContraparte, ProyectoMunicipio,
@@ -404,6 +395,24 @@ def lista_contrapartes_proyecto(request, id):
     diccionario_resultado = {'lista': resultados, 'monto_total': monto_total} 
     return HttpResponse(simplejson.dumps(diccionario_resultado), 
             mimetype='application/json')
+
+def lista_fotos_proyecto(request, id):
+    lista_fotos = ProyectoFotos.objects.filter(proyecto__id=id)
+    resultados = []
+    for foto in lista_fotos:
+        dicc = {
+            'titulo': foto.titulo, 
+            'descripcion': foto.descripcion,
+            'thumbnail': foto.foto.url_135x115,
+            'url_800x600': foto.foto.url_800x600,
+            'url_640x480': foto.foto.url_640x480,
+        }
+        resultados.append(dicc)
+    
+    diccionario_resultado = {'lista': resultados}
+    return HttpResponse(simplejson.dumps(diccionario_resultado),
+                        mimetype='application/json')
+        
 
 def lista_lugares(request, id):
     proyecto_departamentos = ProyectoDepartamento.objects.filter(proyecto__id = id)
