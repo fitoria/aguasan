@@ -360,6 +360,16 @@ def eliminar_elemento_proyecto(request, id, model):
     else:
         raise Http404
 
+@login_required
+def eliminar_elemento(request, id, model, redirect_to):
+    '''Metodo para eliminar un objeto y redirigir,
+    ejemplo
+    ('r^eliminar/foo/(?P<id>)/$', 'eliminar_elemento', {'model': Foo, 'redirect_to': '/bar/'}
+    '''
+    objeto = get_object_or_404(model, pk=id)
+    objeto.delete()
+    return HttpResponseRedirect(redirect_to)
+
 def lista_donantes_proyecto(request, id):
     lista_donantes = ProyectoDonante.objects.filter(proyecto__id = id)
     resultados = []

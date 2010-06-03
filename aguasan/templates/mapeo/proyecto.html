@@ -117,6 +117,7 @@ function cargar_lugares(){
 }
 
 function cargar_fotos(){
+    //TODO: remover children del div de fotos
     $.getJSON('/ajax/lista/fotos/{{proyecto.id}}/',
             function(data) {
                 $.each(data.lista, function(i, item){
