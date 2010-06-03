@@ -470,6 +470,19 @@ h2{
    box-shadow:#949494 0px 1px 2px;
 }
 
+#fotos img{
+  border-width:4px;
+  border-color:#E5E5E5;
+  border-style:solid;
+  margin-right:5px;
+  margin-bottom:5px;
+}
+.subtitulo_seccion a,.subtitulo_seccion a:visited{
+color:#3D77CB;
+font-weight:bold;
+font-size:12px;
+}
+
 .detalle_proyecto a, .detalle_proyecto a:visited{
   color:#6A6053;
 }

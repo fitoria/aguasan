@@ -169,14 +169,12 @@ function cargar_fotos(){
                             <div class="subtitulo_seccion">Descripción</div>
                                 {{proyecto.descripcion}}
                             <br><br>
-                            <div class="subtitulo_seccion">Galeria de fotos</div>
-                            <br><br>
+                            <div class="subtitulo_seccion">Galeria de fotos{%if user.is_authenticated%}<a href="#" id="nueva_foto"class="der"><img src='{{MEDIA_URL}}imagen/icono_agregar.png'> Agregar Fotos</a>{%endif%}</div>
+                            
                             <div id="fotos"></div>
-                            {%if user.is_authenticated%}
-                            <a href="#" id="nueva_foto">Agregar Fotos</a>
-                            {%endif%}
+
                         </div>
-                        <br style="clear:both">
+                        <br style="clear:both"><br>
                         <div class="seccion">
                             <div class="titulo_seccion izq">Cobertura Geografica</div>
                             {%if user.is_authenticated%}<div class="accion_seccion der" id="nuevo_departamento"><a href="#">Agregar Departamento</a></div>{%endif%}
@@ -202,6 +200,7 @@ function cargar_fotos(){
                                 </tr>
                             </table>
                         </div>
+                        
                         <div class="columna_interna_378 der">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Contrapartes</div>

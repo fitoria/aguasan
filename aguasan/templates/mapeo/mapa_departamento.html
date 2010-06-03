@@ -176,5 +176,18 @@
                                                         <area href="/proyectos/municipio/1012" title="Bocay" shape="circle" coords="302.91,284.69,7.25"></area>
                             </map>
                             {%endifequal%}
+                            {%ifequal departamento.id 25%}
+                            <img src="{{MEDIA_URL}}imagen/esteli.jpg" class="mapa" usemap="#esteli" width="534" height="516" border="0">
+                            <map name="esteli">
+                                                        <area href="/proyectos/municipio/2515" title="Estelí" shape="poly" coords="301.69,321.98, 308.20,326.18, 307.57,318.46, 313.57,313.56, 306.03,311.78, 303.22,304.56, 299.20,311.18, 291.47,311.61, 296.52,317.48, 294.54,324.97"></area>
+                                                        <area href="/proyectos/municipio/2530" title="San Nicolas" shape="circle" coords="313.62,428.87,7.25"></area>
+                                                        <area href="/proyectos/municipio/2525" title="La Trinidad" shape="circle" coords="409.08,361.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/2520" title="Limay" shape="circle" coords="148.86,266.94,7.25"></area>
+                                                        <area href="/proyectos/municipio/2505" title="Pueblo Nuevo" shape="circle" coords="242.20,144.08,7.25"></area>
+                                                        <area href="/proyectos/municipio/2510" title="Condenga" shape="circle" coords="295.94,158.05,7.25"></area>
+
+                                                     
+                            </map>
+                            {%endifequal%}
                    </div>
 {%endblock%}
