@@ -227,13 +227,16 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
                             mimetype='application/json')
 
                 return render_to_response('mapeo/agregar_municipio_proyecto.html',
-                                          {'form': form, 'cerrar': True}, context_instance=RequestContext(request))
+                                          {'form': form, 'cerrar': True, 
+                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
             else:
                 return render_to_response('mapeo/agregar_municipio_proyecto.html',
-                                          {'form': form, 'cerrar': False}, context_instance=RequestContext(request))
+                                          {'form': form, 'cerrar': False, 
+                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
         else:
             return render_to_response('mapeo/agregar_municipio_proyecto.html',
-                                      {'form': form, 'cerrar': False}, context_instance=RequestContext(request))
+                                      {'form': form, 'cerrar': False, 
+                                       'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
     else:
         return HttpResponse('ERROR')
 
