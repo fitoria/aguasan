@@ -210,28 +210,30 @@ def editar_contraparte(request,id):
 @login_required
 def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
-    if request.is_ajax():
+    if (request.method=='POST'):
         form = ProyectoMunicipioForm(request.POST)
         if form.is_valid():
-            proyecto = ProyectoDepartamento.objects.get(proyecto=id_proyecto, departamento=id_dept)
+            proyecto = ProyectoDepartamento.objects.get(proyecto=id_proyecto,
+                                                        departamento=id_dept)
             if proyecto:
                 proyecto_municipio = form.save(commit=False)
                 proyecto_municipio.proyecto = proyecto
                 try:
                     proyecto_municipio.full_clean()
                     proyecto_municipio.save()
-                    proyecto_municipio.save_m2m()
                 except ValidationError, e:
                     error_dict = {'error': 'El municipio ya fue agregado'}
                     return HttpResponse(simplejson.dumps(error_dict),
                             mimetype='application/json')
 
-                return HttpResponse('OK')
+                return render_to_response('mapeo/agregar_municipio_proyecto.html',
+                                          {'form': form, 'cerrar': True}, context_instance=RequestContext(request))
             else:
-                return HttpResponse('ERROR')
+                return render_to_response('mapeo/agregar_municipio_proyecto.html',
+                                          {'form': form, 'cerrar': False}, context_instance=RequestContext(request))
         else:
-            return HttpResponse(simplejson.dumps(form.errors), 
-                                mimetype="application/json")
+            return render_to_response('mapeo/agregar_municipio_proyecto.html',
+                                      {'form': form, 'cerrar': False}, context_instance=RequestContext(request))
     else:
         return HttpResponse('ERROR')
 
@@ -316,33 +318,33 @@ def agregar_departamento_proyecto(request, id):
     else:
         return HttpResponse('ERROR')
 
-@login_required
-def agregar_municipio_proyecto(request, id_proyecto, id_dept):
-    ''' agrega departamento al proyecto por medio de ajax'''
-    if request.is_ajax():
-        form = ProyectoMunicipioForm(request.POST)
-        if form.is_valid():
-            proyecto = ProyectoDepartamento.objects.get(proyecto__id=id_proyecto, 
-                    departamento__id=id_dept)
-            if proyecto and departamento:
-                proyecto_municipio= form.save(commit=False)
-                proyecto_municipio.proyecto = proyecto
-                try:
-                    proyecto_municipio.full_clean()
-                    proyecto_municipio.save()
-                except ValidationError, e:
-                    error_dict = {'error': 'El municipio ya fue agregado'}
-                    return HttpResponse(simplejson.dumps(error_dict),
-                            mimetype='application/json')
-
-                return HttpResponse('OK')
-            else:
-                return HttpResponse('ERROR')
-        else:
-            return HttpResponse(simplejson.dumps(form.errors), 
-                                mimetype = 'application/json')
-    else:
-        return HttpResponse('ERROR')
+#@login_required
+#def agregar_municipio_proyecto(request, id_proyecto, id_dept):
+#    ''' agrega departamento al proyecto por medio de ajax'''
+#    if request.is_ajax():
+#        form = ProyectoMunicipioForm(request.POST)
+#        if form.is_valid():
+#            proyecto = ProyectoDepartamento.objects.get(proyecto__id=id_proyecto, 
+#                    departamento__id=id_dept)
+#            if proyecto and departamento:
+#                proyecto_municipio= form.save(commit=False)
+#                proyecto_municipio.proyecto = proyecto
+#                try:
+#                    proyecto_municipio.full_clean()
+#                    proyecto_municipio.save()
+#                except ValidationError, e:
+#                    error_dict = {'error': 'El municipio ya fue agregado'}
+#                    return HttpResponse(simplejson.dumps(error_dict),
+#                            mimetype='application/json')
+#
+#                return HttpResponse('OK')
+#            else:
+#                return HttpResponse('ERROR')
+#        else:
+#            return HttpResponse(simplejson.dumps(form.errors), 
+#                                mimetype = 'application/json')
+#    else:
+#        return HttpResponse('ERROR')
 
 @login_required
 def eliminar_elemento_proyecto(request, id, model):

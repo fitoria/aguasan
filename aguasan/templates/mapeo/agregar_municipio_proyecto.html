@@ -1,12 +1,18 @@
 {%extends "modal_base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
+{% if cerrar %}
+    window.parent.cargar_lugares();
+    window.parent.$.modal.close();
+{%endif%}
+/*
 function agregar_municipio(form){
         $.post('/ajax/agregar/municipio/{{id_proyecto}}/{{id_dept}}/', {
             municipio: form.municipio.value,
             monto: form.monto.value,
-            donantes: form.donantes.value,
-            contrapartes: form.contrapartes.value,
+            donantes: lista_chequeados(form.donantes),
+            contrapartes: lista_chequeados(form.contrapartes),
+            csrfmiddlewaretoken: '{{csrf_token}}',
         },
         function(data) { 
             if(data!='OK'){
@@ -23,38 +29,62 @@ function agregar_municipio(form){
                }
         });
     }
+
+function lista_chequeados(objeto){
+    var lista = [];
+    if (objeto.value){
+        lista.push(objeto.value);
+    }else{
+     $.each(objeto, function(i, item){
+            if (item.checked){
+                lista.push(item.value);
+                }
+      });
+    }
+    return lista;
+}
+*/
 </script>
 {%endblock%}  
 {%block contenido%}
                    <div id="contenido_interno">
                        <div id="mensaje"></div>
-							<form action="."  id="formulario" name="formulario">
+                       <form action="/ajax/agregar/municipio/{{id_proyecto}}/{{id_dept}}/"  id="formulario" name="formulario" method="POST">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar municipio al proyecto</div>
 									<div class="campo izq">
 									   <div class="label izq">municipio: </div>
                                        {{form.municipio}}
-                                       <div id="campo_municipio"></div>
+                                       {%if form.municipio.errors%}
+                                           {{form.municipio.errors}}
+                                       {%endif%}
 									</div>
 									<br style="clear:both">
 									<div class="campo izq">
 									   <div class="label izq">Monto:</div>
-                                       {{form.monto}}                                     </div>
-                                       <div id="campo_monto"></div>
+                                       {{form.monto}}                                    
+                                       {%if form.monto.errors%}
+                                           {{form.monto.errors}}
+                                       {%endif%}
+                                   </div>
                                     <br style="clear:both">
 									<div class="campo izq">
 									   <div class="label izq">Contrapartes:</div><br>
                                        {{form.contrapartes}}
-                                       <div id="campo_contrapartes"></div>
+                                       {%if form.contrapartes.errors%}
+                                           {{form.contrapartes.errors}}
+                                       {%endif%}
 									</div>
                                     <br style="clear:both">
 									<div class="campo izq">
 									   <div class="label izq">Donantes:</div><br>
                                        {{form.donantes}}
-                                       <div id="campo_donantes"></div>
+                                       {%if form.donantes.errors%}
+                                           {{form.donantes.errors}}
+                                       {%endif%}
 									</div>
 									<br style="clear:both">
-                                    <input type="button" value="Agregar municipio" onClick="agregar_municipio(this.form)"/>
+                                    <input type="submit" value="Agregar municipio" />
 									<br style="clear:both">
 									<br>
 							</form>
