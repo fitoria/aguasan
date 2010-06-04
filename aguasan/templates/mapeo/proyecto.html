@@ -2,9 +2,18 @@
 {% load humanize %}
 {%block extra_js%}
 <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.simplemodal-1.3.min.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.fancybox-1.3.1.pack.js"></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/jquery.mousewheel-3.0.2.pack.js"></script>
 <link type="text/css" href="{{MEDIA_URL}}css/simple-modal.css" rel="stylesheet"/>
+<link type="text/css" href="{{MEDIA_URL}}css/jquery.fancybox-1.3.1.css" rel="stylesheet"/>
 <script type="text/javascript">
 $(document).ready(function() {
+		$("a.popup").fancybox({
+		'titleShow'		: false,
+		'transitionIn'	: 'elastic',
+		'transitionOut'	: 'elastic',
+        'titlePosition'	: 'inside'
+			});
     {%if user.is_authenticated%}
     $("#nueva_contraparte").click(function(){
         $("#modal_content").attr({'src':'/proyecto/{{proyecto.id}}/contrapartes/'});
@@ -28,6 +37,7 @@ $(document).ready(function() {
     cargar_donantes();
     cargar_lugares();
     cargar_fotos();
+
 });
 
 {%if user.is_authenticated%}
@@ -116,17 +126,19 @@ function cargar_lugares(){
         });
 }
 
+
 function cargar_fotos(){
     //TODO: remover children del div de fotos
     $.getJSON('/ajax/lista/fotos/{{proyecto.id}}/',
             function(data) {
                 $.each(data.lista, function(i, item){
-                    var html_foto = "<a href='" + item.url_640x480 + "'><img src='" +
-                        item.thumbnail + "'/></a>"; 
+                    var html_foto = "<a href='" + item.url_640x480 + "' class='popup'><img src='" +
+                        item.thumbnail + "' /></a>"; 
                     $(html_foto).appendTo("#fotos");
                     });
             });
 }
+
 </script>
 {%endblock%}
 {%block contenido%}
@@ -172,7 +184,9 @@ function cargar_fotos(){
                             <br><br>
                             <div class="subtitulo_seccion">Galeria de fotos{%if user.is_authenticated%}<a href="#" id="nueva_foto"class="der"><img src='{{MEDIA_URL}}imagen/icono_agregar.png'> Agregar Fotos</a>{%endif%}</div>
                             
-                            <div id="fotos"></div>
+                            <div id="fotos">
+
+                            </div>
 
                         </div>
                         <br style="clear:both"><br>

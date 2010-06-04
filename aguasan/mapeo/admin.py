@@ -5,10 +5,10 @@ class AvanceAdmin(admin.ModelAdmin):
     pass
 
 class TipoDonanteiAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("tipo",)}
 
 class TipoContraparteAdmin(admin.ModelAdmin):
-    pass
+    prepopulated_fields = {"slug": ("tipo",)}
 
 class DonanteAdmin(admin.ModelAdmin):
     pass
