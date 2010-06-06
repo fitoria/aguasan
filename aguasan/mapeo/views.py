@@ -113,16 +113,6 @@ def departamento_proyecto(request, id):
     return render_to_response('mapeo/agregar_departamento_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
-@login_required
-def municipio_proyecto(request, id_proyecto, id_dept):
-    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
-    form = ProyectoMunicipioForm()
-    form.fields['municipio'].queryset = Municipio.objects.filter(departamento__id=id_dept)
-    dicc = {'form': form, 'id_proyecto': id_proyecto,
-            'id_dept': id_dept}
-    return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
-                                  context_instance=RequestContext(request))
-                              
 def lista_proyectos(request):
     proyectos = Proyecto.objects.all()
     dicc = {'proyectos': proyectos}
@@ -228,17 +218,26 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
 
                 return render_to_response('mapeo/agregar_municipio_proyecto.html',
                                           {'form': form, 'cerrar': True, 
-                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
+                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, 
+                                          context_instance=RequestContext(request))
             else:
                 return render_to_response('mapeo/agregar_municipio_proyecto.html',
                                           {'form': form, 'cerrar': False, 
-                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
+                                           'id_proyecto': id_proyecto, 'id_dept': id_dept}, 
+                                          context_instance=RequestContext(request))
         else:
             return render_to_response('mapeo/agregar_municipio_proyecto.html',
                                       {'form': form, 'cerrar': False, 
-                                       'id_proyecto': id_proyecto, 'id_dept': id_dept}, context_instance=RequestContext(request))
+                                       'id_proyecto': id_proyecto, 'id_dept': id_dept}, 
+                                      context_instance=RequestContext(request))
     else:
-        return HttpResponse('ERROR')
+        proyecto = get_object_or_404(Proyecto, id=id_proyecto)
+        form = ProyectoMunicipioForm()
+        form.fields['municipio'].queryset = Municipio.objects.filter(departamento__id=id_dept)
+        dicc = {'form': form, 'id_proyecto': id_proyecto,
+                'id_dept': id_dept}
+        return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
+                                  context_instance=RequestContext(request))
 
 @login_required
 def agregar_donante_proyecto(request, id):

@@ -5,51 +5,12 @@
     window.parent.cargar_lugares();
     window.parent.$.modal.close();
 {%endif%}
-/*
-function agregar_municipio(form){
-        $.post('/ajax/agregar/municipio/{{id_proyecto}}/{{id_dept}}/', {
-            municipio: form.municipio.value,
-            monto: form.monto.value,
-            donantes: lista_chequeados(form.donantes),
-            contrapartes: lista_chequeados(form.contrapartes),
-            csrfmiddlewaretoken: '{{csrf_token}}',
-        },
-        function(data) { 
-            if(data!='OK'){
-                if (data.hasOwnProperty('error')){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
-                if (data.hasOwnProperty('municipio')){ $("<p>" + data.departamento[0] + "</p>").appendTo('#campo_departamento');}
-                if (data.hasOwnProperty('monto')){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
-                if (data.hasOwnProperty('donantes')){ $("<p>" + data.donantes[0] + "</p>").appendTo('#campo_donantes');}
-                if (data.hasOwnProperty('contrapartes')){ $("<p>" + data.contrapartes[0] + "</p>").appendTo('#campo_contrapartes');}
-            }
-            else{
-                $("<p>Departamento agregado</p>").appendTo("#mensaje");
-                window.parent.cargar_lugares();
-                window.parent.$.modal.close();
-               }
-        });
-    }
-
-function lista_chequeados(objeto){
-    var lista = [];
-    if (objeto.value){
-        lista.push(objeto.value);
-    }else{
-     $.each(objeto, function(i, item){
-            if (item.checked){
-                lista.push(item.value);
-                }
-      });
-    }
-    return lista;
-}
-*/
 </script>
 {%endblock%}  
 {%block contenido%}
                    <div id="contenido_interno">
                        <div id="mensaje"></div>
-                       <form action="/ajax/agregar/municipio/{{id_proyecto}}/{{id_dept}}/"  id="formulario" name="formulario" method="POST">
+                       <form action="/proyecto/{{id_proyecto}}/departamento/{{id_dept}}/municipio/"  id="formulario" name="formulario" method="POST">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar municipio al proyecto</div>
 									<div class="campo izq">
