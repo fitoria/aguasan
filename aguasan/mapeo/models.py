@@ -93,6 +93,12 @@ class ProyectoDepartamento(models.Model):
 
     def __unicode__(self):
         return"%s en %s" % (self.proyecto.nombre, self.departamento.nombre)
+    
+    def update_monto(self):
+        '''Metodo para actualizar monto en caso de borrar o agregar cosas'''
+        monto = ProyectoMunicipio.objects.filter(proyecto__id = self.id).aggregate(monto=Sum('monto'))
+        self.monto_total = monto['monto']
+        self.save()
 
     class Meta:
         unique_together = ['proyecto', 'departamento']
@@ -109,8 +115,11 @@ class ProyectoMunicipio(models.Model):
 
     def save(self, *args, **kwargs):
         super(ProyectoMunicipio, self).save(*args, **kwargs)
-        self.proyecto.monto_total = ProyectoMunicipio.objects.filter(proyecto__id=self.proyecto.id).aggregate(monto=Sum('monto'))['monto']
-        self.proyecto.save()
+        self.proyecto.update_monto()
+
+    def delete(self):
+        super(ProyectoMunicipio, self).delete()
+        self.proyecto.update_monto()
 
     class Meta:
         unique_together = ['proyecto', 'municipio']

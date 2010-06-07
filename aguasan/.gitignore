@@ -3,4 +3,4 @@
 settings_local.py
 *.sqlite3
 media/proyecto/*
-media/donante/*
+media/donantes/*
