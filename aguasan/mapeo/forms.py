@@ -21,9 +21,9 @@ class ProyectoDepartamentoForm(ModelForm):
 
 class ProyectoMunicipioForm(ModelForm):
     donantes = ModelMultipleChoiceField(widget=CheckboxSelectMultiple,
-            queryset = Donante.objects.all())
+            queryset = Donante.objects.all(), required=False)
     contrapartes = ModelMultipleChoiceField(widget=CheckboxSelectMultiple, 
-            queryset = Contraparte.objects.all())
+            queryset = Contraparte.objects.all(), required=False)
     class Meta:
         model = ProyectoMunicipio
         exclude = ['proyecto']
