@@ -31,6 +31,9 @@ class ProyectoDepartamentoAdmin(admin.ModelAdmin):
 class ProyectoMunicipioAdmin(admin.ModelAdmin):
     pass
 
+class ProyectoFotosAdmin(admin.ModelAdmin):
+    pass
+
 admin.site.register(ProyectoDepartamento, ProyectoDepartamentoAdmin)
 admin.site.register(ProyectoMunicipio, ProyectoMunicipioAdmin)
 admin.site.register(Proyecto, ProyectoAdmin)
@@ -41,3 +44,4 @@ admin.site.register(TipoContraparte, TipoDonanteiAdmin)
 admin.site.register(Donante, DonanteAdmin)
 admin.site.register(Contraparte, ContraparteAdmin)
 admin.site.register(Pais, PaisAdmin)
+admin.site.register(ProyectoFotos, ProyectoFotosAdmin)
