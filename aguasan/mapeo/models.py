@@ -47,7 +47,7 @@ class Proyecto(models.Model):
     nombre = models.CharField(max_length=400)
     descripcion = models.TextField(_('Descripcion de medidas'))
     avance = models.ForeignKey(Avance)
-    tipo = models.ForeignKey(TipoProyecto)
+    tipos = models.ManyToManyField(TipoProyecto)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
     logo = models.ImageField(upload_to='/proyecto/logos/', blank=True)

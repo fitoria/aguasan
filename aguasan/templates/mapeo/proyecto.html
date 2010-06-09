@@ -168,7 +168,11 @@ function cargar_fotos(){
                                 <b>{{proyecto.avance}}</b>
                             <br><br>
                             <div class="subtitulo_seccion">Finalidad</div>
-                                <b>{{proyecto.tipo}}</b>
+                            <b>
+                            {%for tipo in proyecto.tipos.all%}
+                            {{tipo}}, 
+                            {%endfor%}
+                            </b>
                             <br><br>
                             <div class="subtitulo_seccion">Periodo</div>
                                 <b>{{proyecto.fecha_inicial}} - {{proyecto.fecha_final}}</b>

@@ -3,6 +3,8 @@ from models import *
 from utils import MontoField
 
 class ProyectoForm(ModelForm):
+    tipos = ModelMultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class': 'combobox'}),
+            queryset = TipoProyecto.objects.all(), )
     class Meta:
         model = Proyecto
         widgets = {
@@ -12,7 +14,6 @@ class ProyectoForm(ModelForm):
             'fecha_inicial': TextInput(attrs={'class': 'textbox'}),
             'fecha_final': TextInput(attrs={'class': 'textbox'}),
             'avance': Select(attrs={'class':'combobox'}),
-            'tipo': Select(attrs={'class':'combobox'}),
         }
 
 class ProyectoDepartamentoForm(ModelForm):
