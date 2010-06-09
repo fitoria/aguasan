@@ -1,9 +1,11 @@
 {%extends "base.html"%}
 {%block extra_js%}
+<script type="text/javascript" src="{{MEDIA_URL}}js/tiny_mce/tiny_mce.js" />
+<script type="text/javascript" src="{{MEDIA_URL}}js/editores/textareas.js" />
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
-                   Formulario de editar donante
+                   Formulario de editar Cooperante 
  </div>
  {%if form.errors%}
    {{form.errors}}

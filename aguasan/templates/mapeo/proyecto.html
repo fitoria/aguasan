@@ -181,7 +181,7 @@ function cargar_fotos(){
                         </div>
                         <div class="columna_interna_460 der">
                             <div class="subtitulo_seccion">Descripción</div>
-                                {{proyecto.descripcion}}
+                                {{proyecto.descripcion|safe}}
                             <br><br>
                             <div class="subtitulo_seccion">Galeria de fotos{%if user.is_authenticated%}<a href="#" id="nueva_foto"class="der"><img src='{{MEDIA_URL}}imagen/icono_agregar.png'> Agregar Fotos</a>{%endif%}</div>
                             
