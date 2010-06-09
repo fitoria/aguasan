@@ -1,5 +1,6 @@
 from django.forms import *
 from models import *
+from utils import MontoField
 
 class ProyectoForm(ModelForm):
     class Meta:
@@ -24,16 +25,19 @@ class ProyectoMunicipioForm(ModelForm):
             queryset = Donante.objects.all(), required=False)
     contrapartes = ModelMultipleChoiceField(widget=CheckboxSelectMultiple, 
             queryset = Contraparte.objects.all(), required=False)
+    monto = MontoField()
     class Meta:
         model = ProyectoMunicipio
         exclude = ['proyecto']
 
 class ProyectoDonanteForm(ModelForm):
+    monto = MontoField()
     class Meta:
         model = ProyectoDonante
         exclude = ['proyecto']
 
 class ProyectoContraparteForm(ModelForm):
+    monto = MontoField()
     class Meta:
         model = ProyectoContraparte
         exclude = ['proyecto']

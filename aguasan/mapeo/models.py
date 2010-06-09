@@ -5,7 +5,6 @@ from django.utils.translation import ugettext as _
 from thumbs import ImageWithThumbsField
 from django.db.models import Sum
 
-
 class Pais(models.Model):
     codigo = models.CharField(_("Codigo"), max_length=2, unique = True, 
                               help_text=_("Codigo pais mas info en: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"))
