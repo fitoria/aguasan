@@ -1,7 +1,7 @@
 {%extends "base.html"%}
 {%block extra_js%}
-<script type="text/javascript" src="{{MEDIA_URL}}js/tiny_mce/tiny_mce.js" />
-<script type="text/javascript" src="{{MEDIA_URL}}js/editores/textareas.js" />
+<script type="text/javascript" src="{{MEDIA_URL}}js/tiny_mce/tiny_mce.js" ></script>
+<script type="text/javascript" src="{{MEDIA_URL}}js/editores/textareas.js" ></script>
 <script type="text/javascript">
 	$(function() {
 		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
