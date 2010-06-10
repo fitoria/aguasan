@@ -9,7 +9,7 @@
                    <div id="contenido_interno">
 {%for donante in donantes%}
 	<div class="detalle_proyecto">
-		<a href="/donante/editar/{{donante.id}}">{{donante.nombre}}</a>
+		<a href="/donantes/editar/{{donante.id}}">{{donante.nombre}}</a>
         <div class="acciones_detalle der"><a href="/donantes/editar/{{donante.id}}">Editar</a> | <a href="/donantes/eliminar/{{donante.id}}/">Borrar</a></div>
 	</div>
 {%endfor%}
