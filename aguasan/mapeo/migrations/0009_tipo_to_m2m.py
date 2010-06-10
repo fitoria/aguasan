@@ -12,9 +12,10 @@ class Migration(DataMigration):
             id_tipo = db.execute("select tipo_id from mapeo_proyecto where id=%s", 
                     [proyecto.id])[0][0]
             try:
-                tipo = TipoProyecto.objects.get(id=id_tipo)
+                tipo = orm.TipoProyecto.objects.get(id=id_tipo)
                 proyecto.tipos.add(tipo)
                 proyecto.save()
+                print 'Migracion de tipo exitosa'
             except:
                 print "tipo no encontrado, id: %s" % id_tipo
 
