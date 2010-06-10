@@ -11,8 +11,8 @@ class ProyectoForm(ModelForm):
             'descripcion': Textarea(attrs={'class': 'textarea'}),
             'nombre': TextInput(attrs={'class': 'textbox_nombre'}),
             'website': TextInput(attrs={'class': 'textbox'}),
-            'fecha_inicial': TextInput(attrs={'class': 'textbox'}),
-            'fecha_final': TextInput(attrs={'class': 'textbox'}),
+            'fecha_inicial': DateInput(attrs={'class': 'textbox'}, format="%d/%m/%Y"),
+            'fecha_final': DateInput(attrs={'class': 'textbox'}, format="%d/%m/%Y"),
             'avance': Select(attrs={'class':'combobox'}),
         }
 
