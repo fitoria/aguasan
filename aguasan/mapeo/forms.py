@@ -3,7 +3,7 @@ from models import *
 from utils import MontoField
 
 class ProyectoForm(ModelForm):
-    tipos = ModelMultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class': 'combobox'}),
+    tipos = ModelMultipleChoiceField(widget=CheckboxSelectMultiple(attrs={'class': ''}),
             queryset = TipoProyecto.objects.all(), )
     class Meta:
         model = Proyecto

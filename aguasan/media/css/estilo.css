@@ -452,6 +452,19 @@ h2{
   float:left;
 }
 
+.campo_ancho ul{
+  border:medium none;
+  list-style-image:none;
+  list-style-position:outside;
+  list-style-type:none;
+  text-align:left;
+}
+
+.campo_ancho li{
+  float:left;
+}
+
+
 .detalle_proyecto{
   margin-top:5px;
   background:#fff;

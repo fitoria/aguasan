@@ -30,30 +30,35 @@
 									<div class="campo_ancho">
 										<div class="label izq">Descripción</div>{{form.descripcion}}
 									</div>
+									<div class="campo izq">
+									   <div class="label izq">Tipo</div>
+                                       {{form.tipos}}
+									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
                                        {{form.avance}}
 									</div>
-									<div class="campo">
-									   <div class="label izq">Tipo</div>
-                                       {{form.tipos}}
-									</div>
-									<div class="campo izq">
+									<div class="campo der">
 									   <div class="label izq">Website</div>
                                        {{form.website}}
+									</div>
+									<div class="campo izq">
+									   <div class="label izq">Fecha inicio</div>
+                                       {{form.fecha_inicial}}
 									</div>
 									<div class="campo der">
 									   <div class="label izq">logo</div>
                                        {{form.logo}}
 									</div>
+
 									<div class="campo izq">
-									   <div class="label izq">Fecha inicio</div>{{form.fecha_inicial}}
+									   <div class="label izq">Fecha final</div>
+                                       {{form.fecha_final}}
 									</div>
-									<div class="campo der">
-									   <div class="label izq">Fecha final</div>{{form.fecha_final}}
-									</div>
-                                    <input type="submit" value="Editar Proyecto"/>
-									<br style="clear:both">
+                                    <br><br>
+                                    <br style="clear:both">
+                                    <input type="submit" value="Crear Proyecto"/>
+									
 									<br>
 							</form>
                    </div>

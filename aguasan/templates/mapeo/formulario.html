@@ -1,5 +1,7 @@
 {%extends "base.html"%}
 {%block extra_js%}
+<script type="text/javascript" src="{{MEDIA_URL}}js/tiny_mce/tiny_mce.js" />
+<script type="text/javascript" src="{{MEDIA_URL}}js/editores/textareas.js" />
 <script type="text/javascript">
 	$(function() {
 		$("#id_fecha_inicial").datepicker({ dateFormat: 'dd/mm/yy', dayNamesMin: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'], monthNames: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'],changeYear: true});
@@ -30,32 +32,36 @@
 										<div class="label izq">Descripción</div>
                                         {{form.descripcion}}
 									</div>
+
+									<div class="campo izq">
+									   <div class="label izq">Tipo</div>
+                                       {{form.tipos}}
+									</div>
 									<div class="campo der">
 									   <div class="label izq">Avance</div>
                                        {{form.avance}}
 									</div>
-									<div class="campo">
-									   <div class="label izq">Tipo</div>
-                                       {{form.tipo}}
-									</div>
-									<div class="campo izq">
+									<div class="campo der">
 									   <div class="label izq">Website</div>
                                        {{form.website}}
-									</div>
-									<div class="campo der">
-									   <div class="label izq">logo</div>
-                                       {{form.logo}}
 									</div>
 									<div class="campo izq">
 									   <div class="label izq">Fecha inicio</div>
                                        {{form.fecha_inicial}}
 									</div>
 									<div class="campo der">
+									   <div class="label izq">logo</div>
+                                       {{form.logo}}
+									</div>
+
+									<div class="campo izq">
 									   <div class="label izq">Fecha final</div>
                                        {{form.fecha_final}}
 									</div>
+                                    <br><br>
+                                    <br style="clear:both">
                                     <input type="submit" value="Crear Proyecto"/>
-									<br style="clear:both">
+									
 									<br>
 							</form>
                    </div>
