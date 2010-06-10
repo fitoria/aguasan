@@ -5,6 +5,8 @@ from django.utils.translation import ugettext as _
 from thumbs import ImageWithThumbsField
 from django.db.models import Sum
 
+SIZES = ((135,72),(88, 75))
+
 class Pais(models.Model):
     codigo = models.CharField(_("Codigo"), max_length=2, unique = True, 
                               help_text=_("Codigo pais mas info en: http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2"))
@@ -50,7 +52,8 @@ class Proyecto(models.Model):
     tipos = models.ManyToManyField(TipoProyecto)
     fecha_inicial = models.DateField() 
     fecha_final = models.DateField() 
-    logo = models.ImageField(upload_to='/proyecto/logos/', blank=True)
+    logo = ImageWithThumbsField(upload_to='proyecto/logos/', 
+                                       blank=True, sizes=SIZES)
     website = models.URLField(blank=True)
 
     def __unicode__(self):
@@ -62,7 +65,8 @@ class Proyecto(models.Model):
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
     descripcion = models.TextField(_('Descripcion del donante'))
-    logo = models.ImageField(upload_to='donante/logos/', blank=True)
+    logo = ImageWithThumbsField(upload_to='donante/logos/', 
+                                       blank=True, sizes=SIZES)
     website = models.URLField(blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoDonante)
@@ -70,12 +74,16 @@ class Donante(models.Model):
     def __unicode__(self):
         return self.nombre
 
+    class Meta:
+        verbose_name = 'Cooperante'
+
 class Contraparte(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
     descripcion = models.TextField(_('Descripcion del donante'), blank=True)
     pais = models.ForeignKey(Pais)
     tipo = models.ForeignKey(TipoContraparte)
-    logo = models.ImageField(upload_to='contraparte/logos/', blank=True)
+    logo = ImageWithThumbsField(upload_to='contraparte/logos/', 
+                                       blank=True, sizes=SIZES)
     website = models.URLField(blank=True)
 
     def __unicode__(self):
