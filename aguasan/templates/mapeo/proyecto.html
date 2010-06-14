@@ -175,7 +175,7 @@ function cargar_fotos(){
                             </b>
                             <br><br>
                             <div class="subtitulo_seccion">Periodo</div>
-                                <b>{{proyecto.fecha_inicial}} - {{proyecto.fecha_final}}</b>
+                                <b>{{proyecto.fecha_inicial|date:"F Y"}} - {{proyecto.fecha_final|date:"F Y"}}</b>
                             <br><br>
                             {%if proyecto.website%}
                             <div class="subtitulo_seccion">Sitio Web</div>
