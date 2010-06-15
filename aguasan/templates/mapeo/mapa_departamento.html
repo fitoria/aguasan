@@ -10,6 +10,7 @@
                    Selección por Departamento
  </div>
                    <div id="contenido_interno">
+                            <div id="mapa" class="izq">
                             {%ifequal departamento.id 40%}
                             <img src="{{MEDIA_URL}}imagen/matagalpa.jpg" class="mapa" usemap="#matagalpa" width="534" height="516" border="0">
                             <map name="matagalpa">
@@ -250,5 +251,33 @@
                                                         <area href="/proyectos/municipio/9345" title="Nueva Guinea" shape="circle" coords="223.74,372.45,7.25"></area>
                             </map>
                             {%endifequal%}
+                            </div>
+                            <div class="bloque" class="der">
+                            <div class="titulo_bloque">Leyenda</div>
+                            <div class="contenido_bloque">
+                                <img src="{{MEDIA_URL}}imagen/estrella.png" hspace="1">  Cabecera Departamental<br>
+                                <img src="{{MEDIA_URL}}imagen/bolita.png" hspace="4" >  Municipios
+                            </div>
+                            </div>
+
+                            <div class="bloque" class="der">
+                            <div class="titulo_bloque">Departamento</div>
+                            <div class="contenido_bloque">
+                                    {{departamento.nombre}}<br>{{departamento.extension}} km2
+                            </div>
+                            </div>
+
+                            <div class="bloque" class="der">
+                            <div class="titulo_bloque">Proyectos</div>
+                            <div class="contenido_bloque">
+                                <ul>
+                                {%for proyecto in proyectos%}
+                                    <li><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></li>
+                                {%endfor%}
+                                </ul>
+                            </div>
+                            </div>
+
+                            <div class="separador"></div>
                    </div>
 {%endblock%}

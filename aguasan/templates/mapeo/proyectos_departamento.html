@@ -3,8 +3,11 @@
 {%endblock%}
 {%block contenido%}
  <div id="titulo">
-
-                   Proyectos en Municipio: {{municipio.nombre}}
+                   {%ifequal departamento.id 99 %}
+                   Lista de proyectos con cobertura Nacional
+                   {%else%}
+                   Proyectos en Departamento: {{departamento.nombre}}
+                   {%endifequal%}
  </div>
                    <div id="contenido_interno">
 
