@@ -255,6 +255,9 @@ def editar_municipio_proyecto(request, id):
                                            'id': id}, 
                                           context_instance=RequestContext(request))
     else:
+        form = ProyectoMunicipioForm(instance=proyecto_municipio)
+        form.contrapartes = proyecto_municipio.contrapartes
+        form.donantes= proyecto_municipio.donantes
         return render_to_response('mapeo/editar_municipio_proyecto.html',
                                   {'form': form, 'cerrar': False, 
                                    'id': id}, 

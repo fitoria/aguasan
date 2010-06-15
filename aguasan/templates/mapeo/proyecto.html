@@ -62,6 +62,12 @@ function eliminarElemento(elemento, id){
     cargar_lugares();
     cargar_fotos();
 }
+
+function editarMunicipio(id){
+    var url = '/proyectos/editar/municipio/' + id + '/';
+    $("#modal_content").attr({'src': url});
+    $("#modal_content").modal();
+}
 {%endif%}
     
 function cargar_contrapartes(){
@@ -116,7 +122,8 @@ function cargar_lugares(){
                          tabla += "<tr><td style='padding-left:20px'>" + subitem.municipio + 
                          "</td><td>$" + subitem.monto + 
                          "</td><td>{%if user.is_authenticated%}<a href='#' onClick=eliminarElemento('municipio'," + 
-                         subitem.id + ") ><img src='{{MEDIA_URL}}imagen/icono_eliminar.png'> Eliminar</a>{%endif%}</td></tr>";
+                         subitem.id + ") ><img src='{{MEDIA_URL}}imagen/icono_eliminar.png'> Eliminar</a>" + 
+                         " <a href='#' onClick=editarMunicipio(" + subitem.id + ")>Editar</a>{%endif%}</td></tr>";
                          });
                     });
                 tabla += "<tr><td><b>Total del proyecto</b></td><td><b>$" +
