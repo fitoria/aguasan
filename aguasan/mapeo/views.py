@@ -177,7 +177,7 @@ def editar_donante(request,id):
                                       {'form': form}, context_instance=RequestContext(request))
     else:
         form = DonanteForm(instance=d)
-        return render_to_response('mapeo/editar_donante.html',
+        return render_to_response('mapeo/ditar_donante.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
 @login_required
@@ -239,6 +239,27 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
         return render_to_response('mapeo/agregar_municipio_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
+@login_required
+def editar_municipio_proyecto(request, id):
+    proyecto_municipio = get_object_or_404(ProyectoMunicipio, id=id)
+    if (request.method=='POST'):
+        form = ProyectoMunicipioForm(request.POST, instance=proyecto_municipio)
+        if form.save():
+            return render_to_response('mapeo/editar_municipio_proyecto.html',
+                                          {'form': form, 'cerrar': True, 
+                                           'id': id}, 
+                                          context_instance=RequestContext(request))
+        else:
+            return render_to_response('mapeo/editar_municipio_proyecto.html',
+                                          {'form': form, 'cerrar': False, 
+                                           'id': id}, 
+                                          context_instance=RequestContext(request))
+    else:
+        return render_to_response('mapeo/editar_municipio_proyecto.html',
+                                  {'form': form, 'cerrar': False, 
+                                   'id': id}, 
+                                  context_instance=RequestContext(request))
+        
 @login_required
 def agregar_donante_proyecto(request, id):
     '''se agrega donante por medio de ajax'''
