@@ -9,7 +9,7 @@
                     {%for donante in donantes%}
                       <a href="/proyectos/donantes/{{donante.id}}"><div class="boton_donante" onmouseover="this.className='boton_donante_hover'" onmouseout="this.className='boton_donante'" >
                       {%if donante.logo%}
-                      <img src="{{donante.logo.url_135x72}}"><br>
+                      <img src="{{donante.logo.url}}"><br>
                       {%endif%}
                       {{donante.nombre}}</div></a>
                     {%endfor%}
