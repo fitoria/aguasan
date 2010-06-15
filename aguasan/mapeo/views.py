@@ -466,7 +466,11 @@ def mapa(request):
 
 def departamento(request,id):
     departamento=Departamento.objects.get(id=id)
-    dicc = {'departamento': departamento}
+    _proyectos_dept = ProyectoDepartamento.objects.filter(departamento__id = id)
+    proyectos = []
+    for proyecto_departamento in _proyectos_dept:
+        proyectos.append(proyecto_departamento.proyecto)
+    dicc = {'departamento': departamento,'proyectos':proyectos}
     return render_to_response('mapeo/mapa_departamento.html', dicc,
                               context_instance=RequestContext(request))
 
@@ -478,6 +482,16 @@ def proyectos_municipio(request, id_municipio):
         proyectos.append(proyecto_municipio.proyecto.proyecto)
     municipio=Municipio.objects.get(id=id_municipio)
     return render_to_response('mapeo/proyectos_municipio.html', {'proyectos':proyectos,'municipio':municipio},
+                              context_instance=RequestContext(request))
+
+def proyectos_departamento(request, id_departamento):
+    '''listado de proyectos por departamento'''
+    _proyectos_dept = ProyectoDepartamento.objects.filter(departamento__id = id_departamento)
+    proyectos = []
+    for proyecto_departamento in _proyectos_dept:
+        proyectos.append(proyecto_departamento.proyecto)
+    departamento=Departamento.objects.get(id=id_departamento)
+    return render_to_response('mapeo/proyectos_departamento.html', {'proyectos':proyectos,'departamento':departamento},
                               context_instance=RequestContext(request))
 
 def proyectos_donante(request, id_donante):
@@ -505,12 +519,4 @@ def proyectos_inversion(request, id_tipo):
     return render_to_response('mapeo/proyectos_inversion.html', dicc,
                                context_instance=RequestContext(request))
 
-# ESte aun no se usa
-def proyectos_departamento(request, id_dept):
-    _proyectos_departamento = ProyectoDepartamento.objects.filter(departamento__id=id_dept)
-    proyectos = []
-    for proyecto_departamento in _proyectos_departamento:
-        proyectos.append(proyecto_departamento)
 
-    return render_to_response('mapeo/proyectos_departamento.html', proyectos,
-                              context_instance=RequestContext(request))
