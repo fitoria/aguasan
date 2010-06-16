@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from lugar.models import *
 from django.utils import simplejson
 from django.db import transaction
-from lugar.models import Municipio
+from lugar.models import Municipio, Departamento
 from django.shortcuts import render_to_response, get_object_or_404, get_list_or_404, redirect
 from django.core import serializers
 from django.core.validators import ValidationError
@@ -602,6 +602,16 @@ def conteo_proyectos_municipio(request, id):
     municipio = get_object_or_404(Municipio, id=id)
     proyectos = ProyectoMunicipio.objects.filter(municipio=municipio).all().count()
     response = {'id': id, 'municipio': municipio.nombre, 
+                'proyectos': proyectos}
+    return HttpResponse(simplejson.dumps(response),
+                    mimetype='application/json')
+
+def conteo_proyectos_departamento(request, id):
+    '''devuelve un json con nombre del municipio
+    y numero de proyectos'''
+    departamento = get_object_or_404(Departamento, id=id)
+    proyectos = ProyectoDepartamento.objects.filter(departamento=departamento).all().count()
+    response = {'id': id, 'departamento': departamento.nombre, 
                 'proyectos': proyectos}
     return HttpResponse(simplejson.dumps(response),
                     mimetype='application/json')

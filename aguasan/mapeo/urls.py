@@ -49,4 +49,5 @@ urlpatterns = patterns('mapeo.views',
     (r'^ajax/lista/lugares/(?P<id>\d+)/$', 'lista_lugares'),
     (r'^ajax/lista/fotos/(?P<id>\d+)/$', 'lista_fotos_proyecto'),
     (r'^ajax/conteo/proyectos/municipio/(?P<id>\d+)/$', 'conteo_proyectos_municipio'),
+    (r'^ajax/conteo/proyectos/departamento/(?P<id>\d+)/$', 'conteo_proyectos_departamento'),
 )
