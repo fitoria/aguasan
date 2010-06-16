@@ -187,7 +187,7 @@ def editar_donante(request,id):
                                       {'form': form}, context_instance=RequestContext(request))
     else:
         form = DonanteForm(instance=d)
-        return render_to_response('mapeo/ditar_donante.html',
+        return render_to_response('mapeo/editar_donante.html',
                                   {'form': form}, context_instance=RequestContext(request))
 
 @login_required
@@ -542,7 +542,12 @@ def departamento(request,id):
     proyectos = []
     for proyecto_departamento in _proyectos_dept:
         proyectos.append(proyecto_departamento.proyecto)
-    dicc = {'departamento': departamento,'proyectos':proyectos}
+    num_proy = len(proyectos)
+    if num_proy > 4:
+        mas_proy="Ver Lista Completa"
+    else:
+        mas_proy=""
+    dicc = {'departamento': departamento,'proyectos':proyectos[:4],'mas_proy':mas_proy,'num_proy':num_proy}
     return render_to_response('mapeo/mapa_departamento.html', dicc,
                               context_instance=RequestContext(request))
 
