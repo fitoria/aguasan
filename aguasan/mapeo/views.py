@@ -244,11 +244,17 @@ def editar_municipio_proyecto(request, id):
     proyecto_municipio = get_object_or_404(ProyectoMunicipio, id=id)
     if (request.method=='POST'):
         form = ProyectoMunicipioForm(request.POST, instance=proyecto_municipio)
-        if form.save():
-            return render_to_response('mapeo/editar_municipio_proyecto.html',
-                                          {'form': form, 'cerrar': True, 
-                                           'id': id}, 
-                                          context_instance=RequestContext(request))
+        if form.is_valid():
+            if form.save():
+                return render_to_response('mapeo/editar_municipio_proyecto.html',
+                                              {'form': form, 'cerrar': True, 
+                                               'id': id}, 
+                                              context_instance=RequestContext(request))
+            else:
+                return render_to_response('mapeo/editar_municipio_proyecto.html',
+                                              {'form': form, 'cerrar': False, 
+                                               'id': id}, 
+                                              context_instance=RequestContext(request))
         else:
             return render_to_response('mapeo/editar_municipio_proyecto.html',
                                           {'form': form, 'cerrar': False, 
