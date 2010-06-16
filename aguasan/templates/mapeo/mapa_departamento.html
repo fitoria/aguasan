@@ -1,9 +1,12 @@
 {%extends "base.html"%}
 {%block extra_js%}
+        <script type="text/javascript" src="{{MEDIA_URL}}js/vtip.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.maphilight.min.js"></script>
                 <script>$(function() {
                 $('.mapa').maphilight({fade: true, stroke: true, strokeColor: '336699',fillColor: 'd0ddff', fillOpacity: 0.5});
-        });</script>
+        });
+        </script>
+        <link type="text/css" href="{{MEDIA_URL}}css/vtip.css" rel="stylesheet" />
 {%endblock%}
  {%block contenido%}
  <div id="titulo">
@@ -14,178 +17,178 @@
                             {%ifequal departamento.id 40%}
                             <img src="{{MEDIA_URL}}imagen/matagalpa.jpg" class="mapa" usemap="#matagalpa" width="534" height="516" border="0">
                             <map name="matagalpa">
-                                                        <area href="/proyectos/municipio/4030" title="Matagalpa" shape="poly" coords="176.33,285.55,182.84,289.75, 182.20,282.03,188.20,277.13,180.67,275.35,177.86,268.13,173.84,274.75,166.11,275.18, 171.16,281.05, 169.18,288.54"></area>
-                                                        <area href="/proyectos/municipio/4020" title="San Isidro" shape="circle" coords="79.50,288.50,7.25"></area>
-                                                        <area href="/proyectos/municipio/4065" title="Ciudad Dario" shape="circle" coords="81.50,368.61,7.25"></area>
-                                                        <area href="/proyectos/municipio/4060" title="Terrabona" shape="circle" coords="147.47,364.41,7.25"></area>
-                                                        <area href="/proyectos/municipio/4025" title="Sebaco" shape="circle" coords="135.17,312.50,7.25"></area>
-                                                        <area href="/proyectos/municipio/4050" title="Esquipulas" shape="circle" coords="235.56,344.58,7.25"></area>
-                                                        <area href="/proyectos/municipio/4035" title="San Ramon" shape="circle" coords="245.43,269.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/4015" title="La Dalia" shape="circle" coords="237.18,212.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/4005" title="Rancho Grande" shape="circle" coords="316.55,232.18,7.25"></area>
-                                                        <area href="/proyectos/municipio/4055" title="San Dionisio" shape="circle" coords="234.32,312.69,7.25"></area>
-                                                        <area href="/proyectos/municipio/4040" title="Matiguas" shape="circle" coords="315.05,285.78,7.25"></area>
-                                                        <area href="/proyectos/municipio/4045" title="Muymuy" shape="circle" coords="288.08,330.85,7.25"></area>
-                                                        <area href="/proyectos/municipio/4010" title="Rio Blanco" shape="circle" coords="403.55,230.67,7.25"></area>
+                                                        <area href="/proyectos/municipio/4030" id="4030" class="vtip" title="Matagalpa" shape="poly" coords="176.33,285.55,182.84,289.75, 182.20,282.03,188.20,277.13,180.67,275.35,177.86,268.13,173.84,274.75,166.11,275.18, 171.16,281.05, 169.18,288.54"></area>
+                                                        <area href="/proyectos/municipio/4020" id="4020" class="vtip"  title="San Isidro" shape="circle" coords="79.50,288.50,7.25"></area>
+                                                        <area href="/proyectos/municipio/4065" id="4065" class="vtip" title="Ciudad Dario" shape="circle" coords="81.50,368.61,7.25"></area>
+                                                        <area href="/proyectos/municipio/4060" id="4060" class="vtip" title="Terrabona" shape="circle" coords="147.47,364.41,7.25"></area>
+                                                        <area href="/proyectos/municipio/4025" id="4025" class="vtip" title="Sebaco" shape="circle" coords="135.17,312.50,7.25"></area>
+                                                        <area href="/proyectos/municipio/4050" id="4050" class="vtip" title="Esquipulas" shape="circle" coords="235.56,344.58,7.25"></area>
+                                                        <area href="/proyectos/municipio/4035" id="4035" class="vtip" title="San Ramon" shape="circle" coords="245.43,269.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/4015" id="4015" class="vtip" title="La Dalia" shape="circle" coords="237.18,212.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/4005" id="4005" class="vtip" title="Rancho Grande" shape="circle" coords="316.55,232.18,7.25"></area>
+                                                        <area href="/proyectos/municipio/4055" id="4055" class="vtip" title="San Dionisio" shape="circle" coords="234.32,312.69,7.25"></area>
+                                                        <area href="/proyectos/municipio/4040" id="4040" class="vtip" title="Matiguas" shape="circle" coords="315.05,285.78,7.25"></area>
+                                                        <area href="/proyectos/municipio/4045" id="4045" class="vtip" title="Muymuy" shape="circle" coords="288.08,330.85,7.25"></area>
+                                                        <area href="/proyectos/municipio/4010" id="4010" class="vtip" title="Rio Blanco" shape="circle" coords="403.55,230.67,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 55%}
                             <img src="{{MEDIA_URL}}imagen/managua.jpg" class="mapa" usemap="#managua" width="534" height="516" border="0">
                             <map name="managua">
-                                                        <area href="/proyectos/municipio/5525" title="Managua" shape="poly" coords="330.04,321.83, 336.55,326.02, 335.92,318.30, 341.92,313.40, 334.38,311.62, 331.58,304.40, 327.55,311.02, 319.82,311.46, 324.87,317.33, 322.90,324.82"></area>
-                                                        <area href="/proyectos/municipio/5520" title="Villa Carlos Fonseca" shape="circle" coords="156.36,356.40,7.25"></area>
-                                                        <area href="/proyectos/municipio/5532" title="El Crucero" shape="circle" coords="238.43,366.48,7.25"></area>
-                                                        <area href="/proyectos/municipio/5535" title="San Rafael del Sur" shape="circle" coords="194.55,422.86,7.25"></area>
-                                                        <area href="/proyectos/municipio/5515" title="Mateare" shape="circle" coords="225.55,277.11,7.25"></area>
-                                                        <area href="/proyectos/municipio/5510" title="Tipitapa" shape="circle" coords="392.04,239.81,7.25"></area>
-                                                        <area href="/proyectos/municipio/5505" title="San Francisco Libre" shape="circle" coords="305.04,145.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/5522" title="Ciudad Sandino" shape="circle" coords="252.45,306.74,7.25"></area>
-                                                        <area href="/proyectos/municipio/5530" title="Ticuantepe" shape="circle" coords="302.41,356.19,7.25"></area>
+                                                        <area href="/proyectos/municipio/5525" id="5525" class="vtip" title="Managua" shape="poly" coords="330.04,321.83, 336.55,326.02, 335.92,318.30, 341.92,313.40, 334.38,311.62, 331.58,304.40, 327.55,311.02, 319.82,311.46, 324.87,317.33, 322.90,324.82"></area>
+                                                        <area href="/proyectos/municipio/5520" id="5520" class="vtip" title="Villa Carlos Fonseca" shape="circle" coords="156.36,356.40,7.25"></area>
+                                                        <area href="/proyectos/municipio/5532" id="5532" class="vtip" title="El Crucero" shape="circle" coords="238.43,366.48,7.25"></area>
+                                                        <area href="/proyectos/municipio/5535" id="5535" class="vtip" title="San Rafael del Sur" shape="circle" coords="194.55,422.86,7.25"></area>
+                                                        <area href="/proyectos/municipio/5515" id="5515" class="vtip" title="Mateare" shape="circle" coords="225.55,277.11,7.25"></area>
+                                                        <area href="/proyectos/municipio/5510" id="5510" class="vtip" title="Tipitapa" shape="circle" coords="392.04,239.81,7.25"></area>
+                                                        <area href="/proyectos/municipio/5505" id="5505" class="vtip" title="San Francisco Libre" shape="circle" coords="305.04,145.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/5522" id="5522" class="vtip" title="Ciudad Sandino" shape="circle" coords="252.45,306.74,7.25"></area>
+                                                        <area href="/proyectos/municipio/5530" id="5530" class="vtip" title="Ticuantepe" shape="circle" coords="302.41,356.19,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 60%}
                             <img src="{{MEDIA_URL}}imagen/masaya.jpg" class="mapa" usemap="#masaya" width="534" height="516" border="0">
                             <map name="masaya">
-                                                        <area href="/proyectos/municipio/6010" title="Masaya" shape="poly" coords="338.53,293.54, 345.04,297.74, 344.40,290.02, 350.40,285.12, 342.87,283.34, 340.06,276.12, 336.04,282.74, 328.31,283.17, 333.36,289.04, 331.38,296.53"></area>
-                                                        <area href="/proyectos/municipio/6035" title="Catarina" shape="circle" coords="362.91,351.44,7.25"></area>
-                                                        <area href="/proyectos/municipio/6040" title="San Juan de Oriente" shape="circle" coords="342.16,393.69,7.25"></area>
-                                                        <area href="/proyectos/municipio/6045" title="Niquinomo" shape="circle" coords="289.91,403.69,7.25"></area>
-                                                        <area href="/proyectos/municipio/6025" title="Masatepe" shape="circle" coords="245.66,387.94,7.25"></area>
-                                                        <area href="/proyectos/municipio/6030" title="Nandasmo" shape="circle" coords="281.54,359.94,7.25"></area>
-                                                        <area href="/proyectos/municipio/6020" title="La Concepción" shape="circle" coords="184.79,349.19,7.25"></area>
-                                                        <area href="/proyectos/municipio/6005" title="Nindiri" shape="circle" coords="273.82,270.20,7.25"></area>
-                                                        <area href="/proyectos/municipio/6015" title="Tisma" shape="circle" coords="395.32,174.20,7.25"></area>
+                                                        <area href="/proyectos/municipio/6010" id="6010" class="vtip" title="Masaya" shape="poly" coords="338.53,293.54, 345.04,297.74, 344.40,290.02, 350.40,285.12, 342.87,283.34, 340.06,276.12, 336.04,282.74, 328.31,283.17, 333.36,289.04, 331.38,296.53"></area>
+                                                        <area href="/proyectos/municipio/6035" id="6035" class="vtip" title="Catarina" shape="circle" coords="362.91,351.44,7.25"></area>
+                                                        <area href="/proyectos/municipio/6040" id="6040" class="vtip" title="San Juan de Oriente" shape="circle" coords="342.16,393.69,7.25"></area>
+                                                        <area href="/proyectos/municipio/6045" id="6045" class="vtip" title="Niquinomo" shape="circle" coords="289.91,403.69,7.25"></area>
+                                                        <area href="/proyectos/municipio/6025" id="6025" class="vtip" title="Masatepe" shape="circle" coords="245.66,387.94,7.25"></area>
+                                                        <area href="/proyectos/municipio/6030" id="6030" class="vtip" title="Nandasmo" shape="circle" coords="281.54,359.94,7.25"></area>
+                                                        <area href="/proyectos/municipio/6020" id="6020" class="vtip" title="La Concepción" shape="circle" coords="184.79,349.19,7.25"></area>
+                                                        <area href="/proyectos/municipio/6005" id="6005" class="vtip" title="Nindiri" shape="circle" coords="273.82,270.20,7.25"></area>
+                                                        <area href="/proyectos/municipio/6015" id="6015" class="vtip" title="Tisma" shape="circle" coords="395.32,174.20,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 75%}
                             <img src="{{MEDIA_URL}}imagen/carazo.jpg" class="mapa" usemap="#carazo" width="534" height="516" border="0">
                             <map name="carazo">
-                                                        <area href="/proyectos/municipio/7510" title="Jinotepe" shape="poly" coords="319.21,247.55, 326.75,245.77, 320.75,240.87, 321.38,233.15, 314.87,237.35, 307.73,234.36, 309.70,241.85,304.65,247.72, 312.38,248.15, 316.41,254.77"></area>
-                                                        <area href="/proyectos/municipio/7515" title="Dolores" shape="circle" coords="291.87,214.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/7520" title="Diriamba" shape="circle" coords="254.87,204.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/7505" title="San Marcos" shape="circle" coords="292,155.62,7.25"></area>
-                                                        <area href="/proyectos/municipio/7530" title="La Paz" shape="circle" coords="382,240.87,7.25"></area>
-                                                        <area href="/proyectos/municipio/7525" title="El Rosario" shape="circle" coords="344.87,223.37,7.25"></area>
-                                                        <area href="/proyectos/municipio/7535" title="Santa Teresa" shape="circle" coords="352,273.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/7540" title="La Conquista" shape="circle" coords="307,332.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/7510" id="7510" class="vtip" title="Jinotepe" shape="poly" coords="319.21,247.55, 326.75,245.77, 320.75,240.87, 321.38,233.15, 314.87,237.35, 307.73,234.36, 309.70,241.85,304.65,247.72, 312.38,248.15, 316.41,254.77"></area>
+                                                        <area href="/proyectos/municipio/7515" id="7515" class="vtip" title="Dolores" shape="circle" coords="291.87,214.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/7520" id="7520" class="vtip" title="Diriamba" shape="circle" coords="254.87,204.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/7505" id="7505" class="vtip" title="San Marcos" shape="circle" coords="292,155.62,7.25"></area>
+                                                        <area href="/proyectos/municipio/7530" id="7530" class="vtip" title="La Paz" shape="circle" coords="382,240.87,7.25"></area>
+                                                        <area href="/proyectos/municipio/7525" id="7525" class="vtip" title="El Rosario" shape="circle" coords="344.87,223.37,7.25"></area>
+                                                        <area href="/proyectos/municipio/7535" id="7535" class="vtip" title="Santa Teresa" shape="circle" coords="352,273.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/7540" id="7540" class="vtip" title="La Conquista" shape="circle" coords="307,332.75,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 35%}
                             <img src="{{MEDIA_URL}}imagen/leon.jpg" class="mapa" usemap="#leon" width="534" height="516" border="0">
                             <map name="leon">
-                                                        <area href="/proyectos/municipio/3540" title="León" shape="poly" coords="194.68,340.36, 201.20,344.55, 200.56,336.84, 206.56,331.94, 199.02,330.16, 196.22,322.94, 192.20,329.55, 184.46,329.99, 189.51,335.86, 187.54,343.35"></area>
-                                                        <area href="/proyectos/municipio/3535" title="Quezalcuaque" shape="circle" coords="156.76,323.51,7.25"></area>
-                                                        <area href="/proyectos/municipio/3530" title="Telica" shape="circle" coords="184.89,298.64,7.25"></area>
-                                                        <area href="/proyectos/municipio/3525" title="Larreynaga" shape="circle" coords="266.86,286.67,7.25"></area>
-                                                        <area href="/proyectos/municipio/3505" title="Achuapa" shape="circle" coords="292.85,118.82,7.25"></area>
-                                                        <area href="/proyectos/municipio/3510" title="El Sauce" shape="circle" coords="300.10,170.79,7.25"></area>
-                                                        <area href="/proyectos/municipio/3515" title="Santa Rosa del Peñon" shape="circle" coords="345.39,200.84,7.25"></area>
-                                                        <area href="/proyectos/municipio/3520" title="El Jicaral" shape="circle" coords="350.84,250.47,7.25"></area>
-                                                        <area href="/proyectos/municipio/3545" title="La Paz Centro" shape="circle" coords="240.13,361.95,7.25"></area>
-                                                        <area href="/proyectos/municipio/3550" title="Nagarote" shape="circle" coords="276.81,411.18,7.25"></area>
+                                                        <area href="/proyectos/municipio/3540" id="3540" class="vtip" title="León" shape="poly" coords="194.68,340.36, 201.20,344.55, 200.56,336.84, 206.56,331.94, 199.02,330.16, 196.22,322.94, 192.20,329.55, 184.46,329.99, 189.51,335.86, 187.54,343.35"></area>
+                                                        <area href="/proyectos/municipio/3535" id="3535" class="vtip" title="Quezalcuaque" shape="circle" coords="156.76,323.51,7.25"></area>
+                                                        <area href="/proyectos/municipio/3530" id="3530" class="vtip" title="Telica" shape="circle" coords="184.89,298.64,7.25"></area>
+                                                        <area href="/proyectos/municipio/3525" id="3525" class="vtip" title="Larreynaga" shape="circle" coords="266.86,286.67,7.25"></area>
+                                                        <area href="/proyectos/municipio/3505" id="3505" class="vtip" title="Achuapa" shape="circle" coords="292.85,118.82,7.25"></area>
+                                                        <area href="/proyectos/municipio/3510" id="3510" class="vtip" title="El Sauce" shape="circle" coords="300.10,170.79,7.25"></area>
+                                                        <area href="/proyectos/municipio/3515" id="3515" class="vtip" title="Santa Rosa del Peñon" shape="circle" coords="345.39,200.84,7.25"></area>
+                                                        <area href="/proyectos/municipio/3520" id="3520" class="vtip" title="El Jicaral" shape="circle" coords="350.84,250.47,7.25"></area>
+                                                        <area href="/proyectos/municipio/3545" id="3545" class="vtip" title="La Paz Centro" shape="circle" coords="240.13,361.95,7.25"></area>
+                                                        <area href="/proyectos/municipio/3550" id="3550" class="vtip" title="Nagarote" shape="circle" coords="276.81,411.18,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 30%}
                             <img src="{{MEDIA_URL}}imagen/Chinandega.jpg" class="mapa" usemap="#chinandega" width="534" height="516" border="0">
                             <map name="chinandega">
-                                                        <area href="/proyectos/municipio/3045" title="Chinandega" shape="poly" coords="259.03,353.80, 265.54,357.99, 264.91,350.27, 270.91,345.37, 263.37,343.59, 260.57,336.37, 256.54,342.99, 248.81,343.43, 253.86,349.30,251.89,356.79"></area>
-                                                        <area href="/proyectos/municipio/3055" title="Corinto" shape="circle" coords="245.05,405.09,7.25"></area>
-                                                        <area href="/proyectos/municipio/3050" title="El Realejo" shape="circle" coords="230.93,383.34,7.25"></area>
-                                                        <area href="/proyectos/municipio/3060" title="Chichigalpa" shape="circle" coords="271.78,380.03,7.25"></area>
-                                                        <area href="/proyectos/municipio/3065" title="Posoltega" shape="circle" coords="315.62,393.47,7.25"></area>
-                                                        <area href="/proyectos/municipio/3025" title="El Viejo" shape="circle" coords="227.32,335.31,7.25"></area>
-                                                        <area href="/proyectos/municipio/3030" title="Puerto Morazan" shape="circle" coords="251.38,280.18,7.25"></area>
-                                                        <area href="/proyectos/municipio/3040" title="Villa Nueva" shape="circle" coords="407.48,222.55,7.25"></area>
-                                                        <area href="/proyectos/municipio/3035" title="Somotillo" shape="circle" coords="368.85,190.91,7.25"></area>
-                                                        <area href="/proyectos/municipio/3020" title="Santo Tomas" shape="circle" coords="371.24,144.06,7.25"></area>
-                                                        <area href="/proyectos/municipio/3010" title="San Francisco" shape="circle" coords="413.22,133.10,7.25"></area>
-                                                        <area href="/proyectos/municipio/3015" title="Cinco Pinos" shape="circle" coords="383.35,121.61,7.25"></area>
-                                                        <area href="/proyectos/municipio/3005" title="San Pedro" shape="circle" coords="394.31,102.70,7.25"></area>
+                                                        <area href="/proyectos/municipio/3045" id="3045" class="vtip" title="Chinandega" shape="poly" coords="259.03,353.80, 265.54,357.99, 264.91,350.27, 270.91,345.37, 263.37,343.59, 260.57,336.37, 256.54,342.99, 248.81,343.43, 253.86,349.30,251.89,356.79"></area>
+                                                        <area href="/proyectos/municipio/3055" id="3055" class="vtip" title="Corinto" shape="circle" coords="245.05,405.09,7.25"></area>
+                                                        <area href="/proyectos/municipio/3050" id="3050" class="vtip" title="El Realejo" shape="circle" coords="230.93,383.34,7.25"></area>
+                                                        <area href="/proyectos/municipio/3060" id="3060" class="vtip" title="Chichigalpa" shape="circle" coords="271.78,380.03,7.25"></area>
+                                                        <area href="/proyectos/municipio/3065" id="3065" class="vtip" title="Posoltega" shape="circle" coords="315.62,393.47,7.25"></area>
+                                                        <area href="/proyectos/municipio/3025" id="3025" class="vtip" title="El Viejo" shape="circle" coords="227.32,335.31,7.25"></area>
+                                                        <area href="/proyectos/municipio/3030" id="3030" class="vtip" title="Puerto Morazan" shape="circle" coords="251.38,280.18,7.25"></area>
+                                                        <area href="/proyectos/municipio/3040" id="3040" class="vtip" title="Villa Nueva" shape="circle" coords="407.48,222.55,7.25"></area>
+                                                        <area href="/proyectos/municipio/3035" id="3035" class="vtip" title="Somotillo" shape="circle" coords="368.85,190.91,7.25"></area>
+                                                        <area href="/proyectos/municipio/3020" id="3020" class="vtip" title="Santo Tomas" shape="circle" coords="371.24,144.06,7.25"></area>
+                                                        <area href="/proyectos/municipio/3010" id="3010" class="vtip" title="San Francisco" shape="circle" coords="413.22,133.10,7.25"></area>
+                                                        <area href="/proyectos/municipio/3015" id="3015" class="vtip" title="Cinco Pinos" shape="circle" coords="383.35,121.61,7.25"></area>
+                                                        <area href="/proyectos/municipio/3005" id="3005" class="vtip" title="San Pedro" shape="circle" coords="394.31,102.70,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 70%}
                             <img src="{{MEDIA_URL}}imagen/granada.jpg" class="mapa" usemap="#granada" width="534" height="516" border="0">
                             <map name="granada">
-                                                        <area href="/proyectos/municipio/7015" title="Granada" shape="poly" coords="266.91,284.29,273.42,288.48, 272.79,280.76, 278.79,275.87, 271.25,274.08, 268.45,266.86, 264.42,273.48, 256.69,273.92, 261.74,279.79, 259.77,287.28"></area>
-                                                        <area href="/proyectos/municipio/7005" title="Diria" shape="circle" coords="209.65,308.28,7.25"></area>
-                                                        <area href="/proyectos/municipio/7010" title="Diriomo" shape="circle" coords="233.90,327.53,7.25"></area>
-                                                        <area href="/proyectos/municipio/7020" title="Nandaime" shape="circle" coords="195.90,390.03,7.25"></area>
+                                                        <area href="/proyectos/municipio/7015" id="7015" class="vtip" title="Granada" shape="poly" coords="266.91,284.29,273.42,288.48, 272.79,280.76, 278.79,275.87, 271.25,274.08, 268.45,266.86, 264.42,273.48, 256.69,273.92, 261.74,279.79, 259.77,287.28"></area>
+                                                        <area href="/proyectos/municipio/7005" id="7005" class="vtip" title="Diria" shape="circle" coords="209.65,308.28,7.25"></area>
+                                                        <area href="/proyectos/municipio/7010" id="7010" class="vtip" title="Diriomo" shape="circle" coords="233.90,327.53,7.25"></area>
+                                                        <area href="/proyectos/municipio/7020" id="7020" class="vtip" title="Nandaime" shape="circle" coords="195.90,390.03,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 80%}
                             <img src="{{MEDIA_URL}}imagen/rivas.jpg" class="mapa" usemap="#rivas" width="534" height="516" border="0">
                             <map name="rivas">
-                                                        <area href="/proyectos/municipio/8040" title="Rivas" shape="poly" coords="191.05,260.64, 197.56,264.83, 196.93,257.11, 202.93,252.21, 195.39,250.43, 192.59,243.21, 188.56,249.83, 180.83,250.26, 185.88,256.14, 183.91,263.62"></area>
-                                                        <area href="/proyectos/municipio/8005" title="Tola" shape="circle" coords="142.31,258.25,7.25"></area>
-                                                        <area href="/proyectos/municipio/8035" title="San Jorge" shape="circle" coords="230.63,248.72,7.25"></area>
-                                                        <area href="/proyectos/municipio/8020" title="Buenos Aires" shape="circle" coords="209.29,221.62,7.25"></area>
-                                                        <area href="/proyectos/municipio/8015" title="Potosi" shape="circle" coords="189.54,206.37,7.25"></area>
-                                                        <area href="/proyectos/municipio/8010" title="Belen" shape="circle" coords="149.92,197.62,7.25"></area>
-                                                        <area href="/proyectos/municipio/8025" title="Moyogalpa" shape="circle" coords="279.92,194.87,7.25"></area>
-                                                        <area href="/proyectos/municipio/8030" title="Altagracia" shape="circle" coords="343.73,174.19,7.25"></area>
-                                                        <area href="/proyectos/municipio/8045" title="San Juan del Sur" shape="circle" coords="167.66,323.74,7.25"></area>
-                                                        <area href="/proyectos/municipio/8050" title="Cardenas" shape="circle" coords="398.18,389.15,7.25"></area>
+                                                        <area href="/proyectos/municipio/8040" id="8040" class="vtip" title="Rivas" shape="poly" coords="191.05,260.64, 197.56,264.83, 196.93,257.11, 202.93,252.21, 195.39,250.43, 192.59,243.21, 188.56,249.83, 180.83,250.26, 185.88,256.14, 183.91,263.62"></area>
+                                                        <area href="/proyectos/municipio/8005" id="8005" class="vtip" title="Tola" shape="circle" coords="142.31,258.25,7.25"></area>
+                                                        <area href="/proyectos/municipio/8035" id="8035" class="vtip" title="San Jorge" shape="circle" coords="230.63,248.72,7.25"></area>
+                                                        <area href="/proyectos/municipio/8020" id="8020" class="vtip" title="Buenos Aires" shape="circle" coords="209.29,221.62,7.25"></area>
+                                                        <area href="/proyectos/municipio/8015" id="8015" class="vtip" title="Potosi" shape="circle" coords="189.54,206.37,7.25"></area>
+                                                        <area href="/proyectos/municipio/8010" id="8010" class="vtip" title="Belen" shape="circle" coords="149.92,197.62,7.25"></area>
+                                                        <area href="/proyectos/municipio/8025" id="8025" class="vtip" title="Moyogalpa" shape="circle" coords="279.92,194.87,7.25"></area>
+                                                        <area href="/proyectos/municipio/8030" id="8030" class="vtip" title="Altagracia" shape="circle" coords="343.73,174.19,7.25"></area>
+                                                        <area href="/proyectos/municipio/8045" id="8045" class="vtip" title="San Juan del Sur" shape="circle" coords="167.66,323.74,7.25"></area>
+                                                        <area href="/proyectos/municipio/8050" id="8050" class="vtip" title="Cardenas" shape="circle" coords="398.18,389.15,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 85%}
                             <img src="{{MEDIA_URL}}imagen/riosanjuan.jpg" class="mapa" usemap="#riosanjuan" width="534" height="516" border="0">
                             <map name="riosanjuan">
-                                                        <area href="/proyectos/municipio/8520" title="San Carlos" shape="poly" coords="184.69,323.57, 191.20,327.76, 190.57,320.04, 196.56,315.14, 189.03,313.36, 186.22,306.14, 182.20,312.76, 174.47,313.20, 179.52,319.07, 177.54,326.56"></area>
-                                                        <area href="/proyectos/municipio/8525" title="El Castillo" shape="circle" coords="287.86,362.42,7.25"></area>
-                                                        <area href="/proyectos/municipio/8530" title="San Juan del Norte" shape="circle" coords="475.95,381.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/8515" title="San Miguelito" shape="circle" coords="157.76,263.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/8505" title="Morrito" shape="circle" coords="93.94,187.15,7.25"></area>
-                                                        <area href="/proyectos/municipio/8510" title="El Almendro" shape="circle" coords="195.94,154.62,7.25"></area>
+                                                        <area href="/proyectos/municipio/8520" id="8520" class="vtip" title="San Carlos" shape="poly" coords="184.69,323.57, 191.20,327.76, 190.57,320.04, 196.56,315.14, 189.03,313.36, 186.22,306.14, 182.20,312.76, 174.47,313.20, 179.52,319.07, 177.54,326.56"></area>
+                                                        <area href="/proyectos/municipio/8525" id="8525" class="vtip" title="El Castillo" shape="circle" coords="287.86,362.42,7.25"></area>
+                                                        <area href="/proyectos/municipio/8530" id="8530" class="vtip" title="San Juan del Norte" shape="circle" coords="475.95,381.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/8515" id="8515" class="vtip" title="San Miguelito" shape="circle" coords="157.76,263.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/8505" id="8505" class="vtip" title="Morrito" shape="circle" coords="93.94,187.15,7.25"></area>
+                                                        <area href="/proyectos/municipio/8510" id="8510" class="vtip" title="El Almendro" shape="circle" coords="195.94,154.62,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 65%}
                             <img src="{{MEDIA_URL}}imagen/chontales.jpg" class="mapa" usemap="#chontales" width="534" height="516" border="0">
                             <map name="chontales">
-                                                        <area href="/proyectos/municipio/6510" title="Juigalpa" shape="poly" coords="147.92,303.77, 154.43,307.96, 153.80,300.24, 159.79,295.35, 152.26,293.56, 149.45,286.34, 145.43,292.96, 137.70,293.40, 142.75,299.27, 140.77,306.76"></area>
-                                                        <area href="/proyectos/municipio/6505" title="Comalapa" shape="circle" coords="103.40,236.56,7.25"></area>
-                                                        <area href="/proyectos/municipio/6507" title="Cuapa" shape="circle" coords="158.02,230.64,7.25"></area>
-                                                        <area href="/proyectos/municipio/6515" title="La Libertad" shape="circle" coords="226.43,251.36,7.25"></area>
-                                                        <area href="/proyectos/municipio/6520" title="Santo Domingo" shape="circle" coords="272.75,244.47,7.25"></area>
-                                                        <area href="/proyectos/municipio/6530" title="San Pedro del Lóvago" shape="circle" coords="250.12,281.06,7.25"></area>
-                                                        <area href="/proyectos/municipio/6525" title="Santo Tomas" shape="circle" coords="250.25,310.81,7.25"></area>
-                                                        <area href="/proyectos/municipio/6540" title="Villa Sandino" shape="circle" coords="294.87,323.81,7.25"></area>
-                                                        <area href="/proyectos/municipio/6535" title="Acoyapa" shape="circle" coords="216.94,348.85,7.25"></area>
-                                                        <area href="/proyectos/municipio/6545" title="El Coral" shape="circle" coords="421.46,369.11,7.25"></area>
+                                                        <area href="/proyectos/municipio/6510" id="6510" class="vtip" title="Juigalpa" shape="poly" coords="147.92,303.77, 154.43,307.96, 153.80,300.24, 159.79,295.35, 152.26,293.56, 149.45,286.34, 145.43,292.96, 137.70,293.40, 142.75,299.27, 140.77,306.76"></area>
+                                                        <area href="/proyectos/municipio/6505" id="6505" class="vtip" title="Comalapa" shape="circle" coords="103.40,236.56,7.25"></area>
+                                                        <area href="/proyectos/municipio/6507" id="6507" class="vtip" title="Cuapa" shape="circle" coords="158.02,230.64,7.25"></area>
+                                                        <area href="/proyectos/municipio/6515" id="6515" class="vtip" title="La Libertad" shape="circle" coords="226.43,251.36,7.25"></area>
+                                                        <area href="/proyectos/municipio/6520" id="6520" class="vtip" title="Santo Domingo" shape="circle" coords="272.75,244.47,7.25"></area>
+                                                        <area href="/proyectos/municipio/6530" id="6530" class="vtip" title="San Pedro del Lóvago" shape="circle" coords="250.12,281.06,7.25"></area>
+                                                        <area href="/proyectos/municipio/6525" id="6525" class="vtip" title="Santo Tomas" shape="circle" coords="250.25,310.81,7.25"></area>
+                                                        <area href="/proyectos/municipio/6540" id="6540" class="vtip" title="Villa Sandino" shape="circle" coords="294.87,323.81,7.25"></area>
+                                                        <area href="/proyectos/municipio/6535" id="6535" class="vtip" title="Acoyapa" shape="circle" coords="216.94,348.85,7.25"></area>
+                                                        <area href="/proyectos/municipio/6545" id="6545" class="vtip" title="El Coral" shape="circle" coords="421.46,369.11,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 50%}
                             <img src="{{MEDIA_URL}}imagen/boaco.jpg" class="mapa" usemap="#boaco" width="534" height="516" border="0">
                             <map name="boaco">
-                                                        <area href="/proyectos/municipio/5010" title="Boaco" shape="poly" coords="192.54,294.65, 199.05,298.84, 198.42,291.12, 204.42,286.22, 196.88,284.44, 194.08,277.22, 190.05,283.84, 182.32,284.28, 187.37,290.15, 185.40,297.64"></area>
-                                                        <area href="/proyectos/municipio/5030" title="San Lorenzo" shape="circle" coords="157.72,341.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/5025" title="Teustepe" shape="circle" coords="97.47,313.50,7.25"></area>
-                                                        <area href="/proyectos/municipio/5020" title="Santa Lucia" shape="circle" coords="147.72,274.75,7.25"></area>
-                                                        <area href="/proyectos/municipio/5005" title="San Jose de los Remates" shape="circle" coords="131.63,230.54,7.25"></area>
-                                                        <area href="/proyectos/municipio/5015" title="Camoapa" shape="circle" coords="258.63,330.92,7.25"></area>
+                                                        <area href="/proyectos/municipio/5010" id="5010" class="vtip" title="Boaco" shape="poly" coords="192.54,294.65, 199.05,298.84, 198.42,291.12, 204.42,286.22, 196.88,284.44, 194.08,277.22, 190.05,283.84, 182.32,284.28, 187.37,290.15, 185.40,297.64"></area>
+                                                        <area href="/proyectos/municipio/5030" id="5030" class="vtip" title="San Lorenzo" shape="circle" coords="157.72,341.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/5025" id="5025" class="vtip" title="Teustepe" shape="circle" coords="97.47,313.50,7.25"></area>
+                                                        <area href="/proyectos/municipio/5020" id="5020" class="vtip" title="Santa Lucia" shape="circle" coords="147.72,274.75,7.25"></area>
+                                                        <area href="/proyectos/municipio/5005" id="5005" class="vtip" title="San Jose de los Remates" shape="circle" coords="131.63,230.54,7.25"></area>
+                                                        <area href="/proyectos/municipio/5015" id="5015" class="vtip" title="Camoapa" shape="circle" coords="258.63,330.92,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 10%}
                             <img src="{{MEDIA_URL}}imagen/jinotega.jpg" class="mapa" usemap="#jinotega" width="534" height="516" border="0">
                             <map name="jinotega">
-                                                        <area href="/proyectos/municipio/1035" title="Jinotega" shape="poly" coords="147.54,467.65, 154.05,471.84, 153.42,464.12, 159.42,459.22, 151.88,457.44, 149.08,450.22, 145.05,456.84, 137.32,457.28, 142.37,463.15, 140.40,470.64"></area>
-                                                        <area href="/proyectos/municipio/1030" title="La Concordia" shape="circle" coords="119.50,437.50,7.25"></area>
-                                                        <area href="/proyectos/municipio/1020" title="San Rafael del Norte" shape="circle" coords="135.74,412.81,7.25"></area>
-                                                        <area href="/proyectos/municipio/1025" title="Yali" shape="circle" coords="106.61,398.81,7.25"></area>
-                                                        <area href="/proyectos/municipio/1015" title="Pantasma" shape="circle" coords="174.57,385.19,7.25"></area>
-                                                        <area href="/proyectos/municipio/1010" title="El Cua" shape="circle" coords="263.57,351.56,7.25"></area>
-                                                        <area href="/proyectos/municipio/1005" title="Wiwili" shape="circle" coords="206.57,311.56,7.25"></area>
-                                                        <area href="/proyectos/municipio/1012" title="Bocay" shape="circle" coords="302.91,284.69,7.25"></area>
+                                                        <area href="/proyectos/municipio/1035" id="1035" class="vtip" title="Jinotega" shape="poly" coords="147.54,467.65, 154.05,471.84, 153.42,464.12, 159.42,459.22, 151.88,457.44, 149.08,450.22, 145.05,456.84, 137.32,457.28, 142.37,463.15, 140.40,470.64"></area>
+                                                        <area href="/proyectos/municipio/1030" id="1030" class="vtip" title="La Concordia" shape="circle" coords="119.50,437.50,7.25"></area>
+                                                        <area href="/proyectos/municipio/1020" id="1020" class="vtip" title="San Rafael del Norte" shape="circle" coords="135.74,412.81,7.25"></area>
+                                                        <area href="/proyectos/municipio/1025" id="1025" class="vtip" title="Yali" shape="circle" coords="106.61,398.81,7.25"></area>
+                                                        <area href="/proyectos/municipio/1015" id="1015" class="vtip" title="Pantasma" shape="circle" coords="174.57,385.19,7.25"></area>
+                                                        <area href="/proyectos/municipio/1010" id="1010" class="vtip" title="El Cua" shape="circle" coords="263.57,351.56,7.25"></area>
+                                                        <area href="/proyectos/municipio/1005" id="1005" class="vtip" title="Wiwili" shape="circle" coords="206.57,311.56,7.25"></area>
+                                                        <area href="/proyectos/municipio/1012" id="1012" class="vtip" title="Bocay" shape="circle" coords="302.91,284.69,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 25%}
                             <img src="{{MEDIA_URL}}imagen/esteli.jpg" class="mapa" usemap="#esteli" width="534" height="516" border="0">
                             <map name="esteli">
-                                                        <area href="/proyectos/municipio/2515" title="Estelí" shape="poly" coords="301.69,321.98, 308.20,326.18, 307.57,318.46, 313.57,313.56, 306.03,311.78, 303.22,304.56, 299.20,311.18, 291.47,311.61, 296.52,317.48, 294.54,324.97"></area>
-                                                        <area href="/proyectos/municipio/2530" title="San Nicolas" shape="circle" coords="313.62,428.87,7.25"></area>
-                                                        <area href="/proyectos/municipio/2525" title="La Trinidad" shape="circle" coords="409.08,361.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/2520" title="Limay" shape="circle" coords="148.86,266.94,7.25"></area>
-                                                        <area href="/proyectos/municipio/2505" title="Pueblo Nuevo" shape="circle" coords="242.20,144.08,7.25"></area>
-                                                        <area href="/proyectos/municipio/2510" title="Condenga" shape="circle" coords="295.94,158.05,7.25"></area>
+                                                        <area href="/proyectos/municipio/2515" id="2525" class="vtip" title="Estelí" shape="poly" coords="301.69,321.98, 308.20,326.18, 307.57,318.46, 313.57,313.56, 306.03,311.78, 303.22,304.56, 299.20,311.18, 291.47,311.61, 296.52,317.48, 294.54,324.97"></area>
+                                                        <area href="/proyectos/municipio/2530" id="2530" class="vtip" title="San Nicolas" shape="circle" coords="313.62,428.87,7.25"></area>
+                                                        <area href="/proyectos/municipio/2525" id="2525" class="vtip" title="La Trinidad" shape="circle" coords="409.08,361.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/2520" id="2520" class="vtip" title="Limay" shape="circle" coords="148.86,266.94,7.25"></area>
+                                                        <area href="/proyectos/municipio/2505" id="2505" class="vtip" title="Pueblo Nuevo" shape="circle" coords="242.20,144.08,7.25"></area>
+                                                        <area href="/proyectos/municipio/2510" id="2510" class="vtip" title="Condenga" shape="circle" coords="295.94,158.05,7.25"></area>
 
                                                      
                             </map>
@@ -193,62 +196,62 @@
                             {%ifequal departamento.id 20%}
                             <img src="{{MEDIA_URL}}imagen/madriz.jpg" class="mapa" usemap="#madriz" width="534" height="516" border="0">
                             <map name="madriz">
-                                                        <area href="/proyectos/municipio/2005" title="Somoto" shape="poly" coords="210.47,240.67, 216.98,244.86, 216.35,237.14, 222.35,232.24, 214.81,230.46, 212.01,223.24, 207.98,229.86, 200.25,230.30, 205.30,236.17, 203.33,243.66, 210.47,240.67"></area>
-                                                        <area href="/proyectos/municipio/2030" title="Yalaguina" shape="circle" coords="275.97,221.69,7.25"></area>
-                                                        <area href="/proyectos/municipio/2010" title="Totogalpa" shape="circle" coords="306.55,191.46,7.25"></area>
-                                                        <area href="/proyectos/municipio/2015" title="Telpaneca" shape="circle" coords="348.98,220.45,7.25"></area>
-                                                        <area href="/proyectos/municipio/2025" title="Palacaguina" shape="circle" coords="321.40,260.93,7.25"></area>
-                                                        <area href="/proyectos/municipio/2020" title="San Juan del Rio Coco" shape="circle" coords="451.52,209.68,7.25"></area>
-                                                        <area href="/proyectos/municipio/2035" title="San Lucas" shape="circle" coords="159.52,290.18,7.25"></area>
-                                                        <area href="/proyectos/municipio/2040" title="Las Sabanas" shape="circle" coords="143.02,340.43,7.25"></area>
-                                                        <area href="/proyectos/municipio/2045" title="Cusmapa" shape="circle" coords="122.77,381.93,7.25"></area>
+                                                        <area href="/proyectos/municipio/2005" id="2005" class="vtip" title="Somoto" shape="poly" coords="210.47,240.67, 216.98,244.86, 216.35,237.14, 222.35,232.24, 214.81,230.46, 212.01,223.24, 207.98,229.86, 200.25,230.30, 205.30,236.17, 203.33,243.66, 210.47,240.67"></area>
+                                                        <area href="/proyectos/municipio/2030" id="2030" class="vtip" title="Yalaguina" shape="circle" coords="275.97,221.69,7.25"></area>
+                                                        <area href="/proyectos/municipio/2010" id="2010" class="vtip" title="Totogalpa" shape="circle" coords="306.55,191.46,7.25"></area>
+                                                        <area href="/proyectos/municipio/2015" id="2015" class="vtip" title="Telpaneca" shape="circle" coords="348.98,220.45,7.25"></area>
+                                                        <area href="/proyectos/municipio/2025" id="2025" class="vtip" title="Palacaguina" shape="circle" coords="321.40,260.93,7.25"></area>
+                                                        <area href="/proyectos/municipio/2020" id="2020" class="vtip" title="San Juan del Rio Coco" shape="circle" coords="451.52,209.68,7.25"></area>
+                                                        <area href="/proyectos/municipio/2035" id="2035" class="vtip" title="San Lucas" shape="circle" coords="159.52,290.18,7.25"></area>
+                                                        <area href="/proyectos/municipio/2040" id="2040" class="vtip" title="Las Sabanas" shape="circle" coords="143.02,340.43,7.25"></area>
+                                                        <area href="/proyectos/municipio/2045" id="2045" class="vtip" title="Cusmapa" shape="circle" coords="122.77,381.93,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 5%}
                             <img src="{{MEDIA_URL}}imagen/nuevasegovia.jpg" class="mapa" usemap="#nuevasegovia" width="534" height="516" border="0">
                             <map name="nuevasegovia">
-                                                        <area href="/proyectos/municipio/545" title="Ocotal" shape="poly" coords="193.50,287.68, 200.01,291.87, 199.38,284.15, 205.38,279.25, 197.84,277.47, 195.04,270.25, 191.01,276.87, 183.28,277.31, 188.33,283.18, 186.36,290.67"></area>
-                                                        <area href="/proyectos/municipio/540" title="Santa Maria" shape="circle" coords="67.55,228.91,7.25"></area>
-                                                        <area href="/proyectos/municipio/535" title="Macuelizo" shape="circle" coords="128.54,272.04,7.25"></area>
-                                                        <area href="/proyectos/municipio/530" title="Dipilto" shape="circle" coords="186.42,236.00,7.25"></area>
-                                                        <area href="/proyectos/municipio/525" title="Mozonte" shape="circle" coords="217.38,253.88,7.25"></area>
-                                                        <area href="/proyectos/municipio/520" title="San Fernando" shape="circle" coords="276.63,246.51,7.25"></area>
-                                                        <area href="/proyectos/municipio/550" title="Ciudad Antigua" shape="circle" coords="262.75,283.01,7.25"></area>
-                                                        <area href="/proyectos/municipio/555" title="Quilalí" shape="circle" coords="373.95,309.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/515" title="El Jícaro" shape="circle" coords="333.20,242.52,7.25"></area>
-                                                        <area href="/proyectos/municipio/510" title="Murra" shape="circle" coords="389.20,229.65,7.25"></area>
-                                                        <area href="/proyectos/municipio/505" title="Jalapa" shape="circle" coords="364.20,145.65,7.25"></area>
-                                                        <area href="/proyectos/municipio/560" title="Wiwilí" shape="circle" coords="415.99,277.73,7.25"></area>
+                                                        <area href="/proyectos/municipio/545" id="545" class="vtip" title="Ocotal" shape="poly" coords="193.50,287.68, 200.01,291.87, 199.38,284.15, 205.38,279.25, 197.84,277.47, 195.04,270.25, 191.01,276.87, 183.28,277.31, 188.33,283.18, 186.36,290.67"></area>
+                                                        <area href="/proyectos/municipio/540" id="540" class="vtip" title="Santa Maria" shape="circle" coords="67.55,228.91,7.25"></area>
+                                                        <area href="/proyectos/municipio/535" id="535" class="vtip" title="Macuelizo" shape="circle" coords="128.54,272.04,7.25"></area>
+                                                        <area href="/proyectos/municipio/530" id="530" class="vtip" title="Dipilto" shape="circle" coords="186.42,236.00,7.25"></area>
+                                                        <area href="/proyectos/municipio/525" id="525" class="vtip" title="Mozonte" shape="circle" coords="217.38,253.88,7.25"></area>
+                                                        <area href="/proyectos/municipio/520" id="520" class="vtip" title="San Fernando" shape="circle" coords="276.63,246.51,7.25"></area>
+                                                        <area href="/proyectos/municipio/550" id="550" class="vtip" title="Ciudad Antigua" shape="circle" coords="262.75,283.01,7.25"></area>
+                                                        <area href="/proyectos/municipio/555" id="555" class="vtip" title="Quilalí" shape="circle" coords="373.95,309.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/515" id="515" class="vtip" title="El Jícaro" shape="circle" coords="333.20,242.52,7.25"></area>
+                                                        <area href="/proyectos/municipio/510" id="510" class="vtip" title="Murra" shape="circle" coords="389.20,229.65,7.25"></area>
+                                                        <area href="/proyectos/municipio/505" id="505" class="vtip" title="Jalapa" shape="circle" coords="364.20,145.65,7.25"></area>
+                                                        <area href="/proyectos/municipio/560" id="560" class="vtip" title="Wiwilí" shape="circle" coords="415.99,277.73,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 91%}
                             <img src="{{MEDIA_URL}}imagen/raan.jpg" class="mapa" usemap="#raan" width="534" height="516" border="0">
                             <map name="raan">
-                                                        <area href="/proyectos/municipio/9110" title="Puerto Cabezas" shape="poly" coords="399.98,276.37, 406.49,280.56, 405.85,272.84, 411.85,267.94, 404.32,266.16, 401.51,258.94, 397.49,265.56, 389.76,265.99, 394.81,271.87, 392.83,279.35"></area>
-                                                        <area href="/proyectos/municipio/9135" title="Prinzapolka" shape="circle" coords="373.02,364.17,7.25"></area>
-                                                        <area href="/proyectos/municipio/9105" title="Waspán" shape="circle" coords="283.27,161.92,7.25"></area>
-                                                        <area href="/proyectos/municipio/9120" title="Bonanza" shape="circle" coords="188.17,259.50,7.25"></area>
-                                                        <area href="/proyectos/municipio/9115" title="Rosita" shape="circle" coords="227.41,279.30,7.25"></area>
-                                                        <area href="/proyectos/municipio/9130" title="Siuna" shape="circle" coords="153.87,313.95,7.25"></area>
-                                                        <area href="/proyectos/municipio/9127" title="Mulukuku" shape="circle" coords="152.10,369.10,7.25"></area>
-                                                        <area href="/proyectos/municipio/9125" title="Waslala" shape="circle" coords="87.76,366.63,7.25"></area>
+                                                        <area href="/proyectos/municipio/9110" id="9110" class="vtip" title="Puerto Cabezas" shape="poly" coords="399.98,276.37, 406.49,280.56, 405.85,272.84, 411.85,267.94, 404.32,266.16, 401.51,258.94, 397.49,265.56, 389.76,265.99, 394.81,271.87, 392.83,279.35"></area>
+                                                        <area href="/proyectos/municipio/9135" id="9135" class="vtip" title="Prinzapolka" shape="circle" coords="373.02,364.17,7.25"></area>
+                                                        <area href="/proyectos/municipio/9105" id="9105" class="vtip" title="Waspán" shape="circle" coords="283.27,161.92,7.25"></area>
+                                                        <area href="/proyectos/municipio/9120" id="9120" class="vtip" title="Bonanza" shape="circle" coords="188.17,259.50,7.25"></area>
+                                                        <area href="/proyectos/municipio/9115" id="9115" class="vtip" title="Rosita" shape="circle" coords="227.41,279.30,7.25"></area>
+                                                        <area href="/proyectos/municipio/9130" id="9130" class="vtip" title="Siuna" shape="circle" coords="153.87,313.95,7.25"></area>
+                                                        <area href="/proyectos/municipio/9127" id="9127" class="vtip" title="Mulukuku" shape="circle" coords="152.10,369.10,7.25"></area>
+                                                        <area href="/proyectos/municipio/9125" id="9125" class="vtip" title="Waslala" shape="circle" coords="87.76,366.63,7.25"></area>
                             </map>
                             {%endifequal%}
                             {%ifequal departamento.id 93%}
                             <img src="{{MEDIA_URL}}imagen/raas.jpg" class="mapa" usemap="#raan" width="534" height="516" border="0">
                             <map name="raan">
-                                                        <area href="/proyectos/municipio/9340" title="Bluefields" shape="poly" coords="323.71,311.71, 330.22,315.91, 329.58,308.19, 335.58,303.29, 328.05,301.51, 325.24,294.29, 321.22,300.91, 313.49,301.34, 318.54,307.21, 316.56,314.70"></area>
-                                                        <area href="/proyectos/municipio/9335" title="Corn Island" shape="circle" coords="396.51,305.38,7.25"></area>
-                                                        <area href="/proyectos/municipio/9330" title="Kukra Hill" shape="circle" coords="337.26,271.13,7.25"></area>
-                                                        <area href="/proyectos/municipio/9315" title="Laguna de Perlas" shape="circle" coords="349.51,247.63,7.25"></area>
-                                                        <area href="/proyectos/municipio/9316" title="El Tortuguero" shape="circle" coords="267.01,168.38,7.25"></area>
-                                                        <area href="/proyectos/municipio/9312" title="Desembocadura de Rio Grande" shape="circle" coords="346.26,131.88,7.25"></area>
-                                                        <area href="/proyectos/municipio/9310" title="La Cruz de Rio Grande" shape="circle" coords="273.01,123.13,7.25"></area>
-                                                        <area href="/proyectos/municipio/9305" title="Paiwas" shape="circle" coords="143.63,178.04,7.25"></area>
-                                                        <area href="/proyectos/municipio/9323" title="El Ayote" shape="circle" coords="167.88,222.54,7.25"></area>
-                                                        <area href="/proyectos/municipio/9320" title="Rama" shape="circle" coords="286.47,285.80,7.25"></area>
-                                                        <area href="/proyectos/municipio/9325" title="Muelle de los Bueyes" shape="circle" coords="216.11,299.06,7.25"></area>
-                                                        <area href="/proyectos/municipio/9345" title="Nueva Guinea" shape="circle" coords="223.74,372.45,7.25"></area>
+                                                        <area href="/proyectos/municipio/9340" id="9340" class="vtip" title="Bluefields" shape="poly" coords="323.71,311.71, 330.22,315.91, 329.58,308.19, 335.58,303.29, 328.05,301.51, 325.24,294.29, 321.22,300.91, 313.49,301.34, 318.54,307.21, 316.56,314.70"></area>
+                                                        <area href="/proyectos/municipio/9335" id="9335" class="vtip" title="Corn Island" shape="circle" coords="396.51,305.38,7.25"></area>
+                                                        <area href="/proyectos/municipio/9330" id="9330" class="vtip" title="Kukra Hill" shape="circle" coords="337.26,271.13,7.25"></area>
+                                                        <area href="/proyectos/municipio/9315" id="9315" class="vtip" title="Laguna de Perlas" shape="circle" coords="349.51,247.63,7.25"></area>
+                                                        <area href="/proyectos/municipio/9316" id="9316" class="vtip" title="El Tortuguero" shape="circle" coords="267.01,168.38,7.25"></area>
+                                                        <area href="/proyectos/municipio/9312" id="9312" class="vtip" title="Desembocadura de Rio Grande" shape="circle" coords="346.26,131.88,7.25"></area>
+                                                        <area href="/proyectos/municipio/9310" id="9310" class="vtip" title="La Cruz de Rio Grande" shape="circle" coords="273.01,123.13,7.25"></area>
+                                                        <area href="/proyectos/municipio/9305" id="9305" class="vtip" title="Paiwas" shape="circle" coords="143.63,178.04,7.25"></area>
+                                                        <area href="/proyectos/municipio/9323" id="9323" class="vtip" title="El Ayote" shape="circle" coords="167.88,222.54,7.25"></area>
+                                                        <area href="/proyectos/municipio/9320" id="9320" class="vtip" title="Rama" shape="circle" coords="286.47,285.80,7.25"></area>
+                                                        <area href="/proyectos/municipio/9325" id="9325" class="vtip" title="Muelle de los Bueyes" shape="circle" coords="216.11,299.06,7.25"></area>
+                                                        <area href="/proyectos/municipio/9345" id="9345" class="vtip" title="Nueva Guinea" shape="circle" coords="223.74,372.45,7.25"></area>
                             </map>
                             {%endifequal%}
                             </div>
@@ -275,6 +278,10 @@
                                     <li><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></li>
                                 {%endfor%}
                                 </ul>
+                                {%if num_proy != 0 %}
+                                <br>Total de proyectos {{num_proy}}<br>
+                                {%endif%}
+                                <a href="/proyectos/departamento/{{departamento.id}}/"><b>{{mas_proy}}</b></a>
                             </div>
                             </div>
 
