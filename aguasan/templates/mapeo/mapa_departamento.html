@@ -1,8 +1,9 @@
 {%extends "base.html"%}
 {%block extra_js%}
+        <link type="text/css" href="{{MEDIA_URL}}css/vtip.css" rel="stylesheet" />
         <script type="text/javascript" src="{{MEDIA_URL}}js/vtip.js"></script>
         <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.maphilight.min.js"></script>
-                <script>$(function() {
+                <script>$(document).ready(function() {
                 $('.mapa').maphilight({fade: true, stroke: true, strokeColor: '336699',fillColor: 'd0ddff', fillOpacity: 0.5});
                 $.each($('.vtip'), function(i, item){
                     var url = "/ajax/conteo/proyectos/municipio/" + item.id + "/";
@@ -13,7 +14,7 @@
                 });
         });
         </script>
-        <link type="text/css" href="{{MEDIA_URL}}css/vtip.css" rel="stylesheet" />
+
 {%endblock%}
  {%block contenido%}
  <div id="titulo">
@@ -70,6 +71,7 @@
                             {%ifequal departamento.id 75%}
                             <img src="{{MEDIA_URL}}imagen/carazo.jpg" class="mapa" usemap="#carazo" width="534" height="516" border="0">
                             <map name="carazo">
+                                                        <area href="/mapeo/mapa/" class="vtip" title="Volver al mapa departamental" shape="rect" coords="402.43,511.49, 530.87,387.41"></area>
                                                         <area href="/proyectos/municipio/7510" id="7510" class="vtip" title="Jinotepe" shape="poly" coords="319.21,247.55, 326.75,245.77, 320.75,240.87, 321.38,233.15, 314.87,237.35, 307.73,234.36, 309.70,241.85,304.65,247.72, 312.38,248.15, 316.41,254.77"></area>
                                                         <area href="/proyectos/municipio/7515" id="7515" class="vtip" title="Dolores" shape="circle" coords="291.87,214.75,7.25"></area>
                                                         <area href="/proyectos/municipio/7520" id="7520" class="vtip" title="Diriamba" shape="circle" coords="254.87,204.75,7.25"></area>
@@ -152,6 +154,7 @@
                             {%ifequal departamento.id 65%}
                             <img src="{{MEDIA_URL}}imagen/chontales.jpg" class="mapa" usemap="#chontales" width="534" height="516" border="0">
                             <map name="chontales">
+                                                        <area href="/mapeo/mapa/" class="vtip" title="Volver al mapa departamental" shape="rect" coords="418.01,511.13, 529.83,403.11"></area>
                                                         <area href="/proyectos/municipio/6510" id="6510" class="vtip" title="Juigalpa" shape="poly" coords="147.92,303.77, 154.43,307.96, 153.80,300.24, 159.79,295.35, 152.26,293.56, 149.45,286.34, 145.43,292.96, 137.70,293.40, 142.75,299.27, 140.77,306.76"></area>
                                                         <area href="/proyectos/municipio/6505" id="6505" class="vtip" title="Comalapa" shape="circle" coords="103.40,236.56,7.25"></area>
                                                         <area href="/proyectos/municipio/6507" id="6507" class="vtip" title="Cuapa" shape="circle" coords="158.02,230.64,7.25"></area>
@@ -167,6 +170,7 @@
                             {%ifequal departamento.id 50%}
                             <img src="{{MEDIA_URL}}imagen/boaco.jpg" class="mapa" usemap="#boaco" width="534" height="516" border="0">
                             <map name="boaco">
+                                                        <area href="/mapeo/mapa/" class="vtip" title="Volver al mapa departamental" shape="rect" coords="393.41,510.41, 529.15,379.30"></area>
                                                         <area href="/proyectos/municipio/5010" id="5010" class="vtip" title="Boaco" shape="poly" coords="192.54,294.65, 199.05,298.84, 198.42,291.12, 204.42,286.22, 196.88,284.44, 194.08,277.22, 190.05,283.84, 182.32,284.28, 187.37,290.15, 185.40,297.64"></area>
                                                         <area href="/proyectos/municipio/5030" id="5030" class="vtip" title="San Lorenzo" shape="circle" coords="157.72,341.75,7.25"></area>
                                                         <area href="/proyectos/municipio/5025" id="5025" class="vtip" title="Teustepe" shape="circle" coords="97.47,313.50,7.25"></area>
@@ -191,6 +195,7 @@
                             {%ifequal departamento.id 25%}
                             <img src="{{MEDIA_URL}}imagen/esteli.jpg" class="mapa" usemap="#esteli" width="534" height="516" border="0">
                             <map name="esteli">
+                                                        <area href="/mapeo/mapa/" class="vtip" title="Volver al mapa departamental" shape="rect" coords="411.46,510.93, 528.99,397.41"></area>
                                                         <area href="/proyectos/municipio/2515" id="2525" class="vtip" title="Estelí" shape="poly" coords="301.69,321.98, 308.20,326.18, 307.57,318.46, 313.57,313.56, 306.03,311.78, 303.22,304.56, 299.20,311.18, 291.47,311.61, 296.52,317.48, 294.54,324.97"></area>
                                                         <area href="/proyectos/municipio/2530" id="2530" class="vtip" title="San Nicolas" shape="circle" coords="313.62,428.87,7.25"></area>
                                                         <area href="/proyectos/municipio/2525" id="2525" class="vtip" title="La Trinidad" shape="circle" coords="409.08,361.52,7.25"></area>
@@ -288,6 +293,8 @@
                                 </ul>
                                 {%if num_proy != 0 %}
                                 <br>Total de proyectos {{num_proy}}<br>
+                                {%else%}
+                                No hay proyectos en este departamento<br>
                                 {%endif%}
                                 <a href="/proyectos/departamento/{{departamento.id}}/"><b>{{mas_proy}}</b></a>
                             </div>
