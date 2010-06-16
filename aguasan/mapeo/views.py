@@ -534,7 +534,13 @@ def lista_lugares(request, id):
 #Estas vistas tienen que ver con salidas#        
         
 def mapa(request):
-	return render_to_response('mapeo/mapa.html',context_instance=RequestContext(request))
+    proyectos = Proyecto.objects.all().count()
+    cooperantes = Donante.objects.all().count()
+    contrapartes = Contraparte.objects.all().count()
+    monto_cooperante = ProyectoDonante.objects.all().aggregate(monto=Sum('monto'))['monto']
+    monto_cooperante = float(monto_cooperante)
+    monto_contraparte = ProyectoContraparte.objects.all().aggregate(monto=Sum('monto'))['monto']
+    return render_to_response('mapeo/mapa.html',{'proyectos':proyectos,'contrapartes':contrapartes,'cooperantes':cooperantes,'monto_cooperante':monto_cooperante,'monto_contraparte':monto_contraparte},context_instance=RequestContext(request))
 
 def departamento(request,id):
     departamento=Departamento.objects.get(id=id)
