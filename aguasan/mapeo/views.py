@@ -596,4 +596,12 @@ def proyectos_inversion(request, id_tipo):
     return render_to_response('mapeo/proyectos_inversion.html', dicc,
                                context_instance=RequestContext(request))
 
-
+def conteo_proyectos_municipio(request, id):
+    '''devuelve un json con nombre del municipio
+    y numero de proyectos'''
+    municipio = get_object_or_404(Municipio, id=id)
+    proyectos = ProyectoMunicipio.objects.filter(municipio=municipio).all().count()
+    response = {'id': id, 'municipio': municipio.nombre, 
+                'proyectos': proyectos}
+    return HttpResponse(simplejson.dumps(response),
+                    mimetype='application/json')
