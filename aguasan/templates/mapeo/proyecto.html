@@ -68,6 +68,18 @@ function editarMunicipio(id){
     $("#modal_content").attr({'src': url});
     $("#modal_content").modal();
 }
+
+function editarDonante(id){
+    var url = '/proyecto/' + id + '/donantes/editar/';
+    $("#modal_content").attr({'src': url});
+    $("#modal_content").modal();
+}
+
+function editarContraparte(id){
+    var url = '/proyecto/' + id + '/contrapartes/editar/';
+    $("#modal_content").attr({'src': url});
+    $("#modal_content").modal();
+}
 {%endif%}
     
 function cargar_contrapartes(){
@@ -78,7 +90,8 @@ function cargar_contrapartes(){
                     $('<tr><td>' + item.contraparte + 
                         '</td><td>$' + item.monto + 
                         '</td><td>{%if user.is_authenticated%}<a href="#" onClick=eliminarElemento("contraparte",'+
-                            item.id + ') ><img src="{{MEDIA_URL}}imagen/icono_eliminar.png"> Eliminar</a>{%endif%}</tr>').appendTo("#tabla_contrapartes");
+                            item.id + ') ><img src="{{MEDIA_URL}}imagen/icono_eliminar.png"> Eliminar</a> | <a href="#" onClick=editarContraparte(' + 
+                                item.id +')><img src="{{MEDIA_URL}}imagen/icono_editar.png">Editar</a>{%endif%}</td></tr>').appendTo("#tabla_contrapartes");
                 });
                 $('<tr><td><b>Total Aporte Interno<b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_contrapartes");
@@ -92,7 +105,8 @@ function cargar_donantes(){
                     $('<tr><td>' + item.donante+ 
                         '</td><td>$' + item.monto + 
                         '</td><td>{%if user.is_authenticated%}<a href="#" onClick=eliminarElemento("donante",' + 
-                        item.id + ')><img src="{{MEDIA_URL}}imagen/icono_eliminar.png"> Eliminar</a>{%endif%}</td></tr>').appendTo("#tabla_donantes");
+                            item.id + ')><img src="{{MEDIA_URL}}imagen/icono_eliminar.png"> Eliminar</a> | <a href="#" onClick=editarDonante(' + 
+                                item.id +')><img src="{{MEDIA_URL}}imagen/icono_editar.png">Editar</a>{%endif%}</td></tr>').appendTo("#tabla_donantes");
                 });
                 $('<tr><td><b>Total Aporte Externo</b></td><td><b>$' + 
                     data.monto_total + '</b></td></tr>').appendTo("#tabla_donantes");
@@ -122,8 +136,8 @@ function cargar_lugares(){
                          tabla += "<tr><td style='padding-left:20px'>" + subitem.municipio + 
                          "</td><td>$" + subitem.monto + 
                          "</td><td>{%if user.is_authenticated%}<a href='#' onClick=eliminarElemento('municipio'," + 
-                         subitem.id + ") ><img src='{{MEDIA_URL}}imagen/icono_eliminar.png'> Eliminar</a>" + 
-                         " <a href='#' onClick=editarMunicipio(" + subitem.id + ")>| <img src='{{MEDIA_URL}}imagen/icono_editar.png'> Editar</a>{%endif%}</td></tr>";
+                         subitem.id + ") ><img src='{{MEDIA_URL}}imagen/icono_eliminar.png'> Eliminar</a> |" + 
+                         " <a href='#' onClick=editarMunicipio(" + subitem.id + ")><img src='{{MEDIA_URL}}imagen/icono_editar.png'> Editar</a>{%endif%}</td></tr>";
                          });
                     });
                 tabla += "<tr><td><b>Total de aporte externo por municipio</b></td><td><b>$" +

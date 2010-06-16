@@ -73,10 +73,15 @@ def proyecto(request, id):
                               context_instance=RequestContext(request))
                                   
 @login_required
-def contrapartes_proyecto(request, id):
-    proyecto = get_object_or_404(Proyecto, id=id)
-    form = ProyectoContraparteForm()
-    dicc = {'form': form, 'id': id}
+def contrapartes_proyecto(request, id, action='crear'):
+    if (action=='crear'):
+        proyecto = get_object_or_404(Proyecto, id=id)
+        form = ProyectoContraparteForm()
+    else:
+        proyecto_contraparte = ProyectoContraparte.objects.get(id=id)
+        form = ProyectoContraparteForm(instance=proyecto_contraparte)
+
+    dicc = {'form': form, 'id': id, 'action': action}
     return render_to_response('mapeo/agregar_contraparte_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
@@ -98,10 +103,15 @@ def fotos_proyecto(request, id):
                               context_instance=RequestContext(request))
 
 @login_required
-def donantes_proyecto(request, id):
-    proyecto = get_object_or_404(Proyecto, id=id)
-    form = ProyectoDonanteForm()
-    dicc = {'form': form, 'id': id}
+def donantes_proyecto(request, id, action='crear'):
+    if (action=='crear'):
+        proyecto = get_object_or_404(Proyecto, id=id)
+        form = ProyectoDonanteForm()
+    else:
+        proyecto_donante = get_object_or_404(ProyectoDonante, id=id)
+        form = ProyectoDonanteForm(instance=proyecto_donante)
+    
+    dicc = {'form': form, 'id': id, 'action': action}
     return render_to_response('mapeo/agregar_donante_proyecto.html', dicc,
                                   context_instance=RequestContext(request))
 
@@ -287,6 +297,38 @@ def agregar_donante_proyecto(request, id):
                     return HttpResponse(simplejson.dumps(error_dict),
                             mimetype='application/json')
 
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
+    else:
+        return HttpResponse('ERROR')
+
+@login_required
+def editar_donante_proyecto(request, id):
+    proyecto_donante = get_object_or_404(ProyectoDonante, id=id)
+    if request.is_ajax():
+        form = ProyectoDonanteForm(request.POST, instance=proyecto_donante)
+        if form.is_valid():
+            if form.save():
+                return HttpResponse('OK')
+            else:
+                return HttpResponse('ERROR')
+        else:
+            return HttpResponse(simplejson.dumps(form.errors),
+                                mimetype="application/json")
+    else:
+        return HttpResponse('ERROR')
+
+@login_required
+def editar_contraparte_proyecto(request, id):
+    proyecto_contraparte= get_object_or_404(ProyectoContraparte, id=id)
+    if request.is_ajax():
+        form = ProyectoContraparteForm(request.POST, instance=proyecto_contraparte)
+        if form.is_valid():
+            if form.save():
                 return HttpResponse('OK')
             else:
                 return HttpResponse('ERROR')

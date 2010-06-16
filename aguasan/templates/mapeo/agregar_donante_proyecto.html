@@ -1,6 +1,27 @@
 {%extends "modal_base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
+    {%if action == 'editar'%}
+    function editar_donante(form){
+    $.post('/ajax/editar/donante/{{id}}/', {
+            donante: form.donante.value,
+            monto: form.monto.value,
+        },
+        function(data) { 
+            if(data!='OK'){
+                //do error validation
+                if (data.hasOwnProperty('error')){ $("<p>" + data.error + "</p>").appendTo("#mensaje");}
+                if (data.hasOwnProperty('donante')){ $("<p>" + data.donante[0] + "</p>").appendTo('#campo_donante');}
+                if (data.hasOwnProperty('monto')){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
+            }
+            else{
+                $("<p>Donante Editado</p>").appendTo("#mensaje");
+                window.parent.cargar_donantes();
+                window.parent.$.modal.close();
+               }
+        });
+    }
+    {%else%}
     function agregar_donante(form){
         $.post('/ajax/agregar/donante/{{id}}/', {
             donante: form.donante.value,
@@ -20,6 +41,7 @@
                }
         });
     }
+    {%endif%}
 </script>
 {%endblock%}  
 {%block contenido%}
@@ -34,7 +56,11 @@
                        <div id="mensaje"></div>
 							<form action="." method="POST" id="formulario" name="formulario">
                                 {% csrf_token %}
-								<div class="titulo_form">Agregar Donantes al proyecto</div>
+                                {%if action == 'editar'%}
+                                    <div class="titulo_form">Editar Cooperante del proyecto</div>
+                                {%else%}
+                                    <div class="titulo_form">Agregar Cooperante al proyecto</div>
+                                {%endif%}
 									<div class="campo izq">
 									   <div class="label izq">Donante</div>
                                        {{form.donante}}
@@ -47,7 +73,11 @@
                                     <div id="campo_monto" ></div>
 									</div>
 									<br style="clear:both">
-                                    <input type="button" value="Agregar donate" onClick="agregar_donante(this.form)"/>
+                                    {%if action == 'editar'%}
+                                        <input type="button" value="Editar cooperante" onClick="editar_donante(this.form)"/>
+                                    {%else%}
+                                        <input type="button" value="Agregar cooperante" onClick="agregar_donante(this.form)"/>
+                                    {%endif%}
 									<br style="clear:both">
 									<br>
 							</form>

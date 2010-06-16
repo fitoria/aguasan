@@ -1,6 +1,26 @@
 {%extends "modal_base.html"%}
 {%block extra_js%}
 <script type="text/javascript">
+    {% if action == 'editar'%}
+    function editar_contraparte(form){
+        $.post('/ajax/editar/contraparte/{{id}}/', {
+            contraparte: form.contraparte.value,
+            monto: form.monto.value,
+        },
+        function(data) { 
+            if(data!='OK'){
+                if (data.hasOwnProperty('error')){ $("<p>" + data.error + "</p>").appendTo("mensaje");}
+                if (data.hasOwnProperty('contraparte')){ $("<p>" + data.contraparte[0] + "</p>").appendTo('#campo_contraparte');}
+                if (data.hasOwnProperty('monto')){ $("<p>" + data.monto[0] + "</p>").appendTo('#campo_monto');}
+            }
+            else{
+                //$("<p>Contraparte agregado</p>").appendTo("#mensaje");
+                window.parent.cargar_contrapartes();
+                window.parent.$.modal.close();
+               }
+        });
+    }
+    {%else%}
     function agregar_contraparte(form){
         $.post('/ajax/agregar/contraparte/{{id}}/', {
             contraparte: form.contraparte.value,
@@ -19,7 +39,9 @@
                }
         });
     }
-</script>
+
+    {%endif%}
+    </script>
 {%endblock%}  
 {%block contenido%}
  <div id="titulo">
@@ -33,7 +55,11 @@
                        <div id="mensaje"></div>
 							<form action="."  id="formulario" name="formulario">
                                 {% csrf_token %}
-								<div class="titulo_form">Agregar Contrapartes al proyecto</div>
+                                {% if action == 'editar'%}
+                                    <div class="titulo_form">Editar Contraparte del proyecto</div>
+                                {%else%}
+                                    <div class="titulo_form">Agregar Contrapartes al proyecto</div>
+                                {%endif%}
 									<div class="campo izq">
 									   <div class="label izq">Contraparte</div>
                                        {{form.contraparte}}
@@ -45,7 +71,11 @@
                                        <div id="campo_monto"></div>
 									</div>
 									<br style="clear:both">
-                                    <input type="button" value="Agregar contraparte " onClick="agregar_contraparte(this.form)"/>
+                                    {%if action == 'editar'%}
+                                        <input type="button" value="Editar contraparte " onClick="editar_contraparte(this.form)"/>
+                                    {%else%}
+                                        <input type="button" value="Agregar contraparte " onClick="agregar_contraparte(this.form)"/>
+                                    {%endif%}
                                     <input type="button" value="Cancelar" onClick="window.parent.$.modal.close();"/>
 									<br style="clear:both">
 									<br>
