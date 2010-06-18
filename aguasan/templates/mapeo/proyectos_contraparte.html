@@ -1,5 +1,40 @@
 {%extends "base.html"%}
 {%block extra_js%}
+<link rel="stylesheet" href="{{MEDIA_URL}}css/map.css" type="text/css" />
+<script type="text/javascript" src="{{MEDIA_URL}}js/OpenLayers.js"></script>
+<script type="text/javascript">
+        var map, layer;
+
+        function init(){
+            //OpenLayers.ProxyHost="/proxy/?url=";
+            map = new OpenLayers.Map('map');
+            layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
+                "http://labs.metacarta.com/wms/vmap0", {layers: 'basic'} );
+
+            map.addLayer(layer);
+
+            var markers = new OpenLayers.Layer.Markers( "Markers" );
+            map.addLayer(markers);
+
+            var size = new OpenLayers.Size(10,17);
+            var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
+            var icon = new OpenLayers.Icon('{{MEDIA_URL}}js/img/marker-green.png',size,offset);
+            
+            //Añadimos los marcadores de proyecto.
+            var url_json = '/ajax/ubicacion/contraparte/{{contraparte.id}}/' 
+            $.getJSON(url_json, function(data){
+                    $.each(data, function(i, item){
+                        markers.addMarker(new OpenLayers.Marker(new OpenLayers.LonLat(item[0], item[1]),icon.clone()));
+                        });
+                    });
+
+            map.zoomToMaxExtent();
+            map.setCenter(new OpenLayers.LonLat(-86.266, 12.15), 6);
+        }
+    $(document).ready(function() {
+            init();
+            });
+</script>
 {%endblock%}
 {%block contenido%}
  <div id="titulo">
@@ -41,8 +76,8 @@
                                 
                                 {%endfor%}
                              </table>
-<br><br>
-<img src="{{MEDIA_URL}}/imagen/mapa_proximamente.jpg">
+                            <br/><br/>
+                             <div id="map" class="smallmap"></div>
 
                    </div>
 

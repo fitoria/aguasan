@@ -621,3 +621,27 @@ def conteo_proyectos_departamento(request, id):
                 'proyectos': proyectos}
     return HttpResponse(simplejson.dumps(response),
                     mimetype='application/json')
+
+def ubicacion_proyecto(request, model, id):
+    '''Funcion para obtener la lista de lugares donde hay
+    proyectos.
+    model puede ser: Donante o Contraparte.'''
+    resultados = [] #aca guardaremos las latitudes y longitudes.
+    objeto = get_object_or_404(model, id=id)
+    if "Donante" in str(model):
+        proyectos_municipio = ProyectoMunicipio.objects.all().filter(donantes=objeto)
+    elif "Contraparte" in str(model):
+        proyectos_municipio = ProyectoMunicipio.objects.all().filter(contrapartes=objeto)
+    else:
+        raise Exception('model is not valid', str(model))
+    
+
+    for proyecto_municipio in proyectos_municipio:
+        lat = float(proyecto_municipio.municipio.latitud)
+        lon = float(proyecto_municipio.municipio.longitud)
+        punto = (lon, lat)
+        resultados.append(punto)
+
+    return HttpResponse(simplejson.dumps(resultados),
+                        mimetype="application/json")
+

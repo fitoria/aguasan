@@ -10,11 +10,8 @@ Las tareas se organizan en orden de prioridad, Con leyenda Finalizada (si), (no)
 (Listo @fitoria) Recargar en ficha proyecto cuando se agregue un dato, sin necesidad de recargar la página.
 (no) Agregar columna a la lista de proyectos, por donante, monto, contraparte y ordenar por columna en tabla de salida
 (Listo @fitoria) Salida por contraparte
-(no) Explorar el APi de google para mapas magicos overcools
+(Listo @fitoria) Explorar el APi de google para mapas magicos overcools
 (Listo) Editar ProyectoMunicipio.
 (no se va a hacer) Cambiar total aporte externo.
 (listo @fitoria) Cambiar Fecha proyecto
 
-BUGSSSSSS
-
-No guarda municipio porque dice que el donante y contraparte es obligatorio
