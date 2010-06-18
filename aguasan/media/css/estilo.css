@@ -319,7 +319,7 @@ h2{
 }
 
 #filtros_principales{
-  width:425px;
+  width:345px;
   height:380px;
 }
 
@@ -366,7 +366,23 @@ h2{
 }
 
 #foto_menu{
-  margin-right:10px;
+    background-image:url(../imagen/fotoindex.png);
+  background-repeat: no-repeat;
+  width:410px;
+  height:350px;
+  border-width:4px;
+  border-style:solid;
+  border-color:#D4E6E7;
+}
+
+#foto_index_contenido{
+width:410px;
+height:180px;
+background:#fff;
+margin-top:168px;opacity: 0.5;
+  border-top-width:2px;
+  border-top-style:solid;
+  border-top-color:#fff;
 }
 
 /* Para Widgets de mapas */
