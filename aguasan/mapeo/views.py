@@ -639,7 +639,7 @@ def ubicacion_proyecto(request, model, id):
     for proyecto_municipio in proyectos_municipio:
         lat = float(proyecto_municipio.municipio.latitud)
         lon = float(proyecto_municipio.municipio.longitud)
-        punto = (lon, lat)
+        punto = (lon, lat, proyecto_municipio.municipio.nombre)
         resultados.append(punto)
 
     return HttpResponse(simplejson.dumps(resultados),
