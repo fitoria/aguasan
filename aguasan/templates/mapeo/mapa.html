@@ -1,7 +1,7 @@
 {%extends "base.html"%}
 {%block extra_js%}
         <script type="text/javascript" src="{{MEDIA_URL}}js/jquery.maphilight.min.js"></script>
-                <script>$(document).ready(function() {
+                <script>$(function() {
                 $('.mapa').maphilight({fade: true, stroke: true, strokeColor: '336699',fillColor: 'd0ddff', fillOpacity: 0.5});
                 $.each($('.vtip'), function(i, item){
                     var url = "/ajax/conteo/proyectos/departamento/" + item.id + "/";
