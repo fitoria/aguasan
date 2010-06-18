@@ -15,10 +15,9 @@
 
             var markers = new OpenLayers.Layer.Markers( "Markers" );
             map.addLayer(markers);
-
             var size = new OpenLayers.Size(10,17);
             var offset = new OpenLayers.Pixel(-(size.w/2), -size.h);
-            var icon = new OpenLayers.Icon('{{MEDIA_URL}}js/img/marker-green.png',size,offset);
+            var icon = new OpenLayers.Icon('{{MEDIA_URL}}js/img/marker-gold.png',size,offset);
             
             //Añadimos los marcadores de proyecto.
             var url_json = '/ajax/ubicacion/donante/{{donante.id}}/' 
@@ -29,7 +28,7 @@
                     });
 
             map.zoomToMaxExtent();
-            map.setCenter(new OpenLayers.LonLat(-86.266, 12.15), 6);
+            map.setCenter(new OpenLayers.LonLat(-85.24704, 12.987831), 7);
         }
     $(document).ready(function() {
             init();
@@ -71,12 +70,19 @@
                                 <tr>
                                     <td><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></td>
                                     <td>{{proyecto.avance}}</td>
-                                    <td>{{proyecto.tipo}}</td>
+                                    <td>
+                                        {%for tipo in proyecto.tipos.all%}
+                                            {{tipo}},
+                                        {%endfor%}
+                                    </td>
                                 </tr>
 
                                 {%endfor%}
                              </table>
-                             <br/><br/>
+
+                        <div class="seccion">
+                            <div class="titulo_seccion izq">Mapa de ubicación de proyectos</div>
+                        </div>
                              <div id="map" class="smallmap"></div>
                    </div>
 
