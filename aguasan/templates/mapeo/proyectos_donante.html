@@ -2,21 +2,37 @@
 {%block extra_js%}
 <link rel="stylesheet" href="{{MEDIA_URL}}css/map.css" type="text/css" />
 <script type="text/javascript" src="{{MEDIA_URL}}js/OpenLayers.js"></script>
+<script src="http://maps.google.com/maps?file=api&v=2&sensor=true_or_false&key=ABQIAAAAkpPqjY_DH9Am0T2BOGW8-xTbE2WFgluONObTGPtQKbaZ8jTotRSL_1R-6qL6K2quarlTQVXxuxdEPw"
+    type="text/javascript"></script>
 <script type="text/javascript">
         var map, layer, popup; 
-        var markers, feature;
-        AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.FramedCloud,
+        var markers;
+        AutoSizeFramedCloud = OpenLayers.Class(OpenLayers.Popup.Anchored,
                 {'autoSize': true, 'closeOnMove': true});
 
         function init(){
             map = new OpenLayers.Map('map');
+            map.addControl(new OpenLayers.Control.LayerSwitcher());
             layer = new OpenLayers.Layer.WMS( "OpenLayers WMS",
                 "http://labs.metacarta.com/wms/vmap0", {layers: 'basic'} );
+            var gphy = new OpenLayers.Layer.Google(
+                "Google Físico",
+                {type: G_PHYSICAL_MAP}
+            );
+            var gmap = new OpenLayers.Layer.Google(
+                "Google Streets", // the default
+                {numZoomLevels: 20}
+            );
+            var ghyb = new OpenLayers.Layer.Google(
+                "Google Híbrido",
+                {type: G_HYBRID_MAP, numZoomLevels: 20}
+            );
+            var gsat = new OpenLayers.Layer.Google(
+                "Google Satélite",
+                {type: G_SATELLITE_MAP, numZoomLevels: 22}
+            );
 
-            map.addLayer(layer);
-            feature = new OpenLayers.Feature(layer, 
-                                             new OpenLayers.LonLat(-86.266, 12.15));
-            feature.popupClass = AutoSizeFramedCloud;
+            map.addLayers([gphy, gmap, ghyb, gsat, layer]);
 
             markers = new OpenLayers.Layer.Markers( "Markers" );
             map.addLayer(markers);
@@ -40,16 +56,25 @@
             map.zoomToMaxExtent();
             map.setCenter(new OpenLayers.LonLat(-85.24704, 12.987831), 7);
         }
+
 function marker_click(evt){
     if (popup==null){
         popup = new AutoSizeFramedCloud("popup",this.marker.lonlat, null,
                 this.text, null, true, onPopupMouseDown); 
         map.addPopup(popup);
     }else {
-        popup.toggle();
+        if (popup.lonlat != this.marker.lonlat){
+            map.removePopup(popup);
+            popup = new AutoSizeFramedCloud("popup",this.marker.lonlat, null,
+                    this.text, null, true, onPopupMouseDown); 
+            map.addPopup(popup);
+        }else{
+            popup.toggle();
+        }
     }
     OpenLayers.Event.stop(evt)
 }
+
 function onPopupMouseDown(evt) {
     markers.map.removePopup(popup);
     popup.destroy();
@@ -60,6 +85,7 @@ function onPopupMouseDown(evt) {
 function destroy() {
  popup.destroy();
 }
+
 $(document).ready(function() {
     init();
 });
