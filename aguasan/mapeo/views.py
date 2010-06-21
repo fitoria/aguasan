@@ -580,19 +580,28 @@ def proyectos_departamento(request, id_departamento):
 def proyectos_donante(request, id_donante):
     _proyectos_donante = ProyectoDonante.objects.filter(donante__id=id_donante)
     proyectos = []
+    monto_total = 0
     for proyecto_donante in _proyectos_donante:
         proyectos.append(proyecto_donante.proyecto)
+        monto_total += proyecto_donante.proyecto.monto_total()
     donante=Donante.objects.get(id=id_donante)
     
-    return render_to_response('mapeo/proyectos_donante.html',{'donante':donante,'proyectos':proyectos},
+    return render_to_response('mapeo/proyectos_donante.html', 
+                              {'donante':donante,'proyectos':proyectos,
+                               'monto_total': monto_total},
                               context_instance=RequestContext(request))
 def proyectos_contraparte(request, id_contraparte):
     _proyectos_contraparte = ProyectoContraparte.objects.filter(contraparte__id=id_contraparte)
     proyectos = []
+    monto_total = 0
     for proyecto_contraparte in _proyectos_contraparte:
         proyectos.append(proyecto_contraparte.proyecto)
+        monto_total += proyecto_contraparte.proyecto.monto_total()
+
     contraparte = Contraparte.objects.get(id=id_contraparte)
-    return render_to_response('mapeo/proyectos_contraparte.html',{'contraparte':contraparte,'proyectos':proyectos},
+    return render_to_response('mapeo/proyectos_contraparte.html',
+                              {'contraparte':contraparte,'proyectos':proyectos, 
+                               'monto_total': monto_total},
                               context_instance=RequestContext(request))
 
 def proyectos_inversion(request, id_tipo):
@@ -607,9 +616,19 @@ def conteo_proyectos_municipio(request, id):
     y numero de proyectos'''
     #TODO: nombre de cooperantes en municipio 
     municipio = get_object_or_404(Municipio, id=id)
-    proyectos = ProyectoMunicipio.objects.filter(municipio=municipio).all().count()
+    proyectos = ProyectoMunicipio.objects.filter(municipio=municipio).all()
+    donantes = []
+    for proyecto in proyectos:
+        donantes = donantes + list(proyecto.donantes.all())
+
+    donantes = list(set(donantes))
+    for i in range(len(donantes)):
+        donantes[i] = {'donante': donantes[i].nombre, 
+                       'url': donantes[i].get_absolute_url()}
+
     response = {'id': id, 'municipio': municipio.nombre, 
-                'proyectos': proyectos}
+                'proyectos': proyectos.count(), 'donantes': donantes}
+
     return HttpResponse(simplejson.dumps(response),
                     mimetype='application/json')
 
@@ -620,7 +639,7 @@ def conteo_proyectos_departamento(request, id):
     municipios = ProyectoMunicipio.objects.filter(proyecto__departamento = departamento)
     donantes = []
     for municipio in municipios:
-        donantes = donantes + (list(municipio.donantes.all()))
+        donantes = donantes + list(municipio.donantes.all())
     
     donantes = list(set(donantes))
     proyectos = ProyectoDepartamento.objects.filter(departamento=departamento).all().count()
@@ -651,4 +670,3 @@ def ubicacion_proyecto(request, model, id):
 
     return HttpResponse(simplejson.dumps(resultados),
                         mimetype="application/json")
-

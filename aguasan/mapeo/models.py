@@ -62,6 +62,31 @@ class Proyecto(models.Model):
     def get_absolute_url(self):
         return "/proyecto/%d/" % self.id
 
+    def donantes(self):
+        return self.__lista_donantes_cooperantes__(ProyectoDonante)
+
+    def contrapartes(self):
+        return self.__lista_donantes_cooperantes__(ProyectoContraparte)
+
+    def __lista_donantes_cooperantes__(self, model):
+        query  = model.objects.filter(proyecto = self) 
+        lista = []
+        for object in query:
+            if (model is ProyectoDonante):
+                lista.append(object.donante)
+            elif (model is ProyectoContraparte):
+                lista.append(object.contraparte)
+            else:
+                raise Exception('model is not valid', str(model))
+        
+        return lista 
+
+    def monto_total(self):
+        monto_donantes = ProyectoDonante.objects.filter(proyecto = self).aggregate(monto=Sum('monto'))['monto']
+        monto_contrapartes = ProyectoContraparte.objects.filter(proyecto = self).aggregate(monto=Sum('monto'))['monto']
+        return monto_donantes + monto_contrapartes
+
+
 class Donante(models.Model):
     nombre = models.CharField(max_length=150, unique = True)
     descripcion = models.TextField(_('Descripcion del donante'))
@@ -73,6 +98,9 @@ class Donante(models.Model):
 
     def __unicode__(self):
         return self.nombre
+
+    def get_absolute_url(self):
+        return '/proyectos/donantes/%d' % self.id
 
     class Meta:
         verbose_name = 'Cooperante'

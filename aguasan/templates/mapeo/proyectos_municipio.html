@@ -15,6 +15,7 @@
                         </div>
                                 <table class="tabla_proyecto" id="tabla_lugares">
                                 <tr>
+                                    <th>Cooperantes</th>
                                     <th>Proyectos</th>
                                     <th>Estado</th>
                                     <th>Finalidad</th>
@@ -22,14 +23,19 @@
                                 </tr>
                                 {%for proyecto in proyectos%}
                                 <tr>
-                                    <td><a href="/proyecto/{{proyecto.id}}">{{proyecto.nombre}}</a></td>
+                                    <td>
+                                        {%for donante in proyecto.donantes%}
+                                            {{donante}},
+                                        {%endfor%}
+                                    </td>
+                                    <td><a href="{{proyecto.get_absolute_url}}">{{proyecto.nombre}}</a></td>
                                     <td>{{proyecto.avance}}</td>
                                     <td>
                                         {%for tipo in proyecto.tipos.all%}
                                             {{tipo}},
                                         {%endfor%}
                                     </td>
-                                    <td></td>
+                                    <td>{{proyecto.monto_total}}</td>
                                 </tr>
                                 
                                 {%endfor%}

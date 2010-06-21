@@ -121,6 +121,7 @@ $(document).ready(function() {
                                     <th>Proyectos</th>
                                     <th>Estado</th>
                                     <th>Finalidad</th>
+                                    <th>Monto</th>
                                 </tr>
                                 {%for proyecto in proyectos%}
                                 <tr>
@@ -131,9 +132,12 @@ $(document).ready(function() {
                                             {{tipo}},
                                         {%endfor%}
                                     </td>
+                                    <td>{{proyecto.monto_total}}</td>
                                 </tr>
-
                                 {%endfor%}
+                                <tr>
+                                    <td colspan="3">TOTAL</td>
+                                    <td>{{monto_total}}</td>
                              </table>
 
                         <div class="seccion">

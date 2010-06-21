@@ -8,7 +8,13 @@
                 $.each($('.vtip'), function(i, item){
                     var url = "/ajax/conteo/proyectos/municipio/" + item.id + "/";
                     $.getJSON(url, function(data){
-                        var titulo = data.municipio + " ( " + data.proyectos + " proyectos)";
+                        //lista de cooperantes.
+                        var lista_donantes = '';
+                        $.each(data.donantes, function(i, item){
+                            lista_donantes += item.donante + ', '; 
+                        });
+                        var titulo = data.municipio + " ( " + data.proyectos +
+                        " proyectos, cooperantes: "+ lista_donantes + ")";
                         $('#' + item.id).attr({'title': titulo});
                     });
                 });
