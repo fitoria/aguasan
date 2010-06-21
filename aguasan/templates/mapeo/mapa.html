@@ -8,7 +8,9 @@
                 $.each($('.vtip'), function(i, item){
                     var url = "/ajax/conteo/proyectos/departamento/" + item.id + "/";
                     $.getJSON(url, function(data){
-                        var titulo = data.departamento+ " ( " + data.proyectos + " proyectos)";
+                        var titulo = data.departamento +
+                        " (proyectos: " + data.proyectos + 
+                        " cooperantes: " + data.donantes + ")";
                         $('#' + item.id).attr({'title': titulo});
                     });
                 });

@@ -605,6 +605,7 @@ def proyectos_inversion(request, id_tipo):
 def conteo_proyectos_municipio(request, id):
     '''devuelve un json con nombre del municipio
     y numero de proyectos'''
+    #TODO: nombre de cooperantes en municipio 
     municipio = get_object_or_404(Municipio, id=id)
     proyectos = ProyectoMunicipio.objects.filter(municipio=municipio).all().count()
     response = {'id': id, 'municipio': municipio.nombre, 
@@ -616,9 +617,15 @@ def conteo_proyectos_departamento(request, id):
     '''devuelve un json con nombre del municipio
     y numero de proyectos'''
     departamento = get_object_or_404(Departamento, id=id)
+    municipios = ProyectoMunicipio.objects.filter(proyecto__departamento = departamento)
+    donantes = []
+    for municipio in municipios:
+        donantes = donantes + (list(municipio.donantes.all()))
+    
+    donantes = list(set(donantes))
     proyectos = ProyectoDepartamento.objects.filter(departamento=departamento).all().count()
     response = {'id': id, 'departamento': departamento.nombre, 
-                'proyectos': proyectos}
+                'proyectos': proyectos, 'donantes': len(donantes)}
     return HttpResponse(simplejson.dumps(response),
                     mimetype='application/json')
 
