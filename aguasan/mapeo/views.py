@@ -210,10 +210,11 @@ def editar_contraparte(request,id):
 @login_required
 def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     if (request.method=='POST'):
-        form = ProyectoMunicipioForm(request.POST)
+        form = ProyectoMunicipioForm(proyecto, request.POST)
         if form.is_valid():
-            proyecto = ProyectoDepartamento.objects.get(proyecto=id_proyecto,
+            proyecto = ProyectoDepartamento.objects.get(proyecto=proyecto,
                                                         departamento=id_dept)
             if proyecto:
                 proyecto_municipio = form.save(commit=False)
@@ -241,8 +242,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
                                        'id_proyecto': id_proyecto, 'id_dept': id_dept}, 
                                       context_instance=RequestContext(request))
     else:
-        proyecto = get_object_or_404(Proyecto, id=id_proyecto)
-        form = ProyectoMunicipioForm()
+        form = ProyectoMunicipioForm(proyecto)
         form.fields['municipio'].queryset = Municipio.objects.filter(departamento__id=id_dept)
         dicc = {'form': form, 'id_proyecto': id_proyecto,
                 'id_dept': id_dept}
@@ -253,7 +253,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
 def editar_municipio_proyecto(request, id):
     proyecto_municipio = get_object_or_404(ProyectoMunicipio, id=id)
     if (request.method=='POST'):
-        form = ProyectoMunicipioForm(request.POST, instance=proyecto_municipio)
+        form = ProyectoMunicipioForm(proyecto, request.POST, instance=proyecto_municipio)
         if form.is_valid():
             if form.save():
                 return render_to_response('mapeo/editar_municipio_proyecto.html',
@@ -271,7 +271,7 @@ def editar_municipio_proyecto(request, id):
                                            'id': id}, 
                                           context_instance=RequestContext(request))
     else:
-        form = ProyectoMunicipioForm(instance=proyecto_municipio)
+        form = ProyectoMunicipioForm(proyecto_municipio.proyecto.proyecto, instance=proyecto_municipio)
         form.contrapartes = proyecto_municipio.contrapartes
         form.donantes= proyecto_municipio.donantes
         return render_to_response('mapeo/editar_municipio_proyecto.html',
