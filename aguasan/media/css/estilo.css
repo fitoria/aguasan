@@ -210,7 +210,7 @@ border-color:#d9cfbf;
 .colum_izq a:hover{
 border-style:solid;
 border-width:1px;
-border-color:#625855;
+border-color:#7B7371;
   border-radius:6px;
   -moz-border-radius:6px; /* Firefox */
   -webkit-border-radius:6px; /* Safari y Chrome */ 
@@ -390,7 +390,7 @@ border-color:#625855;
 }
 
 #foto_menu{
-    background-image:url(../imagen/fotoindex.png);
+    background-image:url(../imagen/fotoindex.jpg);
   background-repeat: no-repeat;
   width:410px;
   height:350px;
