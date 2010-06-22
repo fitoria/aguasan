@@ -561,20 +561,28 @@ def proyectos_municipio(request, id_municipio):
     '''listado de proyectos por municipio'''
     _proyectos_municipio = ProyectoMunicipio.objects.filter(municipio__id = id_municipio)
     proyectos = []
+    monto_total = 0
     for proyecto_municipio in _proyectos_municipio:
         proyectos.append(proyecto_municipio.proyecto.proyecto)
+        monto_total += proyecto_municipio.proyecto.proyecto.monto_total()
     municipio=Municipio.objects.get(id=id_municipio)
-    return render_to_response('mapeo/proyectos_municipio.html', {'proyectos':proyectos,'municipio':municipio},
+    return render_to_response('mapeo/proyectos_municipio.html', 
+                              {'proyectos':proyectos, 'monto_total': monto_total, 
+                               'municipio':municipio},
                               context_instance=RequestContext(request))
 
 def proyectos_departamento(request, id_departamento):
     '''listado de proyectos por departamento'''
     _proyectos_dept = ProyectoDepartamento.objects.filter(departamento__id = id_departamento)
     proyectos = []
+    monto_total = 0
     for proyecto_departamento in _proyectos_dept:
         proyectos.append(proyecto_departamento.proyecto)
+        monto_total+= proyecto_departamento.proyecto.monto_total()
     departamento=Departamento.objects.get(id=id_departamento)
-    return render_to_response('mapeo/proyectos_departamento.html', {'proyectos':proyectos,'departamento':departamento},
+    return render_to_response('mapeo/proyectos_departamento.html', 
+                              {'proyectos':proyectos, 'monto_total': monto_total, 
+                               'departamento':departamento},
                               context_instance=RequestContext(request))
 
 def proyectos_donante(request, id_donante):
