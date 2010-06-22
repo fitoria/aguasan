@@ -87,15 +87,19 @@ function destroy() {
 }
 $(document).ready(function() {
     init();
+    $("#mapa").hide();
+    $("#mapa_menu").click(function(){$("#perfil").hide("slow"); $("#mapa").show("slow")});
+    $("#perfil_menu").click(function(){$("#mapa").hide("slow"); $("#perfil").show("slow")});
 });
 
 </script>
 {%endblock%}
 {%block contenido%}
  <div id="titulo">
-                   Perfil de Contraparte
+                   <a id="perfil_menu" href="#">Perfil de Contraparte</a> <a id="mapa_menu"href="#">Mapa de Proyectos</a>
  </div>
                    <div id="contenido_interno">
+                   <div id="perfil">
                     {%if contraparte.logo%}
                     <img src="{{MEDIA_URL}}/{{contraparte.logo}}"class="der">
                     {%endif%}
@@ -138,8 +142,13 @@ $(document).ready(function() {
                                 {%endfor%}
                              </table>
                             <br/><br/>
+                        </div>
+                        <div id="mapa">
+                        <div class="seccion">
+                            <div class="titulo_seccion izq">Mapa de ubicación de proyectos</div>
+                        </div>
                              <div id="map" class="smallmap"></div>
-
+                        </div>
                    </div>
 
 
