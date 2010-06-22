@@ -17,8 +17,9 @@
   <!-- Comienza el header -->
         <div id="header">
            <div id="header_contenedor">
-			   <div id="logo" class="izq">Mapeo de Cooperantes en Agua Potable y Saneamiento (APS)</div>
+			   <div id="logo" class="izq">Mapeo de Cooperantes</div>
 			   <div id="imagen_header" class="der"></div>
+              <div id="logo_sub" class="izq">Agua Potable y Saneamiento (APS)</div>
 			   <div class="separador"></div>
 <!--
 			   <div id="menu" class="izq">
@@ -32,7 +33,7 @@
                {%if not user.is_authenticated %}
 			       <form action="/cuenta/login/" method="POST">
                         {% csrf_token %}
-			            <input id="id_username" name="username" type="text" value="usuario" onfocus="if(this.value==this.defaultValue)this.value='';">
+			            <input id="id_username"  name="username" type="text" value="usuario" onfocus="if(this.value==this.defaultValue)this.value='';">
 			            <input id="id_password" name="password" type="password" value="" onfocus="if(this.value==this.defaultValue)this.value='';">
 			            <input id="button" type="submit" value="entrar">
 			       </form>

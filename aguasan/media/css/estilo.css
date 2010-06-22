@@ -69,12 +69,21 @@ h2{
 
 #logo{
   width:750px;
-  font-size:22px;
-  font-weight:bold;
+  font-size:33px;
+
   color:#004967;
-  text-shadow: 0 0 1px #4e4e4e;
-  padding-top:20px;
-  height:55px;
+  text-shadow: 0px 1px 0px #fff;
+  padding-top:5px;
+  height:35px;
+  font-family:Impact, Charcoal, sans-serif;
+}
+
+#logo_sub{
+  width:750px;
+  font-size:18px;
+  margin-top:3px;
+  color:#4e4e4e;
+  /*text-shadow: 0 0 1px #4e4e4e;*/
 }
 
 #imagen_header{
@@ -101,21 +110,21 @@ h2{
   color:#E3E3E3;
 }
 
-#user{
+#id_username{
   border-width:0px;
     border-radius:4px;
   -moz-border-radius:4px; /* Firefox */
   -webkit-border-radius:4px; /* Safari y Chrome */ 
-  height:17px;
+  height:20px;
   background:#fff;
 }
 
-#password{
+#id_password{
   border-width:0px;
     border-radius:4px;
   -moz-border-radius:4px; /* Firefox */
   -webkit-border-radius:4px; /* Safari y Chrome */ 
-   height:17px;
+   height:20px;
    background:#fff;
 }
 
@@ -260,6 +269,30 @@ border-color:#7B7371;
   padding:7px;
 }
 
+#titulo a, #titulo a:visited{
+  color:#003951;
+   background:#A0CAD8;
+   border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  padding-top:3px;
+  padding-bottom:3px;
+  padding-left:6px;
+  padding-right:6px;
+}
+
+#titulo a:hover{
+  color:#fff;
+   background:#5096AF;
+   border-radius:3px;
+  -moz-border-radius:3px; /* Firefox */
+  -webkit-border-radius:3px; /* Safari y Chrome */ 
+  padding-top:3px;
+  padding-bottom:3px;
+  padding-left:6px;
+  padding-right:6px;
+}
+
 #accion_titulo{
   font-size:13px;
   width:130px;
@@ -396,7 +429,7 @@ border-color:#7B7371;
   height:350px;
   border-width:4px;
   border-style:solid;
-  border-color:#D4E6E7;
+  border-color:#94C6D6;
 }
 
 #foto_index_contenido{
