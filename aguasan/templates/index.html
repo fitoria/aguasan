@@ -1,7 +1,7 @@
  {%extends "base.html"%}
  {%block contenido%}
  <div id="titulo">
-                   Filtros Iniciales
+                   Opciones de Búsqueda
  </div>
                    <div id="contenido_interno">
 
@@ -32,7 +32,14 @@
                              </a>
                         </div>
                         <div id="foto_menu" class="der">
-                             <div id="foto_index_contenido">
+                             <div id="foto_index_contenido" class="transparente">
+                                <div class="foto_index_elemento">
+                                <img src="{{MEDIA_URL}}imagen/gotaindex.png" class="izq"> <b>QUE ES EL SISTEMA?</b> Este sistema muestra el mapeo de proyectos de el grupo de Cooperantes de Agua Potable y Saneamiento <a href="#">Seguir leyendo</a>
+                                </div>
+                                <br>
+                                <div class="foto_index_elemento">
+                                <img src="{{MEDIA_URL}}imagen/ayuda_index.png" class="izq"><b>COMO USARLO?</b> Usar el sistema es muy facil, puedes seguir los sencillos pasos de nuestra guia de uso.<a href="#">Ir a guia</a>
+                                </div>
                              </div>
                         </div>
                         <div class="separador" ></div>
