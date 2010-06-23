@@ -213,10 +213,11 @@ def editar_contraparte(request,id):
 @login_required
 def agregar_municipio_proyecto(request, id_proyecto, id_dept):
     '''se agrega municipio por medio de ajax'''
+    proyecto = get_object_or_404(Proyecto, id=id_proyecto)
     if (request.method=='POST'):
-        form = ProyectoMunicipioForm(request.POST)
+        form = ProyectoMunicipioForm(proyecto, request.POST)
         if form.is_valid():
-            proyecto = ProyectoDepartamento.objects.get(proyecto=id_proyecto,
+            proyecto = ProyectoDepartamento.objects.get(proyecto=proyecto,
                                                         departamento=id_dept)
             if proyecto:
                 proyecto_municipio = form.save(commit=False)
@@ -244,8 +245,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
                                        'id_proyecto': id_proyecto, 'id_dept': id_dept}, 
                                       context_instance=RequestContext(request))
     else:
-        proyecto = get_object_or_404(Proyecto, id=id_proyecto)
-        form = ProyectoMunicipioForm()
+        form = ProyectoMunicipioForm(proyecto)
         form.fields['municipio'].queryset = Municipio.objects.filter(departamento__id=id_dept)
         dicc = {'form': form, 'id_proyecto': id_proyecto,
                 'id_dept': id_dept}
@@ -256,7 +256,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
 def editar_municipio_proyecto(request, id):
     proyecto_municipio = get_object_or_404(ProyectoMunicipio, id=id)
     if (request.method=='POST'):
-        form = ProyectoMunicipioForm(request.POST, instance=proyecto_municipio)
+        form = ProyectoMunicipioForm(proyecto, request.POST, instance=proyecto_municipio)
         if form.is_valid():
             if form.save():
                 return render_to_response('mapeo/editar_municipio_proyecto.html',
@@ -274,7 +274,7 @@ def editar_municipio_proyecto(request, id):
                                            'id': id}, 
                                           context_instance=RequestContext(request))
     else:
-        form = ProyectoMunicipioForm(instance=proyecto_municipio)
+        form = ProyectoMunicipioForm(proyecto_municipio.proyecto.proyecto, instance=proyecto_municipio)
         form.contrapartes = proyecto_municipio.contrapartes
         form.donantes= proyecto_municipio.donantes
         return render_to_response('mapeo/editar_municipio_proyecto.html',
@@ -564,20 +564,28 @@ def proyectos_municipio(request, id_municipio):
     '''listado de proyectos por municipio'''
     _proyectos_municipio = ProyectoMunicipio.objects.filter(municipio__id = id_municipio)
     proyectos = []
+    monto_total = 0
     for proyecto_municipio in _proyectos_municipio:
         proyectos.append(proyecto_municipio.proyecto.proyecto)
+        monto_total += proyecto_municipio.proyecto.proyecto.monto_total()
     municipio=Municipio.objects.get(id=id_municipio)
-    return render_to_response('mapeo/proyectos_municipio.html', {'proyectos':proyectos,'municipio':municipio},
+    return render_to_response('mapeo/proyectos_municipio.html', 
+                              {'proyectos':proyectos, 'monto_total': monto_total, 
+                               'municipio':municipio},
                               context_instance=RequestContext(request))
 
 def proyectos_departamento(request, id_departamento):
     '''listado de proyectos por departamento'''
     _proyectos_dept = ProyectoDepartamento.objects.filter(departamento__id = id_departamento)
     proyectos = []
+    monto_total = 0
     for proyecto_departamento in _proyectos_dept:
         proyectos.append(proyecto_departamento.proyecto)
+        monto_total+= proyecto_departamento.proyecto.monto_total()
     departamento=Departamento.objects.get(id=id_departamento)
-    return render_to_response('mapeo/proyectos_departamento.html', {'proyectos':proyectos,'departamento':departamento},
+    return render_to_response('mapeo/proyectos_departamento.html', 
+                              {'proyectos':proyectos, 'monto_total': monto_total, 
+                               'departamento':departamento},
                               context_instance=RequestContext(request))
 
 def proyectos_donante(request, id_donante):
@@ -668,8 +676,13 @@ def ubicacion_proyecto(request, model, id):
     for proyecto_municipio in proyectos_municipio:
         lat = float(proyecto_municipio.municipio.latitud)
         lon = float(proyecto_municipio.municipio.longitud)
-        punto = (lon, lat, proyecto_municipio.municipio.nombre)
-        resultados.append(punto)
+        proyectos = Proyecto.objects.filter(proyectodepartamento__proyectomunicipio__municipio__id=proyecto_municipio.municipio.id).values('id', 'nombre')
+
+        dicc = {'punto': (lon, lat), 
+                'municipio': proyecto_municipio.municipio.nombre,
+                'proyectos': list(proyectos) #hay que convertirlo a lista. A huevo
+                }
+        resultados.append(dicc)
 
     return HttpResponse(simplejson.dumps(resultados),
                         mimetype="application/json")

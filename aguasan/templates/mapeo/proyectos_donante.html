@@ -2,7 +2,7 @@
 {%block extra_js%}
 <link rel="stylesheet" href="{{MEDIA_URL}}css/map.css" type="text/css" />
 <script type="text/javascript" src="{{MEDIA_URL}}js/OpenLayers.js"></script>
-<script src="http://maps.google.com/maps?file=api&v=2&sensor=true_or_false&key=ABQIAAAAkpPqjY_DH9Am0T2BOGW8-xTbE2WFgluONObTGPtQKbaZ8jTotRSL_1R-6qL6K2quarlTQVXxuxdEPw"
+<script src="http://maps.google.com/maps?file=api&v=2&sensor=true&key=ABQIAAAAkpPqjY_DH9Am0T2BOGW8-xTbE2WFgluONObTGPtQKbaZ8jTotRSL_1R-6qL6K2quarlTQVXxuxdEPw"
     type="text/javascript"></script>
 <script type="text/javascript">
         var map, layer, popup; 
@@ -44,10 +44,15 @@
             var url_json = '/ajax/ubicacion/donante/{{donante.id}}/' 
             $.getJSON(url_json, function(data){
                     $.each(data, function(i, item){
-                        var lonlat = new OpenLayers.LonLat(item[0], item[1])
+                        var lonlat = new OpenLayers.LonLat(item.punto[0], item.punto[1])
                         var marker = new OpenLayers.Marker(lonlat, icon.clone())
+                        var text_html = item.municipio + "<br/><ul>";
+                        $.each(item.proyectos, function(i, item){
+                            text_html += '<li><a href="/proyecto/' + item.id +'/">' + item.nombre + '</a></li>'
+                            });
+                        text_html += '</ul>';
                         marker.events.register("mousedown", 
-                            {'marker': marker, 'text': item[2]},
+                            {'marker': marker, 'text': text_html},
                             marker_click);
                         markers.addMarker(marker);
                         });
