@@ -9,7 +9,7 @@
 {%endblock%}  
 {%block contenido%}
                    <div id="contenido_interno">
-                       <div id="mensaje"></div>
+                       <div id="mensaje">{{error}}</div>
                        <form action="/proyecto/{{id_proyecto}}/departamento/{{id_dept}}/municipio/"  id="formulario" name="formulario" method="POST">
                                 {% csrf_token %}
 								<div class="titulo_form">Agregar municipio al proyecto</div>
@@ -38,7 +38,7 @@
 									</div>
                                     <br style="clear:both">
 									<div class="campo izq">
-									   <div class="label izq">Donantes:</div><br>
+									   <div class="label izq">Cooperantes:</div><br>
                                        {{form.donantes}}
                                        {%if form.donantes.errors%}
                                            {{form.donantes.errors}}
