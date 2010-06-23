@@ -16,6 +16,9 @@ from django.db.models import Sum
 
 def index(request):
     return render_to_response('index.html',context_instance=RequestContext(request))
+    
+def ayuda(request):
+    return render_to_response('ayuda.html',context_instance=RequestContext(request))
 
 @login_required
 def formulario(request):
@@ -130,13 +133,13 @@ def lista_proyectos(request):
                               context_instance=RequestContext(request))
 
 def lista_donantes(request, template_name):
-    donantes = Donante.objects.all()
+    donantes = Donante.objects.all().order_by('nombre')
     dicc = {'donantes': donantes}
     return render_to_response(template_name, dicc,
                               context_instance=RequestContext(request))
 
 def lista_contrapartes(request, template_name):
-    contrapartes = Contraparte.objects.all()
+    contrapartes = Contraparte.objects.all().order_by('nombre')
     dicc = {'contrapartes': contrapartes}
     return render_to_response(template_name, dicc,
                               context_instance=RequestContext(request))
