@@ -44,10 +44,15 @@
             var url_json = '/ajax/ubicacion/contraparte/{{contraparte.id}}/' 
             $.getJSON(url_json, function(data){
                     $.each(data, function(i, item){
-                        var lonlat = new OpenLayers.LonLat(item[0], item[1])
+                        var lonlat = new OpenLayers.LonLat(item.punto[0], item.punto[1])
                         var marker = new OpenLayers.Marker(lonlat, icon.clone())
+                        var text_html = item.municipio + "<br/><ul>";
+                        $.each(item.proyectos, function(i, item){
+                            text_html += '<li><a href="/proyecto/' + item.id +'/">' + item.nombre + '</a></li>'
+                            });
+                        text_html += '</ul>';
                         marker.events.register("mousedown", 
-                            {'marker': marker, 'text': item[2]},
+                            {'marker': marker, 'text': text_html},
                             marker_click);
                         markers.addMarker(marker);
                         });
