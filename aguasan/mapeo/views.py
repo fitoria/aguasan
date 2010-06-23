@@ -673,8 +673,13 @@ def ubicacion_proyecto(request, model, id):
     for proyecto_municipio in proyectos_municipio:
         lat = float(proyecto_municipio.municipio.latitud)
         lon = float(proyecto_municipio.municipio.longitud)
-        punto = (lon, lat, proyecto_municipio.municipio.nombre)
-        resultados.append(punto)
+        proyectos = Proyecto.objects.filter(proyectodepartamento__proyectomunicipio__municipio__id=proyecto_municipio.municipio.id).values('id', 'nombre')
+
+        dicc = {'punto': (lon, lat), 
+                'municipio': proyecto_municipio.municipio.nombre,
+                'proyectos': list(proyectos) #hay que convertirlo a lista. A huevo
+                }
+        resultados.append(dicc)
 
     return HttpResponse(simplejson.dumps(resultados),
                         mimetype="application/json")
