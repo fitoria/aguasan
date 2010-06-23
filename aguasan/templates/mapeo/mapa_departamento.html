@@ -13,8 +13,13 @@
                         $.each(data.donantes, function(i, item){
                             lista_donantes += item.donante + ', '; 
                         });
-                        var titulo = data.municipio + " ( " + data.proyectos +
-                        " proyectos, cooperantes: "+ lista_donantes + ")";
+                        if (lista_donantes != ''){
+                            var titulo = data.municipio + " ( " + data.proyectos +
+                            " proyectos, cooperantes: "+ lista_donantes + ")";
+                        }else{
+                            var titulo = data.municipio + " ( " + data.proyectos +
+                            " proyectos)";
+                        }
                         $('#' + item.id).attr({'title': titulo});
                     });
                 });
