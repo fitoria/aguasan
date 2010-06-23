@@ -5,6 +5,7 @@ from models import *
 
 urlpatterns = patterns('mapeo.views',
     (r'^index/$', 'index'),
+    (r'^ayuda/$', 'ayuda'),
     (r'^mapeo/formulario/$', 'formulario'),
     (r'^mapeo/mapa/$', 'mapa'),
     (r'^mapeo/mapa/departamento/(?P<id>\d+)/$', 'departamento'),

@@ -1,0 +1,59 @@
+ {%extends "base.html"%}
+ {%block extra_js%}
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#nacional").hide();
+    $("#territorial").hide();
+    $("#cooperante").hide();
+    $("#contraparte").hide();
+    $("#menu_nacional").click(function(){$("#territorial").hide("slow"); $("#cooperante").hide("slow");$("#contraparte").hide("slow"); $("#nacional").show("slow")});
+    $("#menu_territorial").click(function(){$("#nacional").hide("slow"); $("#cooperante").hide("slow");$("#contraparte").hide("slow"); $("#territorial").show("slow")});
+    $("#menu_cooperante").click(function(){$("#territorial").hide("slow"); $("#nacional").hide("slow");$("#contraparte").hide("slow"); $("#cooperante").show("slow")});
+    $("#menu_contraparte").click(function(){$("#territorial").hide("slow"); $("#cooperante").hide("slow");$("#nacional").hide("slow"); $("#contraparte").show("slow")});
+
+});
+</script>
+{%endblock%}
+ {%block contenido%}
+ <div id="titulo">
+                   Ayuda del Sistema
+ </div>
+                   <div id="contenido_interno">
+                              <div class="subtitulo_seccion">Bienvenidos</div>
+                              El sistema de mapeo de cooperantes, muestra un listado de proyectos que ejecutan el Grupo de Cooperantes de Agua Potable y Saneamiento en Nicaragua. Actualmente se disponen 4 tipos de busqueda para llegar a la información de un proyecto específico. Haciendo Clic en los siguientes enlaces se puede ver una guia para cada tipo de busqueda.
+                            <div class="subtitulo_seccion">Menu Ayuda</div>
+                            <div id="menu_ayuda">
+                            <a id="menu_nacional" href="#">Búsqueda Cobertura Nacional</a> <a id="menu_territorial" href="#">Búsqueda Territorial</a> <a id="menu_cooperante" href="#">Búsqueda por Cooperante</a> <a id="menu_contraparte" href="#">Búsqueda por Contraparte</a>
+                                   <div id="nacional">
+                                           <br>
+                                           <div class="subtitulo_seccion">Paso 1 : Botón de búsqueda territorial</div>
+                                                    <img class="imagen_ayuda der" src="{{MEDIA_URL}}imagen/ayuda/coberturanacional.png" >
+                                                    <p>En el inicio del sistema se encuentra como una de las opciones de búsqueda el boton "Busqueda Territorial", dando clic en el te enviará a un listado de proyectos que tiene una cobertura en todo el territorio del pais.</p>
+                                                    <div class="separador"></div>
+
+                                           <div class="subtitulo_seccion">Paso 2 : Selección de proyecto</div>
+                                                    <img class="imagen_ayuda der" src="{{MEDIA_URL}}imagen/ayuda/proyectos_nacional.jpeg" >
+                                                    <p>Aparecerá un listado de todos los proyectos que tienen la caracteristica de tener una cobertura Nacional. Se puede ver información general del proyecto como lo es, el nombre del proyecto, los cooperantes que participan, la finalidad del proyecto y finalmente su monto total de inversión. Para ver mayor información sobre un proyecto específico solamente se debe dar clic sobre el enlace del nombre del proyecto.</p>
+                                                    
+                                                    <div class="separador"></div>
+                                           <div class="subtitulo_seccion">Paso 3 : Ver Ficha de proyecto</div>
+                                                    <img class="imagen_ayuda der" src="{{MEDIA_URL}}imagen/ayuda/ficha_proyecto.png" >
+                                                    <p>En esta ficha muestra toda los datos de un proyecto, incluyendo su información general y sus datos de inversión de los cooperantes y las contrapartes </p>
+                                                    
+                                                    <div class="separador"></div>
+
+                                   </div>
+                                   <div id="territorial">
+                                   Territorial
+                                   </div>
+                                   <div id="cooperante">
+                                   Cooperante
+                                   </div>
+                                   <div id="contraparte">
+                                   Contraparte
+                                   </div>
+                            </div>
+                   </div>
+                        <div class="separador" ></div>
+                   </div>
+ {% endblock %}
