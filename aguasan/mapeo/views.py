@@ -256,7 +256,7 @@ def agregar_municipio_proyecto(request, id_proyecto, id_dept):
 def editar_municipio_proyecto(request, id):
     proyecto_municipio = get_object_or_404(ProyectoMunicipio, id=id)
     if (request.method=='POST'):
-        form = ProyectoMunicipioForm(proyecto, request.POST, instance=proyecto_municipio)
+        form = ProyectoMunicipioForm(proyecto_municipio.proyecto.proyecto, request.POST, instance=proyecto_municipio)
         if form.is_valid():
             if form.save():
                 return render_to_response('mapeo/editar_municipio_proyecto.html',
