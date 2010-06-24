@@ -195,7 +195,7 @@ function cargar_fotos(){
                             {%endfor%}
                             </b>
                             <br><br>
-                            <div class="subtitulo_seccion">Periodo</div>
+                            <div class="subtitulo_seccion">Período</div>
                                 <b>{{proyecto.fecha_inicial|date:"F Y"}} - {{proyecto.fecha_final|date:"F Y"}}</b>
                             <br><br>
                             {%if proyecto.website%}
@@ -208,25 +208,13 @@ function cargar_fotos(){
                             <div class="subtitulo_seccion">Descripción</div>
                                 {{proyecto.descripcion|safe}}
                             <br><br>
-                            <div class="subtitulo_seccion">Galeria de fotos{%if user.is_authenticated%}<a href="#" id="nueva_foto"class="der"><img src='{{MEDIA_URL}}imagen/icono_agregar.png'> Agregar Fotos</a>{%endif%}</div>
+                            <div class="subtitulo_seccion">Galería de fotos{%if user.is_authenticated%}<a href="#" id="nueva_foto"class="der"><img src='{{MEDIA_URL}}imagen/icono_agregar.png'> Agregar Fotos</a>{%endif%}</div>
                             
                             <div id="fotos">
                             </div>
 
                         </div>
                         <br style="clear:both"><br>
-                        <div class="seccion">
-                            <div class="titulo_seccion izq">Cobertura Geografica</div>
-                            {%if user.is_authenticated%}<div class="accion_seccion der" id="nuevo_departamento"><a href="#">Agregar Departamento</a></div>{%endif%}
-                        </div>
-                            <table class="tabla_proyecto" id="tabla_lugares">
-                                <tr>
-                                    <th>Departamentos y municipios</th>
-                                    <th>Inversion</th>
-                                    <th><b></b></th>
-                                </tr>
-                             </table>
-                        <br>
                         <div class="columna_interna_378 izq">
                             <div class="seccion">
                                 <div class="titulo_seccion izq">Cooperantes</div>
@@ -235,7 +223,7 @@ function cargar_fotos(){
                             <table id="tabla_donantes" class="tabla_proyecto">
                                 <tr>
                                     <th>Cooperante</th>
-                                    <th>Inversion</th>
+                                    <th>Inversión</th>
                                     <th><b></b></th>
                                 </tr>
                             </table>
@@ -249,12 +237,24 @@ function cargar_fotos(){
                             <table id="tabla_contrapartes" class="tabla_proyecto">
                                 <tr class="header_tabla">
                                     <th>Contraparte</th>
-                                    <th>Inversion</th>
+                                    <th>Inversión</th>
                                     <th><b></b></th>
                                 </tr>
                             </table>
                         </div>
-                        <br style="clear:both">
+                        <br style="clear:both"><br>
+                        <div class="seccion">
+                            <div class="titulo_seccion izq">Cobertura Geográfica</div>
+                            {%if user.is_authenticated%}<div class="accion_seccion der" id="nuevo_departamento"><a href="#">Agregar Departamento</a></div>{%endif%}
+                        </div>
+                            <table class="tabla_proyecto" id="tabla_lugares">
+                                <tr>
+                                    <th>Departamentos y municipios</th>
+                                    <th>Inversión</th>
+                                    <th><b></b></th>
+                                </tr>
+                             </table>
+                        
 
                    </div>
 
