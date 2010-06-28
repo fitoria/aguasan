@@ -236,7 +236,7 @@ border-color:#7B7371;
 }
 
 .icono_filtro{
-  background-image:url(../imagen/filtroconsulta.png);
+  background-image:url(../imagen/home.png);
   background-repeat: no-repeat;
   background-position:left;
 }
@@ -469,9 +469,9 @@ margin-left:10px;
 
 #foto_index_contenido{
   width:410px;
-  height:180px;
+  height:100px;
   background:#242119;
-  margin-top:170px;
+  margin-top:250px;
   border-top-width:1px;
   border-top-style:solid;
   border-top-color:#000;
@@ -498,7 +498,8 @@ margin-top:5px;
   -moz-border-radius:3px; /* Firefox */
   -webkit-border-radius:3px; /* Safari y Chrome */ 
 font-weight:bold;
-float:right;
+float:left;
+margin-right:10px;
 }
 
  .foto_index_elemento a:hover{
@@ -510,7 +511,8 @@ margin-top:5px;
   -moz-border-radius:3px; /* Firefox */
   -webkit-border-radius:3px; /* Safari y Chrome */ 
 font-weight:bold;
-float:right;
+float:left;
+margin-right:10px;
 }
 
 .foto_index_elemento img{
@@ -845,6 +847,21 @@ font-weight:bold;
   margin-right:5px;
   margin-bottom:5px;
   text-align:center;
+}
+
+a .boton_donante{
+color:#7F7F7F;
+text-underline:none;
+}
+
+a:visited .boton_donante{
+color:#7F7F7F;
+text-underline:none;
+}
+
+a:hover .boton_donante{
+color:#7F7F7F;
+text-underline:none;
 }
 
 .boton_donante_hover{

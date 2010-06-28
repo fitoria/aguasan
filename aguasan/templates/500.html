@@ -1,19 +1,5 @@
  {%extends "base.html"%}
- {%block extra_js%}
-<script type="text/javascript">
-$(document).ready(function() {
-    $("#nacional").hide();
-    $("#territorial").hide();
-    $("#cooperante").hide();
-    $("#contraparte").hide();
-    $("#menu_nacional").click(function(){$("#territorial").hide("slow"); $("#cooperante").hide("slow");$("#contraparte").hide("slow"); $("#nacional").show("slow")});
-    $("#menu_territorial").click(function(){$("#nacional").hide("slow"); $("#cooperante").hide("slow");$("#contraparte").hide("slow"); $("#territorial").show("slow")});
-    $("#menu_cooperante").click(function(){$("#territorial").hide("slow"); $("#nacional").hide("slow");$("#contraparte").hide("slow"); $("#cooperante").show("slow")});
-    $("#menu_contraparte").click(function(){$("#territorial").hide("slow"); $("#cooperante").hide("slow");$("#nacional").hide("slow"); $("#contraparte").show("slow")});
 
-});
-</script>
-{%endblock%}
  {%block contenido%}
  <div id="titulo">
                    Ayuda del Sistema

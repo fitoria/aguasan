@@ -48,7 +48,7 @@
                         var marker = new OpenLayers.Marker(lonlat, icon.clone())
                         var text_html = item.municipio + "<br/><ul>";
                         $.each(item.proyectos, function(i, item){
-                            text_html += '<li><a href="/proyecto/' + item.id +'/">' + item.nombre + '</a></li>'
+                            text_html += '<li><a style="color:#7F7F7F;"href="/proyecto/' + item.id +'/">' + item.nombre + '</a></li>'
                             });
                         text_html += '</ul>';
                         marker.events.register("mousedown", 
