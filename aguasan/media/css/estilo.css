@@ -1,3 +1,4 @@
+
 /* --------------Comienza Generales-------------- */
 
 body {
@@ -8,6 +9,7 @@ body {
   font-size:14px;
   padding:0;
   margin:0;
+
 }
 
 p {
@@ -37,8 +39,8 @@ h2{
 }
 
 .centro{
-  margin: 0pt auto;
-  padding:0pt;
+  margin: 0 auto;
+  padding:0;
  
 }
 .separador{
@@ -63,8 +65,7 @@ h2{
 #header_contenedor{
   width:960px;
   height:109px;
-  margin:0pt auto;
-  padding:0pt;
+
 }
 
 #logo{
@@ -294,6 +295,7 @@ border-color:#7B7371;
 }
 #menu_ayuda{margin-top:6px;}
 #menu_ayuda a, #menu_ayuda a:visited{
+
   color:#003951;
    background:#A0CAD8;
    border-radius:3px;
@@ -329,6 +331,7 @@ margin-left:10px;
 }
 
 #accion_titulo{
+
   font-size:13px;
   width:130px;
 
@@ -412,6 +415,7 @@ margin-left:10px;
 
 #filtros_principales{
   width:345px;
+  *width:320px;
   height:380px;
 }
 
@@ -428,6 +432,7 @@ margin-left:10px;
   -moz-border-radius:6px; /* Firefox */
   -webkit-border-radius:6px; /* Safari y Chrome */ 
   margin-bottom:10px;
+
 }
 
 .boton_filtro img{
