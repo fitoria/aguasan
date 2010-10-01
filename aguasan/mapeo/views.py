@@ -437,6 +437,7 @@ def lista_donantes_proyecto(request, id):
         monto_total += elemento.monto
         resultados.append(dicc)
 
+    monto_total = '%.2f' % monto_total
     diccionario_resultado = {'lista': resultados, 'monto_total': monto_total} 
     return HttpResponse(simplejson.dumps(diccionario_resultado), 
             mimetype='application/json')
@@ -455,6 +456,7 @@ def lista_contrapartes_proyecto(request, id):
         monto_total += elemento.monto
         resultados.append(dicc)
     
+    monto_total = '%.2f' % monto_total
     diccionario_resultado = {'lista': resultados, 'monto_total': monto_total} 
     return HttpResponse(simplejson.dumps(diccionario_resultado), 
             mimetype='application/json')
@@ -495,6 +497,7 @@ def lista_lugares(request, id):
             monto_total += mun.monto
             lista_municipios.append(dicc_municipios)
 
+        monto_total = '%.2f' % monto_total
         dicc = {'departamento': depart.departamento.nombre,
                 'municipios': lista_municipios,
                 'id_proyecto': depart.proyecto.id,
