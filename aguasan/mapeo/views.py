@@ -497,7 +497,7 @@ def lista_lugares(request, id):
             monto_total += mun.monto
             lista_municipios.append(dicc_municipios)
 
-        monto_total = '%.2f' % monto_total
+        monto_total = '%.2f' % float(monto_total)
         dicc = {'departamento': depart.departamento.nombre,
                 'municipios': lista_municipios,
                 'id_proyecto': depart.proyecto.id,
